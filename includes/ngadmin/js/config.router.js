@@ -34,6 +34,16 @@ angular.module('app')
                           templateUrl: 'includes/ngadmin/tpl/adduser.html',
                            controller:'addUserCtrl'
                       })
+			.state('app.push', {
+				  url: '/pushmsgs',
+				  templateUrl: 'includes/ngadmin/tpl/pushmsgs.html',
+				   controller:'pushMsgCtrl'
+			  })
+			.state('app.news', {
+				  url: '/newsmsgs',
+				  templateUrl: 'includes/ngadmin/tpl/newsmsgs.html',
+				   controller:'newsMsgCtrl'
+			  })			  
               .state('app.dashboard-v2', {
                   url: '/dashboard-v2',
                   templateUrl: 'includes/ngadmin/tpl/app_dashboard_v2.html',

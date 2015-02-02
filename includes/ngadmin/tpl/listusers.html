@@ -1,5 +1,16 @@
 <style>
-
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size: 100%;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
 </style>
 <div class="bg-light lter b-b wrapper-md">
   <h1 class="m-n font-thin h3">Users</h1>
@@ -31,7 +42,7 @@
                   Profie Pic
               </th>
               <th>
-                 Email 
+                 Email  
               </th>
 			  <th data-hide="phone,tablet">
                  User Name
@@ -58,12 +69,12 @@
           <tr ng-repeat="user in users" id="Vip{{user.user_id}}" >
               <td><img ng-src="{{user.profile_picture}}" height="50" width="50"/></td>
 			<td>
-			<a ng-click="open('lg',user.user_id)" style="cursor:pointer;text-decoration:underline;">{{user.email}}</a>
+			<a ng-click="open('lg',user.user_id)" style="cursor:pointer;text-decoration:underline;"><font size="4">{{user.email}}</font></a>
 			</td>
 
-              <td>{{user.user_name}}</td>
-              <td>{{user.login_type}}</td>
-              <td>{{user.gender}}</td>
+              <td><font size="4">{{user.user_name}}</font></td>
+              <td><font size="4">{{user.login_type}}</font></td>
+              <td><font size="4">{{user.gender}}</font></td>
               <td><span class="label {{user.Statclass}}" title="{{user.Status}}" id="stat{{user.user_id}}" style="cursor:pointer" ng-click="changestat(user.user_id)">{{user.Status}}</span></td>
 			  <td>	 
 				  <a  ng-click="opendel('md',user.user_id,user.user_name)"><i class="fa fa-trash-o fa-lg"></i></a>						

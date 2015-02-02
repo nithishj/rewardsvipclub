@@ -13,7 +13,9 @@ class Uploadfile extends CI_Controller
 		header('content-type: application/json;charset=utf-8');
 		error_reporting(E_ALL); ini_set('display_errors', '1');
 		error_reporting(E_ERROR | E_PARSE);
+
 	}
+
 		function upload()
 		{
 
@@ -149,13 +151,13 @@ function testupload()
              if(!empty($userid) && !empty($message))
                 {
                    if(!empty($image) && !empty($image_ext))
-		  $myimage=$this->getmyfile($image,$image_ext,"./user_images/");
+		  $myimage=$this->getmyfile($image,$image_ext,"user_images/");
                    if(!empty($audio) && !empty($audio_ext))
-                  $myaudio=$this->getmyfile($audio,$audio_ext,"./user_audio/");
+                  $myaudio=$this->getmyfile($audio,$audio_ext,"user_audio/");
                   if(!empty($video) && !empty($video_ext))
-                  $myvideo=$this->getmyfile($video,$video_ext,"./user_video/");
+                  $myvideo=$this->getmyfile($video,$video_ext,"user_video/");
                   if(!empty($video_thumb))
-                  $myvideothumb=$this->getmyfile($video_thumb,".jpeg","./user_video/");
+                  $myvideothumb=$this->getmyfile($video_thumb,".jpeg","user_video/");
                   $this->load->model('upload_model');
 	$msg=$this->upload_model->upload($userid,$message,$color,$myimage,$myaudio,$myvideo,$myvideothumb,$broadcast_type);
 		  echo json_encode($msg);

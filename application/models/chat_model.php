@@ -30,13 +30,24 @@ Class chat_model extends CI_Model
 	}
 	}
 	
-	function chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb)
+	function chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb,$myaudio,$latitude,$longitude)
 	{
 
-		$data=array("Message"=>$message,"UserId"=>$userid,"FriendId"=>$friendid,"Image"=>!empty($myimage)?$myimage:"","Video"=>!empty($myvideo)?$myvideo:"","VideoThumb"=>!empty($myvideothumb)?$myvideothumb:"");
+		$data=array("Message"=>$message,"UserId"=>$userid,"FriendId"=>$friendid,"Image"=>!empty($myimage)?$myimage:"","Audio"=>!empty($myaudio)?$myaudio:"","Video"=>!empty($myvideo)?$myvideo:"","VideoThumb"=>!empty($myvideothumb)?$myvideothumb:"","Latitude"=>$latitude,"Longitude"=>$longitude);
 		$this->db->insert('chat',$data);
 		
-
+		$q=$this->db->query("select device_token from user_profile where device_token is not null and char_length(device_token)>0 and user_id='$friendid' group by device_token");
+		if($q->num_rows()>0)
+		{
+		
+		$r=$q->row();
+		foreach($r as $v)
+		{
+		$this->iosnotify($v->device_token,(strlen($message) > 110) ? substr($message,0,110).'... More' : $message);
+		}
+		
+		}
+		
 		return array("message"=>"success","code"=>200);
 	}
 	
@@ -44,7 +55,43 @@ Class chat_model extends CI_Model
 	function getChatHistory($myid,$fid,$start)
 	{
 	 $base=base_url();
-	    $q=$this->db->query("SELECT  cc.ChatId,cc.UserId,cc.FriendId,cc.Message,case when CHAR_length(cc.Image>0) then concat('$base',cc.Image) END as Image,case when CHAR_length(cc.Video>0) then concat('$base',cc.Video) END as Video,case when CHAR_length(cc.VideoThumb>0) then concat('$base',cc.VideoThumb) END as VideoThumb,(select uu.user_name from user_profile uu where uu.user_id=cc.UserId) as myname,(select uu.user_name from user_profile uu where uu.user_id=cc.FriendId) as friendname FROM chat cc where (cc.UserId='$myid' and cc.FriendId='$fid') or (cc.UserId='$fid' and cc.FriendId='$myid') order by cc.ChatId desc limit $start,20");
+	    $q=$this->db->query("SELECT  cc.ChatId,cc.UserId,cc.FriendId,cc.Message,case when CHAR_LENGTH(cc.Image)>0 then concat('$base',cc.Image) ELSE ''  END as Image,case when CHAR_LENGTH(cc.Audio)>0 then concat('$base',cc.Audio) ELSE ''  END as Audio,case when CHAR_LENGTH(cc.Video)>0 then concat('$base',cc.Video)  ELSE '' END as Video,case when CHAR_LENGTH(cc.VideoThumb)>0 then concat('$base',cc.VideoThumb)  ELSE '' END as VideoThumb,(select uu.user_name from user_profile uu where uu.user_id=cc.UserId) as myname,(select uu.user_name from user_profile uu where uu.user_id=cc.FriendId) as friendname,cc.Latitude,cc.Longitude FROM chat cc where (cc.UserId='$myid' and cc.FriendId='$fid') or (cc.UserId='$fid' and cc.FriendId='$myid') order by cc.ChatId desc limit $start,20");
 	    return $q->result();
 	}
+	
+	
+	
+		function iosnotify($devicetoken,$message)
+		{
+			$time = time();
+			$apnsHost = 'gateway.push.apple.com';
+			$apnsPort = 2195;
+			$apnsCert = 'vip.pem';
+			$streamContext = stream_context_create();
+			stream_context_set_option($streamContext, 'ssl', 'local_cert', $apnsCert);
+			$apns = stream_socket_client('ssl://' . $apnsHost . ':' . $apnsPort, $error, $errorString, 2, STREAM_CLIENT_CONNECT,$streamContext);
+			if($apns)
+			{
+			$payload = array();
+			//$payload['aps'] = array('alert' => $message, 'badge' => 1, 'sound' => 'default','notifytype'=>$notifytype,'keyword'=>$keyword);strval($badge)
+			$payload['aps'] = array('alert' => $message,'sound' => 'default','badge'=>1,"type"=>"chat");
+			$payload = json_encode($payload);
+			$apnsMessage = chr(0) . chr(0) . chr(32) . pack('H*', str_replace(' ', '', $devicetoken)) . chr(0) . chr(strlen($payload)) . $payload;
+			fwrite($apns, $apnsMessage);
+			//echo 'Push Message Sent Successfully';
+			//echo $payload;
+			//print_r($payload);
+			//echo $notifytype.'/'.$deviceToken.'/'.$message.'/'.$keyword;
+			//echo $payload;
+			}
+			else
+			{
+			/*echo "Connection Failed - iPhone Push Notifications Server";
+			echo $errorString."<br />";
+			echo $error."<br />";*/
+			}
+			fclose($apns);
+
+		}
+
 } 

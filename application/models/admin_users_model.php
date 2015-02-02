@@ -49,9 +49,12 @@ function plususer($username,$to_email,$role,$gender)
 
 } 
  
-function pushmessage($msg)
+function pushmessage($msg,$userid,$type,$color,$image,$audio,$video,$thumb)
 {
-$a=array("Message"=>$msg,"Fr_UserId"=>1,"BroadcastType"=>"push");
+ if(!empty($video) && empty($thumb))
+ $thumb="includes/images/defaultthumb.png";
+ 
+$a=array("Message"=>$msg,"Fr_UserId"=>$userid,"BroadcastType"=>$type,"Color"=>$color,"Image"=>$image,"Audio"=>$audio,"Video"=>$video,"VideoThumb"=>$thumb);
 $this->db->insert('broadcast',$a);
 $q=$this->db->query("select device_token from user_profile where device_token is not null and char_length(device_token)>0 group by device_token");
 
@@ -60,7 +63,7 @@ if($q->num_rows()>0)
 $r=$q->result();
 foreach($r as $v)
 {
-$this->iosnotify($v->device_token,(strlen($msg) > 110) ? substr($msg,0,110).'... More' : $msg);
+   $this->iosnotify($v->device_token,(strlen($msg) > 110) ? substr($msg,0,110).'... More' : $msg);
 }
 }
 return array("code"=>200);

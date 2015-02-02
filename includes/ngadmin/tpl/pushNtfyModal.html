@@ -3,17 +3,102 @@
 		&nbsp;&nbsp; Send Push Notification </h3>
 </div>
 <div class="modal-body" style="min-height:250px;">
+     <div class="row">
 	 <div class="form-group">
           <label class="col-sm-2 control-label">Message :</label>
           <div class="col-sm-8">
-            <textarea id="msg_content" ng-model="msgcontent" class="form-control maxlength" maxlength="120" rows="5" placeholder="Type your message"></textarea>
-			Characters Remaining:<span style="font-weight:bold">{{120-msgcontent.length}}</span>
+            <textarea id="msg_content" ng-model="msgcontent" class="form-control maxlength" rows="5" placeholder="Type your message"></textarea>
+			 Total Characters:<span style="font-weight:bold">{{msgcontent.length}}</span>
 			
-			<p style="color:red" ng-show="showemsg">{{emsg}}</p>
           </div>
     </div>
+	</div>
+	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Type:</label>
+		<div class="col-sm-8">
+			<select class="form-control m-b" ng-model="btype">
+				<option value="push">Push</option>
+				<option value="news">News</option>
+			</select>
+		</div>
+	</div>
+	</div>
+	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Color:</label>
+		<div class="col-sm-8">
+			
+			 <div class="btn-group" dropdown>
+      <button type="button" class="btn btn-default" style="background-color:{{chosencolor}};background-image:url({{chosenimg}})"><span style="visibility:hidden">Please choose color</span></button>
+      <button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle>
+        <span class="caret"></span>
+        <span class="sr-only">Split button!</span>
+      </button>
+      <ul class="dropdown-menu" role="menu" style="height:200px;overflow-y:auto">
+	  <li ng-repeat="col in colorcodes" style="background-color:{{col.rgb}};background-image:url({{col.color_image}})" ng-click="setcolor({{col.colorid}})"><a>{{col.colorid}}</a></li>
+      </ul>
+    </div>
+	
+		</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Image:</label>
+		<div class="col-sm-5">
+			<input type="file" ng-file-select ng-file-change="onFileSelect($files,'image')" />
+		</div>
+		<div class="col-sm-5">
+			<span style="font-weight:bold" ng-show="imuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="imfinish"/>
+		</div>
+	</div>	
+	</div>
+	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Audio:</label>
+		<div class="col-sm-5">
+			<input type="file" ng-file-select ng-file-change="onFileSelect($files,'audio')" />
+		</div>
+		<div class="col-sm-5">
+			<span style="font-weight:bold"  ng-show="aduploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="adfinish"/>
+		</div>
+	</div>
+	</div>
+	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Video:</label>
+		<div class="col-sm-5">
+			<input type="file" ng-file-select ng-file-change="onFileSelect($files,'video')" />	
+		</div>
+		<div class="col-sm-5">
+			<span style="font-weight:bold" ng-show="vduploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="vdfinish"/>
+		</div>
+	</div>
+	</div>
+	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">VideoThumb:</label>
+		<div class="col-sm-5">
+			<input type="file" ng-file-select ng-file-change="onFileSelect($files,'videothumb')"/>
+		</div>
+		<div class="col-sm-5">
+			<span style="font-weight:bold" ng-show="vtuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="vtfinish"/>
+		</div>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+	<p style="color:red;font-weight:bold" ng-show="showemsg">{{emsg}}</p>
+	</div>
+	</div>
 </div>
 <div class="modal-footer">                  
     <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-    <button class="btn btn-primary" ng-click="sendNotification()">Send</button>
+    <button class="btn btn-primary" ng-click="sendNotification()" ng-disabled="imuploading || vduploading || aduploading || vtuploading">Send</button>
 </div>
+
+<style>
+	select { -webkit -appearance:none }
+</style>

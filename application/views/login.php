@@ -223,7 +223,7 @@
 			e.preventDefault();
 			var form = $("#loginform").serialize();
 			//alert(form);
-			$.post('/admin/portal_signin',form,function(result){
+			$.post('admin/portal_signin',form,function(result){
 				if(result.msg == 200)
 				{
 					//alert(JSON.stringify(result));

@@ -80,10 +80,10 @@ function plususer()
 	function pushmessage()
 	{
 	  $json = json_decode(trim(file_get_contents('php://input')),true);
-	  if(!empty($json['msg']))
+	  if(!empty($json['msg']) && !empty($json['userid']) && !empty($json['type']))
 	  {
 		$this->load->model('admin_users_model');
-		$msg=$this->admin_users_model->pushmessage($json['msg']);
+		$msg=$this->admin_users_model->pushmessage($json['msg'],$json['userid'],$json['type'],!empty($json['color'])?$json['color']:'',!empty($json['image'])?$json['image']:'',!empty($json['audio'])?$json['audio']:'',!empty($json['video'])?$json['video']:'',!empty($json['thumb'])?$json['thumb']:'');
 	  } 
 	  else
 	  {
@@ -94,29 +94,30 @@ function plususer()
 	}
 	
 	function getmyfile()
-		{
-		
-		$json = json_decode(trim(file_get_contents('php://input')),true);
-		if($json['type']=='image')
-		$filedest="user_images/";
-		else if($json['type']=='audio')
-		$filedest="user_audio/"; 
-		else if($json['type']=='video' || $json['type']=='videothumb')
-		$filedest="user_video/"; 
-		//echo $json['value'];
-		$name=str_replace(' ','',$json['name1']);
-		$val=explode(",", $json['value']);
-		$d=base64_decode($val[1]);
-		//echo $d;
-		$myfile = $filedest.uniqid() .$name;
-		//$myfile = $filedest. uniqid().'.'.$json['ext'];
-		$success = file_put_contents($myfile,$d);
-		if($success==true)
-		{
-		$filepath = base_url().$myfile;
-		echo json_encode(array("filepath"=>$filepath,"type"=>$json['type']));
-		}  
-		}
+	{
+
+	$json = json_decode(trim(file_get_contents('php://input')),true);
+	if($json['type']=='image')
+	$filedest="user_images/";
+	else if($json['type']=='audio')
+	$filedest="user_audio/"; 
+	else if($json['type']=='video' || $json['type']=='videothumb')
+	$filedest="user_video/"; 
+	//echo $json['value'];
+	$name=str_replace(' ','',$json['name1']);
+	$val=explode(",", $json['value']);
+	$d=base64_decode($val[1]);
+	//echo $d;
+	$myfile = $filedest.uniqid() .$name;
+	//$myfile = $filedest. uniqid().'.'.$json['ext'];
+	$success = file_put_contents($myfile,$d);
+	if($success==true)
+	{
+	$filepath = $myfile;
+	echo json_encode(array("filepath"=>$filepath,"type"=>$json['type']));
+	} 
+
+	}
 	
 	function getemail($userid)
 	{
@@ -147,5 +148,23 @@ function plususer()
 	 }
 	 
 	 }
+	 
+	function getcolorcodes()
+	{
+	$colorimg=base_url('color_images').'/';
+	$q=$this->db->query("select color_lookup_id as  colorid,case when char_length(color_images)>0 then '' else concat('rgb(',r_value,',',g_value,',',b_value,')') END as rgb, case when char_length(color_images)>0 then concat('$colorimg',color_images) ELSE '' END as color_image from color_lookup");
+	echo json_encode($q->result());
+	}
+	
+	function getcolor()
+	{
+	
+	$json = json_decode(trim(file_get_contents('php://input')),true);
+	$colorimg=base_url('color_images').'/';
+	$q=$this->db->query("select color_lookup_id as  colorid,case when char_length(color_images)>0 then '' else concat('rgb(',r_value,',',g_value,',',b_value,')') END as rgb, case when char_length(color_images)>0 then concat('$colorimg',color_images) ELSE '' END as color_image from color_lookup where color_lookup_id=$json[id]");
+	echo json_encode($q->row());
+	}
+	
+
 	
 	}

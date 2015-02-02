@@ -55,21 +55,27 @@ $userid=$v['userid'];
 $friendid=$v['friendid'];
 $image=$v['image'];
 $image_ext=$v['image_ext'];
-$message=$v['message'];
+$audio=$v['audio'];
+$audio_ext=$v['audio_ext'];
+$message=!empty($v['message'])?$v['message']:"";
 $video=$v['video'];
 $video_ext=$v['video_ext'];
 $video_thumb=$v['video_thumb'];
+$latitude=!empty($v['latitude'])?$v['latitude']:'';
+$longitude=!empty($v['longitude'])?$v['longitude']:'';
 
-if(!empty($userid) &&  !empty($friendid) &&!empty($message))
+if(!empty($userid) &&  !empty($friendid) &&(!empty($message) || !empty($audio) || !empty($image) || !empty($video)))
 {
 if(!empty($image) && !empty($image_ext))
-$myimage=$this->getmyfile($image,$image_ext,"./user_images/");
+$myimage=$this->getmyfile($image,$image_ext,"user_images/");
 if(!empty($video) && !empty($video_ext))
-$myvideo=$this->getmyfile($video,$video_ext,"./user_video/");
+$myvideo=$this->getmyfile($video,$video_ext,"user_video/");
 if(!empty($video_thumb))
-$myvideothumb=$this->getmyfile($video_thumb,".jpeg","./user_video/");
+$myvideothumb=$this->getmyfile($video_thumb,".jpeg","user_video/");
+if(!empty($audio) && !empty($audio_ext))
+$myaudio=$this->getmyfile($audio,$audio_ext,"user_audio/");
 $this->load->model('chat_model');
-$msg=$this->chat_model->chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb);
+$msg=$this->chat_model->chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb,$myaudio,$latitude,$longitude);
 echo json_encode($msg);
 }
 else

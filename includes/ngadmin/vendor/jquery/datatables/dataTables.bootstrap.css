@@ -157,7 +157,7 @@ div.dataTables_scrollHead table.table-bordered {
 
 .table-striped tbody tr.active:nth-child(odd) td,
 .table-striped tbody tr.active:nth-child(odd) th {
-  background-color: #017ebc;
+  background-color: #017ebc !important;
 }
 
 table.DTTT_selectable tbody tr {
