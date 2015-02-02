@@ -1,0 +1,21 @@
+url----------------------------------http://localhost/iosservices/api/users/user
+    function user_get()
+    {
+        // respond with information about a user
+    }
+ 
+    function user_put()
+    {
+        // create a new user and respond with a status/errors
+    }
+ 
+    function user_post()
+    {
+        // update an existing user and respond with a status/errors
+    }
+ 
+    function user_delete()
+    {
+        // delete a user and respond with a status/errors
+    }
+$this->response($message, 200); 

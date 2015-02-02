@@ -1,0 +1,141 @@
+*{
+	margin:0;
+	padding:0;
+	border:0;
+}
+#vip_slider{
+	position:absolute;
+	left:22px;
+	top:67px;
+	z-index:1;
+}
+#vip_slider,.carousel-inner .item img{
+	width:186px;
+	height:319px;
+}
+.slider_container{
+	position:relative;
+	width:225px;
+	height:450px;
+	background-image:url('/vip/includes/images/login/iphone_black_small.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+
+}
+.login-container,.login-container #loginbox{
+	padding:0;
+	
+}
+.phone-description{
+	padding:10px;
+}
+#loginbox .panel{
+	background:#f5f5f5;
+}
+
+.title-widget-sidebar {
+    border-bottom: 2px solid #fafafa; /*e5ebef*/
+    font-size: 14pt;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+	display:block;
+}
+.title-widget-sidebar:after {
+    border-bottom: 2px solid #f1c40f;
+    content: "";
+    display: block;
+    padding-bottom: 10px;
+    position: absolute;
+    width: 100px;
+}
+
+html, body {
+    height: 100%;
+	background:#e5ecee;
+}
+.panel-title{
+	font-weight:bold;
+}
+.btn.btn-warning {
+    background-color: #f1c40f;
+    border: 1px solid #f1c40f;
+    border-radius: 0;
+    color: #fff;
+}
+.btn.btn-warning:hover {
+    background-color: #f39c12;
+    border: 1px solid #f39c12;
+    color: #fff;
+    transition: all 1s ease 0s;
+}
+#wrap {
+    height: auto !important;
+    margin: 0 auto -60px;
+    min-height: 100%;
+}
+#push, #footer {
+    height: 60px;
+}
+#footer {
+    background-color: #000000;
+	color:#ffffff;
+	line-height:60px;
+}
+#footer p {
+    margin-bottom: 0;
+}
+#footer a {
+    font-size: 10pt;
+    margin-left: 10px;
+	color:#f1c40f;
+}
+#footer a:hover {
+    transition: all 1s ease 0s;
+}
+    /* Smartphones ----------- */
+@media only screen
+and (max-device-width : 768px)
+,(max-width:768px) {
+	#slider_main,#slider_des{
+		display:none;
+	}
+	
+} 
+
+       
+  
+  /* Tablets ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 991px),(min-width :768px) and (max-width:991px) {
+/* Styles */
+
+	.slider_container{
+		width:186px;
+		height:372px;
+	}
+	#vip_slider,.carousel-inner .item img{
+	width:155px;
+	height:264px;
+	
+	}
+	#vip_slider{
+	 top:56px;
+	 left:18px;
+	}
+	
+}
+
+/* Desktop and above ----------- */
+@media only screen
+and (min-width : 991px),(min-width :991px) {
+/* Styles */
+	
+}
+
+.color1{
+  background:rgba(7,34,120,.4);
+}
+.color2{
+  background:rgba(60,90,12,.4);
+}

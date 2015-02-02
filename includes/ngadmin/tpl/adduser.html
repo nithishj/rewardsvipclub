@@ -1,0 +1,60 @@
+<div class="col-sm-12" style="margin-top:30px;">
+        <form name="add_user_form" id="add_user_form" class="form-horizontal form-validation">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Add User</h4>
+            </div>
+            <div class="panel-body" style="min-height:400px">                    
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Name : </label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" placeholder="Name" ng-model="name" name="name" required >    
+                </div>
+              </div>
+            <br>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Email : </label>
+                <div class="col-sm-6">
+                  <input type="email" class="form-control" placeholder="Email" ng-model="email" name="email" required >
+                </div>
+              </div>
+           <br>
+              <div class="form-group">
+				<label class="col-sm-3 control-label" style="vertical-align:middle">I am a : </label>
+				<div class="col-sm-4" style="vertical-align:middle;display:inline-block;">
+					 <select class="form-control" ng-model="user_role" name="user_role" required >
+						  <option value="">Choose user role</option>
+						  <option value="2">Sponsor</option>
+						  <option value="3">Member</option>
+					  </select>
+				</div>
+              </div>
+		   <br>
+              <div class="form-group">
+				<label class="col-sm-3 control-label">Gender : </label>
+				<div class="col-sm-4" style="vertical-align:top;display:inline-block;">
+					 <select class="form-control col-sm-9" ng-model="gender" name="gender" required >
+						  <option value="">Choose gender</option>
+						  <option value="Male">Male</option>
+						  <option value="Female">Female</option>
+					  </select>
+				</div>
+              </div>
+              <br>
+			  <div class="form-group">
+				<label class="col-sm-3 control-label"></label>
+				<div id="adduser_errors"  class="col-sm-4" style="vertical-align:top;display:inline-block;color:red;font-weight:bold;" >
+				{{errmsg}}
+				</div>
+			</div>
+              
+            </div>
+			
+              
+            <footer class="panel-footer text-right bg-light lter">
+			  <button type="button" class="btn btn-danger" ng-click="cancel()">cancel</button>
+              <button type="submit" class="btn btn-warning" ng-click="submit()">Submit</button>
+            </footer>
+          </div>
+        </form>
+      </div>

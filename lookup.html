@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body> <input id="R" type="text" /> <input id="G" type="text" /> <input id="B" type="text" /> <input id="rgb" onclick="submitRGB()" type="button" value="Get RGB" /> 
+<p id="result">&nbsp;</p> 
+<script>function submitRGB(){
+var but = document.getElementById("rgb");
+var r = document.getElementById("R");
+var g = document.getElementById("G");
+var b = document.getElementById("B");
+getRGB(r,g,b);
+}
+function getRGB(r,g,b)
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("result").innerHTML=xmlhttp.responseText;
+    }
+}
+var url = "http://pushgrams.com/VIP/index.php/lookup/rgb/r/"+String(r.value)+"/g/"+String(g.value)+"/b/"+String(b.value);
+xmlhttp.open("GET",url,true);
+xmlhttp.send();
+}
+</script></body>
+</html>

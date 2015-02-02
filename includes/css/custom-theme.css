@@ -1,0 +1,12 @@
+tr td{
+    vertical-align:middle !important;
+}
+.footable-visible.hide-sort .footable-sort-indicator{
+	display:none !important;
+}
+ul.error-messages li{
+	color:red;
+	font-size:13px;
+	font-weight:bold;
+	display:none;
+}
