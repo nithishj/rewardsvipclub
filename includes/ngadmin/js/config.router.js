@@ -26,28 +26,43 @@ angular.module('app')
               })
               .state('app.listusers', {
                   url: '/users',
-                  templateUrl: 'includes/ngadmin/tpl/listusers.html',
+                  templateUrl: 'includes/ngadmin/tpl/users/listusers.html',
 				  controller:'listuserCtrl'  
               })
 			   .state('app.adduser', {
                           url: '/adduser',
-                          templateUrl: 'includes/ngadmin/tpl/adduser.html',
+                          templateUrl: 'includes/ngadmin/tpl/users/adduser.html',
                            controller:'addUserCtrl'
                       })
 			.state('app.push', {
 				  url: '/pushmsgs',
-				  templateUrl: 'includes/ngadmin/tpl/pushmsgs.html',
+				  templateUrl: 'includes/ngadmin/tpl/messages/pushmsgs.html',
 				   controller:'pushMsgCtrl'
 			  })
 			.state('app.news', {
 				  url: '/newsmsgs',
-				  templateUrl: 'includes/ngadmin/tpl/newsmsgs.html',
+				  templateUrl: 'includes/ngadmin/tpl/messages/newsmsgs.html',
 				   controller:'newsMsgCtrl'
-			  })			  
-              .state('app.dashboard-v2', {
-                  url: '/dashboard-v2',
-                  templateUrl: 'includes/ngadmin/tpl/app_dashboard_v2.html',
-                  controller:'adduserCtrl'
+			  })	
+			   .state('app.listoffers', {
+                  url: '/listoffers',
+                  templateUrl: 'includes/ngadmin/tpl/offers/listoffers.html',
+                  controller:'listoffersCtrl'
+              })
+			   .state('app.addoffer', {
+                  url: '/addoffer',
+                  templateUrl: 'includes/ngadmin/tpl/offers/addoffer.html',
+                  controller:'addofferCtrl'
+              })
+			  .state('app.listbanners', {
+                  url: '/listbanners',
+                  templateUrl: 'includes/ngadmin/tpl/banners/listbanners.html',
+                  controller:'listbannersCtrl'
+              })
+              .state('app.addbanner', {
+                  url: '/addbanner',
+                  templateUrl: 'includes/ngadmin/tpl/banners/addbanner.html',
+                  controller:'addbannerCtrl'
               })
               .state('app.ui', {
                   url: '/ui',

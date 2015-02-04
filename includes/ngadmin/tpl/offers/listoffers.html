@@ -1,0 +1,99 @@
+<style>
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size: 100%;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
+</style>
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Offers</h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Offers - All Offers
+    </div>
+    <div class="panel-body b-b b-light">
+      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+	 
+		     
+            <div class="pull-right inline">
+				<button  ui-sref="app.addoffer" class="btn btn-warning inline " >Add Offer  <i class="fa fa-plus"></i></button>
+			</div>
+			
+     
+	  
+    </div>
+	
+    <div>
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="20">
+        <thead>
+          <tr>
+              <th data-toggle="true">
+                
+              </th>
+              <th>
+                User Name
+              </th>
+			  <th data-hide="phone,tablet">
+                 Offer Name
+              </th>
+              <th data-hide="phone,tablet">
+                 Offer Code
+              </th>
+              <th data-hide="phone,tablet">
+                 Offer Description
+              </th>
+              <th data-hide="phone">
+                Points
+              </th>
+			  <th class="hide-sort" data-hide="phone" style="width:50px;">
+				
+			  </th>
+			   <th class="hide-sort" data-hide="phone" style="width:50px;">
+				
+			  </th>
+			  
+			  
+			  
+			  
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in users" id="Vip{{user.user_id}}" >
+              <td><img ng-src="{{user.profile_picture}}" height="50" width="50"/></td>
+			<td>
+			<a ng-click="open('lg',user.user_id)" style="cursor:pointer;text-decoration:underline;"><font size="4">{{user.email}}</font></a>
+			</td>
+
+              <td><font size="4">{{user.user_name}}</font></td>
+              <td><font size="4">{{user.login_type}}</font></td>
+              <td><font size="4">{{user.gender}}</font></td>
+              <td><span class="label {{user.Statclass}}" title="{{user.Status}}" id="stat{{user.user_id}}" style="cursor:pointer" ng-click="changestat(user.user_id)">{{user.Status}}</span></td>
+			  <td>	 
+				  <a  ng-click="opendel('md',user.user_id,user.user_name)"><i class="fa fa-trash-o fa-lg"></i></a>						
+			  </td>
+			  
+          </tr>
+        
+         
+
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
