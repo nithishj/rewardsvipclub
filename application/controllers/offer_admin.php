@@ -47,8 +47,8 @@ class offer_admin extends CI_Controller
 	
 	function listoffers()
 	{
-	 $this->load->model();
-	 $res=$this->offer_admin_model->llistoffers();
+	 $this->load->model('offer_admin_model');
+	 $res=$this->offer_admin_model->listoffers();
 	 echo json_encode($res);
 	}
 }

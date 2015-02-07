@@ -1,4 +1,4 @@
-app.controller('addofferCtrl',['$scope','$location','ListOffersFactory', '$upload', function($scope, $location, ListOffersFactory ,$upload)
+app.controller('addofferCtrl',['$scope','$location','OfferFactory', '$upload', function($scope, $location, OfferFactory ,$upload)
 {
   
 	$scope.offer_code = 98987;

@@ -21,7 +21,7 @@ $this->db->update('offer',$a);
 return array("code"=>200,"message"=>"success");
 }
 
-function llistoffers()
+function listoffers()
 {
 $q=$this->db->query("select up.user_name,of.* from offer of inner join user_profile up on of.UserId=up.user_id");
 if($q->num_rows()>0)
