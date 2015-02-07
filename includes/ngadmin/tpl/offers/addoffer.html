@@ -6,41 +6,37 @@
             </div>
             <div class="panel-body" style="min-height:400px">                    
               <div class="form-group">
-                <label class="col-sm-3 control-label">Offer Name : </label>
+                <label class="col-sm-3 control-label">Name : </label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" placeholder="Offer Name" ng-model="offer_name" name="offer_name" required >    
                 </div>
               </div>
             <br>
               <div class="form-group">
-                <label class="col-sm-3 control-label">Offer Description : </label>
+                <label class="col-sm-3 control-label">Description : </label>
                 <div class="col-sm-6">
-                  <textarea placeholder="Offer Description" rows="6" ng-modal="offer_desc" name="offer_desc" class="form-control ng-valid ng-valid-required" required></textarea>
+                  <textarea placeholder="Offer Description" rows="6" ng-model="offer_d" name="offer_d" class="form-control ng-valid ng-valid-required" required></textarea>
                 </div>
               </div>
 			<br> 
+			  
+				<div class="form-group">
+                <label class="col-sm-3 control-label">Points : </label>
+                <div class="col-sm-6">
+				  <input type="number"  placeholder="Offer Points" ng-model="offer_points" name="offer_points" class="form-control ng-valid-number ng-valid ng-valid-required" required>
+                </div>
+              </div>
+			<br>
 			  <div class="form-group">
-                <label class="col-sm-3 control-label">Offer Code : </label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" placeholder="Offer Code" ng-model="offer_code" name="offer_code" disabled>    
-                </div>
-              </div>
+				<label class="col-sm-3 control-label">Image:</label>
+				<div class="col-sm-3">
+					<input type="file" ng-file-select ng-file-change="onFileSelect($files,'image')" />
+				</div>
+				<div class="col-sm-3">
+					<span style="font-weight:bold" ng-show="imuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="imfinish"/>
+				</div>
+			  </div>
 			<br>
-				<div class="form-group">
-                <label class="col-sm-3 control-label">Offer Points : </label>
-                <div class="col-sm-6">
-				  <input type="number"  placeholder="Offer Points" ng-model="offer_points" name="offer_points" class="form-control ng-untouched ng-dirty ng-valid-number ng-valid ng-valid-required">
-                </div>
-              </div>
-			<br>
-				<div class="form-group">
-                <label class="col-sm-3 control-label">Image : </label>
-                <div class="col-sm-6">
-                  <input type="file" name="offer_image" ng-file-change="offerPreview($files)" ng-file-select="">
-				  <img src="" id="offer_preview_img" style="width:100px;height:100px;display:none;margin-top:20px;" />
-                </div>
-              </div>
-           <br>
               
 			  <div class="form-group">
 				<label class="col-sm-3 control-label"></label>

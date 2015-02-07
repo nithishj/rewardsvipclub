@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url'] = "http://localhost/GitHub/rewardsvipclub/";
+$config['base_url'] = "http://localhost/vip/";
 /*
 |--------------------------------------------------------------------------
 | Index File
