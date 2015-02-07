@@ -5,7 +5,7 @@ Class offer_admin_model extends CI_Model
 
 function addoffer($OfferName,$Description,$Points,$UserId,$Image)
 {
-$a=array("OfferName"=>$OfferName,"Description"=>$Description,"Points"=>$Points,"UserId"=>$userid,"Image"=>$image);
+$a=array("OfferName"=>$OfferName,"Description"=>$Description,"Points"=>$Points,"UserId"=>$UserId,"Image"=>$Image);
 $q=$this->db->insert('offer',$a);
 $id=$this->db->insert_id();
 $offercode=md5(uniqid($id, true));
@@ -15,7 +15,7 @@ return array("code"=>200,"message"=>"success");
 
 function editoffer($OfferId,$OfferName,$Description,$Points,$UserId,$Image)
 {
-$a=array("OfferName"=>$OfferName,"Description"=>$Description,"Points"=>$Points,"UserId"=>$userid,"Image"=>$image);
+$a=array("OfferName"=>$OfferName,"Description"=>$Description,"Points"=>$Points,"UserId"=>$UserId,"Image"=>$Image);
 $this->db->where('OfferId',$OfferId);
 $this->db->update('offer',$a);
 return array("code"=>200,"message"=>"success");
