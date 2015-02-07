@@ -8,7 +8,7 @@
             return $http.get('admin/logout');
         };
         
-        factory.userdata = function(userId) {
+        factory.userdata = function() {
             return $http.get('admin/sessionvalues');
         };
         
