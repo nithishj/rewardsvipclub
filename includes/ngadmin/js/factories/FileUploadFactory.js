@@ -86,7 +86,7 @@
             }); 
 		}
         
-          factory.validateImageFile = function($scope,files,type,min_width,min_height,max_width,max_height) {
+         factory.validateImageFile = function($scope,files,type,width,height) {
 
             
          if (window.FileReader && (files[0].type.indexOf('image') > -1 ))
@@ -99,7 +99,7 @@
                 img.src = e.target.result;
                 img.onload = function () {
                    
-                    if((this.width > min_width && this.height > min_height) && (this.width < max_width && this.height < max_height)){
+                     if(this.width == width && this.height == height){
                         factory.uploadFile($scope,files,type);
                         
                     }else
