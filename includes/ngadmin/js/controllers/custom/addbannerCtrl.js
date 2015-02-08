@@ -23,11 +23,9 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 	}
 	 $scope.onFileSelect = function($files,type) {
 		
-         var min_width = 1000,
-            max_width = 2000,
-             min_height = 200,
-             max_height = 800;
-         FileUploadFactory.validateImageFile($scope,$files,type,min_width,min_height,max_width,max_height);
+         var width = 1242,
+            height = 192;
+         FileUploadFactory.validateImageFile($scope,$files,type,width,height);
 		
 	};
 	
@@ -81,7 +79,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 			 }
             }
             else{
-                $scope.errmsg="Please Select Image";
+                $scope.errmsg="Please upload a valid Banner";
             }
 
 

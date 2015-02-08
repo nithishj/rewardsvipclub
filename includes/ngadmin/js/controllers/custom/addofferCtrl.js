@@ -75,7 +75,7 @@ app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFa
             }
             else
             {
-                $scope.errmsg="Please Select Image";
+                $scope.errmsg="Please upload an image";
             }
 
 
