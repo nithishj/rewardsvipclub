@@ -1,18 +1,17 @@
 app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','BannerFactory','loggedUserFactory','$stateParams', function($scope, $location,FileUploadFactory,BannerFactory,loggedUserFactory,$stateParams)
 
 {
-  alert(JSON.stringify($stateParams));
+  
 	$scope.errmsg="";
     $scope.imguploaded=false;
 
 	
 	 $scope.onFileSelect = function($files,type) {
-		$scope.showemsg=false;
+		
          var min_width = 1000,
             max_width = 2000,
-             min_height = 100,
-             max_height = 900;
-		 
+             min_height = 200,
+             max_height = 800;
          FileUploadFactory.validateImageFile($scope,$files,type,min_width,min_height,max_width,max_height);
 		
 	};
@@ -53,5 +52,8 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 
 
 	};
+    
+    
+   
 
 }]);

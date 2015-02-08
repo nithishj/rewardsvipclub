@@ -12,7 +12,7 @@
 		}
         
 		factory.uploadFile=function($scope,$files,type) {
-            alert(JSON.stringify($files));
+            
 			
 		 angular.forEach($files, function ($file, i) {
                 //var $file = $files[i];
@@ -34,6 +34,7 @@
                    factory.getmyfile(dd)
 				   .success(function(data)
 				   {
+                       $scope.errmsg=""; // remove previous error msg
 				   
 				   if(data.type=="image")
 				   {
@@ -87,35 +88,43 @@
         
           factory.validateImageFile = function($scope,files,type,min_width,min_height,max_width,max_height) {
 
+            
+         if (window.FileReader && (files[0].type.indexOf('image') > -1 ))
+         {
+            
             var reader = new FileReader();
             var img = new Image();
-              
-
+            
             reader.onload = function (e) {
                 img.src = e.target.result;
                 img.onload = function () {
-                    
-                    
                    
                     if((this.width > min_width && this.height > min_height) && (this.width < max_width && this.height < max_height)){
                         factory.uploadFile($scope,files,type);
                         
-                    }else{
-                        $scope.showemsg=true;
-                        $scope.errmsg="Invalid image dimentions";
-                        return;
+                    }else
+                    {
+                        
+                       alert("Invalid Image dimentation");
                        
                     }
                     
                 };
-
-
-
-
             };
             reader.readAsDataURL(files[0]);
-
-        }
+            
+             
+         }else{
+            
+             $scope.errmsg="Invalid Format";
+             $scope.imguploaded=false;
+             $scope.imfinish=false;
+             
+         }
+            
+        };
+        
+         
 		
         return factory;
     };
