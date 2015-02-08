@@ -117,7 +117,7 @@
          }else{
             
              $scope.errmsg="Invalid Format";
-             $scope.imguploaded=false;
+             
              $scope.imfinish=false;
              
          }

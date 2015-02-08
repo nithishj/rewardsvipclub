@@ -4,8 +4,23 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
   
 	$scope.errmsg="";
     $scope.imguploaded=false;
+	$scope.heading="Add"
+
+	if($stateParams.id)
+    {
+	$scope.heading="Edit"
+	 BannerFactory.getbanners($stateParams.id)
+                    .success(function(data){
+					//alert(JSON.stringify(data));
+					$scope.banid=data[0].BannerId;
+					$scope.banner_name=data[0].BannerName;
+					$scope.imguploaded=true;
+					$scope.myimg=data[0].BannerImage;
+					});
 
 	
+	
+	}
 	 $scope.onFileSelect = function($files,type) {
 		
          var min_width = 1000,
@@ -28,6 +43,27 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
         loggedUserFactory.userdata().success(function(data){
             if ($scope.myimg)
             {
+			 if($stateParams.id)
+			 {
+			   BannerFactory.editBanner($scope.banid,data.ssdata.user_id,$scope.banner_name,$scope.myimg)
+                    .success(function(data){
+
+                        if(data.code==200)
+                        {
+                            alert('Banner Edited Successfully');
+                            $location.path('/admin/listbanners');
+                        }
+                        else
+                        {
+                            $scope.errmsg=data.message;
+                        }
+
+                    });
+			 
+			 
+			 }
+			 else
+			 {
                 BannerFactory.addBanner(data.ssdata.user_id,$scope.banner_name,$scope.myimg)
                     .success(function(data){
 
@@ -42,6 +78,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
                         }
 
                     });
+			 }
             }
             else{
                 $scope.errmsg="Please Select Image";

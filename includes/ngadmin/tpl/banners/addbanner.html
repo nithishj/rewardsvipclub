@@ -2,11 +2,11 @@
         <form name="add_banner_form" ng-submit="submit()" id="add_banner_form" class="form-horizontal form-validation">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>Add Banner</h4>
+              <h4>{{heading}} Banner</h4>
             </div>
             <div class="panel-body" style="min-height:400px">                    
               <div class="form-group">
-                <label class="col-sm-3 control-label">Name : </label>
+                <label class="col-sm-3 control-label">Names: </label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" placeholder="Banner Name" ng-model="banner_name" name="banner_name" required >    
                 </div>

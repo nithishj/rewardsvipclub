@@ -4,14 +4,20 @@
     
         var factory = {};
         
-		factory.getbanners=function() {
-		return $http.get('banner_admin/listbanners');
+		factory.getbanners=function(id) {
+		return $http.get('banner_admin/listbanners/'+id);
 		}
 		
 		factory.addBanner=function(user_id,name,image_url) {
 
-		var dd={userid:user_id,BannerName:name,image:image_url};
+		var dd={UserId:user_id,BannerName:name,BannerImage:image_url};
 		return $http.post('banner_admin/addbanner?format=json',dd);
+
+		}
+		factory. editBanner=function(bannerid,user_id,name,image_url) {
+
+		var dd={BannerId:bannerid,UserId:user_id,BannerName:name,BannerImage:image_url};
+		return $http.post('banner_admin/editbanner?format=json',dd);
 
 		}
 

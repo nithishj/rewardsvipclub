@@ -30,7 +30,7 @@ return array("code"=>400,"message"=>"fail");
 function listbanners($id)
 {
 if(empty($id))
-$q=$this->db->query("select up.user_name,ba.* from banner ba inner join user_profile up on ba.UserId=up.user_id");
+$q=$this->db->query("select up.user_name,ba.* from banner ba inner join user_profile up on ba.UserId=up.user_id order by BannerId desc");
 else
 $q=$this->db->query("select up.user_name,ba.* from banner ba inner join user_profile up on ba.UserId=up.user_id where ba.BannerId='$id'");
 if($q->num_rows()>0)

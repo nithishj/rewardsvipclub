@@ -3,7 +3,7 @@ app.controller('listbannersCtrl',['$scope','$location','BannerFactory','$modal',
     $scope.AddBannerid=[];
     $scope.disdel=true;
 
-    BannerFactory.getbanners()
+    BannerFactory.getbanners('')
         .success(function (data) {
 
             $scope.banners=data;
@@ -32,7 +32,7 @@ app.controller('listbannersCtrl',['$scope','$location','BannerFactory','$modal',
             $scope.disdel=true;
         else
             $scope.disdel=false;
-        alert($scope.AddBannerid);
+        //alert($scope.AddBannerid);
     };
 
     $scope.openimg = function (size,imgurl)

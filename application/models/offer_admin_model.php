@@ -34,7 +34,7 @@ return array("code"=>400,"message"=>"fail");
 function listoffers($id)
 {
 if(empty($id))
-$q=$this->db->query("select up.user_name,of.* from offer of inner join user_profile up on of.UserId=up.user_id");
+$q=$this->db->query("select up.user_name,of.* from offer of inner join user_profile up on of.UserId=up.user_id order by OfferId desc");
 else
 $q=$this->db->query("select up.user_name,of.* from offer of inner join user_profile up on of.UserId=up.user_id where of.OfferId='$id'");
 if($q->num_rows()>0)

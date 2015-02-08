@@ -22,16 +22,7 @@ app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFa
 
 	 $scope.onFileSelect = function($files,type) {
 		$scope.showemsg=false;
-         alert(JSON.stringify($files));
-         var fileReader = new FileReader();
-         var img = new Image();
-         img.onload = function () {
-             var w = this.width;
-             var h = this.height;
-             alert(w);
-             alert(h);
-         }
-		 FileUploadFactory.uploadFile($scope,$files,type);
+        FileUploadFactory.uploadFile($scope,$files,type);
 		
 	};
 	
