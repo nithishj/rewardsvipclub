@@ -1,4 +1,4 @@
-app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','BannerFactory','loggedUserFactory','$stateParams', function($scope, $location,FileUploadFactory,BannerFactory,loggedUserFactory,$stateParams)
+app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFactory','loggedUserFactory','$stateParams', function($scope, $location,FileUploadFactory,OfferFactory,loggedUserFactory,$stateParams)
 
 {
   alert(JSON.stringify($stateParams));
@@ -8,12 +8,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 	
 	 $scope.onFileSelect = function($files,type) {
 		$scope.showemsg=false;
-         var min_width = 1000,
-            max_width = 2000,
-             min_height = 100,
-             max_height = 900;
-		 
-         FileUploadFactory.validateImageFile($scope,$files,type,min_width,min_height,max_width,max_height);
+		 FileUploadFactory.uploadFile($scope,$files,type);
 		
 	};
 	
@@ -21,7 +16,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 	$scope.cancel=function()
 	{
 
-        $location.path('/admin/listbanners');
+        $location.path('/admin/listoffers');
 	};
 
 	$scope.submit=function()
@@ -29,13 +24,13 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
         loggedUserFactory.userdata().success(function(data){
             if ($scope.myimg)
             {
-                BannerFactory.addBanner(data.ssdata.user_id,$scope.banner_name,$scope.myimg)
+                OfferFactory.addOffer(data.ssdata.user_id,$scope.offer_name,$scope.offer_d,$scope.offer_points,$scope.myimg)
                     .success(function(data){
 
                         if(data.code==200)
                         {
-                            alert('Banner Added Successfully');
-                            $location.path('/admin/listbanners');
+                            alert('Offer Added Successfully');
+                            $location.path('/admin/listoffers');
                         }
                         else
                         {

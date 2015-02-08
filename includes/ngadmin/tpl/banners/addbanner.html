@@ -1,1 +1,52 @@
-<h1>Add Banner</h1>
+<div class="col-sm-12 add-banner" style="margin-top:30px;">
+        <form name="add_banner_form" ng-submit="submit()" id="add_banner_form" class="form-horizontal form-validation">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Add Banner</h4>
+            </div>
+            <div class="panel-body" style="min-height:400px">                    
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Name : </label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" placeholder="Banner Name" ng-model="banner_name" name="banner_name" required >    
+                </div>
+              </div>
+            <br>
+              
+			  <div class="form-group">
+				<label class="col-sm-3 control-label">Image:</label>
+				<div class="col-sm-3">
+					<input type="file" ng-file-select ng-file-change="onFileSelect($files,'image')" />
+				</div>
+				<div class="col-sm-3">
+					<span style="font-weight:bold" ng-show="imuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="imfinish"/>
+				</div>
+			  </div>
+			<br>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-sm-6">
+                        <img   ng-src="{{myimg}}" ng-show="imguploaded" style="width:600px;height:200px;" />
+
+                    </div>
+                </div>
+            <br>
+              
+			  <div class="form-group">
+				<label class="col-sm-3 control-label"></label>
+				<div class="col-sm-4" style="vertical-align:top;display:inline-block;color:red;font-weight:bold;" >
+				{{errmsg}}
+				</div>
+			  </div>
+              
+            </div>
+			
+              
+            <footer class="panel-footer text-right bg-light lter">
+			  <button type="button"  class="btn btn-danger" ng-click="cancel()">cancel</button>
+              <button type="submit" class="btn btn-warning" >Submit</button>
+            </footer>
+          </div>
+        </form>
+      </div>

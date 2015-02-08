@@ -3,14 +3,16 @@
     var FileUploadFactory = function($http,$upload) {
     
         var factory = {};
+        
+      
 		
 		factory.getmyfile=function(dd)
 		{
-		return $http.post('admin_users/getmyfile?format=json',dd);
+		  return $http.post('admin_users/getmyfile?format=json',dd);
 		}
-		
-		
+        
 		factory.uploadFile=function($scope,$files,type) {
+            alert(JSON.stringify($files));
 			
 		 angular.forEach($files, function ($file, i) {
                 //var $file = $files[i];
@@ -38,7 +40,8 @@
 				   $scope.myimg=data.filepath;
 				   $scope.imuploading=false;
 				   $scope.imfinish=true;
-                   $("#preview_image").attr("src",data.filepath).show();
+                   $scope.imguploaded=true; //showing image preview after file upload
+                  // $("#preview_image").attr("src",data.filepath).show();
 				   
 				   }
 				   else if(data.type=="video")
@@ -81,6 +84,38 @@
                 }
             }); 
 		}
+        
+          factory.validateImageFile = function($scope,files,type,min_width,min_height,max_width,max_height) {
+
+            var reader = new FileReader();
+            var img = new Image();
+              
+
+            reader.onload = function (e) {
+                img.src = e.target.result;
+                img.onload = function () {
+                    
+                    
+                   
+                    if((this.width > min_width && this.height > min_height) && (this.width < max_width && this.height < max_height)){
+                        factory.uploadFile($scope,files,type);
+                        
+                    }else{
+                        $scope.showemsg=true;
+                        $scope.errmsg="Invalid image dimentions";
+                        return;
+                       
+                    }
+                    
+                };
+
+
+
+
+            };
+            reader.readAsDataURL(files[0]);
+
+        }
 		
         return factory;
     };

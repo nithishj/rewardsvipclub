@@ -14,7 +14,15 @@
 		return $http.post('offer_admin/addoffer?format=json',dd);
 
 		}
-        
+
+
+        factory.deleteoffer=function(offerid) {
+
+            var dd={offerid:offerid};
+            //alert(JSON.stringify(dd));
+            return $http.post('offer_admin/deleteoffer?format=json',dd);
+        }
+
         return factory;
     };
     
