@@ -3,7 +3,7 @@ app.controller('listoffersCtrl',['$scope', '$location', 'loggedUserFactory', 'Of
  $scope.AddOfferid=[];
  $scope.disdel=true;
  
-OfferFactory.getoffers()
+OfferFactory.getoffers('')
 		.success(function(data){
 		$scope.offers=data;
         //alert(JSON.stringify($scope.offers));

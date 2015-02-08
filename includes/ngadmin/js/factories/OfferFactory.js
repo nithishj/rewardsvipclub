@@ -4,8 +4,8 @@
     
         var factory = {};
         
-		factory.getoffers=function() {
-		return $http.get('offer_admin/listoffers');
+		factory.getoffers=function(id) {
+		return $http.get('offer_admin/listoffers/'+id);
 		}
 		
 		factory.addOffer=function(user_id,name,desc,points,image_url) {
@@ -14,6 +14,13 @@
 		return $http.post('offer_admin/addoffer?format=json',dd);
 
 		}
+
+        factory.editOffer=function(user_id,offerid,name,desc,points,image_url) {
+
+            var dd={userid:user_id,OfferId:offerid,OfferName:name,Description:desc,Points:points,image:image_url};
+            return $http.post('offer_admin/editoffer?format=json',dd);
+
+        }
 
 
         factory.deleteoffer=function(offerid) {

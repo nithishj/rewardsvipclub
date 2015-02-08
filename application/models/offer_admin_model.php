@@ -31,9 +31,12 @@ else
 return array("code"=>400,"message"=>"fail");
 }
 
-function listoffers()
+function listoffers($id)
 {
+if(empty($id))
 $q=$this->db->query("select up.user_name,of.* from offer of inner join user_profile up on of.UserId=up.user_id");
+else
+$q=$this->db->query("select up.user_name,of.* from offer of inner join user_profile up on of.UserId=up.user_id where of.OfferId='$id'");
 if($q->num_rows()>0)
 return $q->result();
 else

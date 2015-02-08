@@ -1,8 +1,8 @@
 <div class="col-sm-12 add-offer" style="margin-top:30px;">
-        <form name="add_offer_form" id="add_offer_form" class="form-horizontal form-validation">
+        <form name="add_offer_form" id="add_offer_form" class="form-horizontal form-validation" ng-submit="submit()">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>Add Offer</h4>
+              <h4>{{heading}} Offer</h4>
             </div>
             <div class="panel-body" style="min-height:400px">                    
               <div class="form-group">
@@ -23,7 +23,7 @@
 				<div class="form-group">
                 <label class="col-sm-3 control-label">Points : </label>
                 <div class="col-sm-6">
-				  <input type="number"  placeholder="Offer Points" ng-model="offer_points" name="offer_points" class="form-control ng-valid-number ng-valid ng-valid-required" required>
+				  <input type="number"  placeholder="Offer Points" ng-model="offer_points" name="offer_points" min="0" class="form-control ng-valid-number ng-valid ng-valid-required" required>
                 </div>
               </div>
 			<br>
@@ -59,7 +59,7 @@
               
             <footer class="panel-footer text-right bg-light lter">
 			  <button type="button"  class="btn btn-danger" ng-click="cancel()">cancel</button>
-              <button type="submit" class="btn btn-warning" ng-click="submit()">Submit</button>
+              <button type="submit" class="btn btn-warning" >Save</button>
             </footer>
           </div>
         </form>
