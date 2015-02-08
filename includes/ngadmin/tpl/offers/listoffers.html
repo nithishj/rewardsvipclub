@@ -29,10 +29,10 @@ border-radius: .25em;
 		</div>
 		
 		<div class="pull-right inline">
-		<button   ng-click="opendeleteall('md')" class="btn  btn-warning inline" ng-disabled="disdel" >Delete Selected  <i class="fa fa-bitbucket"></i></button>
+		<button   ng-click="opendelete('md','','multi')" class="btn  btn-warning inline" ng-disabled="disdel" >Delete Selected  <i class="fa fa-bitbucket"></i></button>
 		</div>
-			
-     
+
+
 	  
     </div>
 	
@@ -89,9 +89,9 @@ border-radius: .25em;
               <td>{{offer.OfferCode}}</td>
 			  <td>{{offer.Description}}</td>
 			  <td>{{offer.Points}}</td>
-			  <td><img ng-show="offer.Image!=''" ng-src="{{offer.Image}}" height="50" width="50" ng-click="openvid('lg',offer.Image)" style="cursor:pointer"/></td>
+			  <td><img ng-show="offer.Image!=''" ng-src="{{offer.Image}}" height="50" width="50" ng-click="openimg('md',offer.Image)" style="cursor:pointer"/></td>
 			  <td>	 
-				  <a  ng-click="opendelete('md',offer.OfferId)"><i class="fa fa-trash-o fa-lg" ></i></a>						
+				  <a  ng-click="opendelete('md',offer.OfferId,'singular')"><i class="fa fa-trash-o fa-lg" ></i></a>
 			  </td>
 			   <td>	 
 				  <a  ng-click="edit('md',offer.OfferId)"><i class="fa fa-pencil-square-o fa-lg" ></i></a>						

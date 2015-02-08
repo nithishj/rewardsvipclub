@@ -6,11 +6,12 @@ app.controller('listoffersCtrl',['$scope', '$location', 'loggedUserFactory', 'Of
 OfferFactory.getoffers()
 		.success(function(data){
 		$scope.offers=data;
+        //alert(JSON.stringify($scope.offers));
 		});
 		
 $scope.pushofferid=function(offerid)
 		{
-	
+
 		 // alert(broadcastid);
 			if ($scope.AddOfferid.indexOf(offerid) == -1) {
 			$scope.AddOfferid.push(offerid);
@@ -26,15 +27,36 @@ $scope.pushofferid=function(offerid)
 			 $scope.disdel=true;
 			 else
 			 $scope.disdel=false;
-			alert($scope.AddOfferid);
-		};		
+			//alert($scope.AddOfferid);
+		};
+
+
+    $scope.openimg = function (size,imgurl)
+    {
+       // alert(imgurl);
+        $scope.vidurl="";
+        $scope.imgurl=imgurl;
+        var modalInstance = $modal.open({
+            templateUrl: 'includes/ngadmin/tpl/pushmsgmodal.html',
+            controller: 'offerModalCtrl',
+            size: size,
+            scope:$scope
+        });
+    };
 		
-		
-$scope.opendelete=function(size , id)
+$scope.opendelete=function(size , id, type)
 {
-$scope.delid=id
-$scope.delname="offer";
-$scope.deltype="singular";
+    if(type=="singular") {
+        $scope.delid = id;
+        $scope.delname="offer";
+    }
+    else    // type=="multi"
+    {
+        $scope.delname = "Selected Offers";
+    }
+
+$scope.deltype=type;
+
 var modalInstance = $modal.open({
 	templateUrl: 'includes/ngadmin/tpl/delmodal.html',
 	controller: 'offerModalCtrl',
@@ -57,31 +79,45 @@ var modalInstance = $modal.open({
 
 	
 }])
-.controller('offerModalCtrl', ['$scope' ,'$modalInstance', function($scope ,$modalInstance){
+.controller('offerModalCtrl', ['$scope' ,'$modalInstance','OfferFactory', function($scope ,$modalInstance ,OfferFactory){
 
 
 $scope.confirmdel=function()
 	{
   
-	 alert($scope.deltype);
+	 //alert($scope.deltype);
 	 if($scope.deltype=="singular")
 	 {
-	 
+
+         OfferFactory.deleteoffer($scope.delid)
+             .success(function(data){
+                 alert('Offer deleted successfully');
+                 $('#Vip'+$scope.delid).hide();
+             });
 	 }
-	 ListUserFactory.deleteuser($scope.delid)
-	  .success(function(data){
-	          
-			alert('user deleted successfully');
-			$('#Vip'+$scope.delid).hide();
-		});
+     else if($scope.deltype=="multi")
+     {
+         OfferFactory.deleteoffer($scope.AddOfferid.toString())
+             .success(function(data){
+                 //alert(JSON.stringify(data));
+                 alert('Offers deleted successfully');
+                 angular.forEach($scope.AddOfferid, function(value, key) {
+                     $('#Vip'+value).hide();
+                 });
+             });
+
+     }
+
 	  $modalInstance.close();
 	};
 
 
-$scope.cancel=function()
-	{
-	$modalInstance.close();
+        $scope.cancel=function()
+        {
+            $scope.vidurl="";
+            $scope.imgurl="";
+            $modalInstance.close();
 
-	};
+        };
 
 }]);

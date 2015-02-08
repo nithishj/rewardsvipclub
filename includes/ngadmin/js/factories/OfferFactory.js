@@ -11,9 +11,17 @@
 		factory.addOffer=function(offer_name,offer_desc,offer_code,offer_points) {
 
 		var dd={offer_name:offer_name,offer_desc:offer_desc,offer_code:offer_code,offer_points:offer_points};
-		return $http.post('offer_admin/add_offer?format=json',dd);
+		return $http.post('offer_admin/addoffer?format=json',dd);
 		}
-        
+
+
+        factory.deleteoffer=function(offerid) {
+
+            var dd={offerid:offerid};
+            //alert(JSON.stringify(dd));
+            return $http.post('offer_admin/deleteoffer?format=json',dd);
+        }
+
         return factory;
     };
     

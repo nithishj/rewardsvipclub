@@ -44,6 +44,21 @@ class offer_admin extends CI_Controller
 		 
 		 echo json_encode($res);
 	}
+
+	function deleteoffer()
+	{
+	   $json = json_decode(trim(file_get_contents('php://input')),true);
+	      if(!empty($json['offerid']))
+	      {
+	      $this->load->model('offer_admin_model');
+          $res=$this->offer_admin_model->deleteoffer($json['offerid']);
+	      }
+	      else
+	     $res=array("code"=>400,"message"=>"Required Fields");
+
+	     echo json_encode($res);
+
+	}
 	
 	function listoffers()
 	{
