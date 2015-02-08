@@ -38,7 +38,8 @@
 				   $scope.myimg=data.filepath;
 				   $scope.imuploading=false;
 				   $scope.imfinish=true;
-                   $("#preview_image").attr("src",data.filepath).show();
+                   $scope.imguploaded=true; //showing image preview after file upload
+                  // $("#preview_image").attr("src",data.filepath).show();
 				   
 				   }
 				   else if(data.type=="video")

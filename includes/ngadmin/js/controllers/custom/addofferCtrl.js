@@ -3,6 +3,7 @@ app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFa
 {
   
 	$scope.errmsg="";
+    $scope.imguploaded=false;
 
 	
 	 $scope.onFileSelect = function($files,type) {
