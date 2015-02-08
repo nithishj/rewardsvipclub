@@ -8,10 +8,11 @@
 		return $http.get('offer_admin/listoffers');
 		}
 		
-		factory.addOffer=function(offer_name,offer_desc,offer_code,offer_points) {
+		factory.addOffer=function(user_id,name,desc,points,image_url) {
 
-		var dd={offer_name:offer_name,offer_desc:offer_desc,offer_code:offer_code,offer_points:offer_points};
+		var dd={userid:user_id,OfferName:name,Description:desc,Points:points,image:image_url};
 		return $http.post('offer_admin/addoffer?format=json',dd);
+
 		}
 
 

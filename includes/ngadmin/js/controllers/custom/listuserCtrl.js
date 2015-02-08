@@ -79,8 +79,8 @@ app.controller('listuserCtrl',['$scope', 'ListUserFactory' , '$modal', function(
 
 
 }])
-.controller('myModalCtrl', ['$scope', '$modalInstance','ListUserFactory', 'loggedUserFactory', '$upload',
-  function($scope, $modalInstance, ListUserFactory, loggedUserFactory, $upload) {
+.controller('myModalCtrl', ['$scope', '$modalInstance','ListUserFactory', 'loggedUserFactory', 'FileUploadFactory',
+  function($scope, $modalInstance, ListUserFactory, loggedUserFactory, FileUploadFactory) {
   $scope.showmsg=false;
   $scope.showemsg=false;
   $scope.msgcontent="";
@@ -109,88 +109,13 @@ app.controller('listuserCtrl',['$scope', 'ListUserFactory' , '$modal', function(
  //alert("hello");
   };
 
-    $scope.onFileSelect = function($files,type) {
-	//alert(JSON.stringify($files));
-	$scope.showemsg=false;
-	
-	 angular.forEach($files, function ($file, i) {
-                //var $file = $files[i];
-				//alert($file.type.indexOf('video'));
-                if (window.FileReader && (($file.type.indexOf('image') > -1 && type=='image') || ($file.type.indexOf('video') > -1 && type=='video') || ($file.type.indexOf('audio') > -1 && type=='audio') || ($file.type.indexOf('image') > -1 && type=='videothumb'))) 
-				{
-				   //alert($scope.vduploading);
-				    if(type=="image")
-				   $scope.imuploading=true;
-				   if(type=="video")
-				   $scope.vduploading=true;
-				   if(type=="audio")
-				   $scope.aduploading=true;
-				   if(type=="videothumb")
-				   $scope.vtuploading=true;
-				   //alert(type);
-				   //alert($scope.vduploading);
-				
-				
-					var fileReader = new FileReader();
-					fileReader.onload = (function (file) {
 
-					return function (e) {
-					var dd={ name1: $file.name.replace(" ","_"),type: type, ext:$file.type.split('/')[1].toLowerCase(),value: this.result };
-					$scope.$apply(function(){
-				
-                   ListUserFactory.getmyfile(dd)
-				   .success(function(data)
-				   {
-				   
-				   if(data.type=="image")
-				   {
-				   $scope.myimg=data.filepath;
-				   $scope.imuploading=false;
-				   $scope.imfinish=true;
-				   
-				   }
-				   else if(data.type=="video")
-				   {
-				   $scope.myvid=data.filepath;
-				   $scope.vduploading=false;
-				   $scope.vdfinish=true;
-				   }
-				   else if(data.type=="audio")
-				   {
-				   $scope.myaudi=data.filepath;
-				   $scope.aduploading=false;
-				   $scope.adfinish=true;
-				   }
-				   else if(data.type=="videothumb")
-				   {
-				   $scope.mythumb=data.filepath;
-				   $scope.vtuploading=false;
-				   $scope.vtfinish=true;
-				   }
-				   
-				  // alert(JSON.stringify(data));
-				   });
 
-					});
+      $scope.onFileSelect = function($files,type) {
+          $scope.showemsg=false;
+          FileUploadFactory.uploadFile($scope,$files,type);
 
-					};
-					})($files[i]);
-					// For data URI purposes
-					fileReader.readAsDataURL($file);
-								
-                }
-                else 
-				{
-                 
-					$scope.showemsg=true;
-					$scope.emsg="Not a Valid File";
-
-                }
-            });
-	
-	
-	
-	};
+      }
   
 ListUserFactory.getcolorids()
 	  .success(function(data){
