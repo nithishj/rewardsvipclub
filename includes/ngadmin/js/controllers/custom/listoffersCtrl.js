@@ -8,6 +8,12 @@ OfferFactory.getoffers()
 		$scope.offers=data;
         //alert(JSON.stringify($scope.offers));
 		});
+
+    //navigate to edit offer screen
+    $scope.edit=function(offerid)
+    {
+     $location.path('/admin/editoffer/'+offerid);
+    };
 		
 $scope.pushofferid=function(offerid)
 		{

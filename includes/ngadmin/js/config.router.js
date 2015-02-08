@@ -54,13 +54,18 @@ angular.module('app')
                   templateUrl: 'includes/ngadmin/tpl/offers/addoffer.html',
                   controller:'addofferCtrl'
               })
+              .state('app.editoffer', {
+                  url: '/editoffer/:id',
+                  templateUrl: 'includes/ngadmin/tpl/offers/addoffer.html',
+                  controller:'addofferCtrl'
+              })
 			  .state('app.listbanners', {
                   url: '/listbanners',
                   templateUrl: 'includes/ngadmin/tpl/banners/listbanners.html',
                   controller:'listbannersCtrl'
               })
               .state('app.addbanner', {
-                  url: '/addbanner',
+                  url: '/addbanner/',
                   templateUrl: 'includes/ngadmin/tpl/banners/addbanner.html',
                   controller:'addbannerCtrl'
               })

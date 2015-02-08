@@ -1,7 +1,7 @@
 app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFactory','loggedUserFactory', function($scope, $location,FileUploadFactory,OfferFactory,loggedUserFactory)
 
 {
-  
+  alert(JSON.stringify($location.search()));
 	$scope.errmsg="";
     $scope.imguploaded=false;
 
@@ -10,7 +10,7 @@ app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFa
 		$scope.showemsg=false;
 		 FileUploadFactory.uploadFile($scope,$files,type);
 		
-	}
+	};
 	
 	
 	$scope.cancel=function()
