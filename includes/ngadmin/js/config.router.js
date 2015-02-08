@@ -69,6 +69,11 @@ angular.module('app')
                   templateUrl: 'includes/ngadmin/tpl/banners/addbanner.html',
                   controller:'addbannerCtrl'
               })
+              .state('app.editbanner', {
+                  url: '/editbanner/:id',
+                  templateUrl: 'includes/ngadmin/tpl/banners/addbanner.html',
+                  controller:'addbannerCtrl'
+              })
               .state('app.ui', {
                   url: '/ui',
                   template: '<div ui-view class="fade-in-up"></div>'

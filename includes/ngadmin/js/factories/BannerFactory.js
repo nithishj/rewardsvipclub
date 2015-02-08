@@ -18,7 +18,7 @@
 
         factory.deletebanner=function(bannerid) {
 
-            var dd={bannerid:bannerid};
+            var dd={Bannerid:bannerid};
             //alert(JSON.stringify(dd));
             return $http.post('banner_admin/deletebanner?format=json',dd);
         }

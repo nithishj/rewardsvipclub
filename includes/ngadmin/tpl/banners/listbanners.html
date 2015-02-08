@@ -27,6 +27,10 @@ border-radius: .25em;
             <div class="pull-right inline">
 				<button  ui-sref="app.addbanner" class="btn btn-warning inline " >Add Banner <i class="fa fa-plus"></i></button>
 			</div>
+
+        <div class="pull-right inline">
+            <button   ng-click="opendelete('md','','multi')" class="btn  btn-warning inline" ng-disabled="disdel" >Delete Selected  <i class="fa fa-bitbucket"></i></button>
+        </div>
 			
      
 	  
@@ -62,19 +66,27 @@ border-radius: .25em;
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in users" id="Vip{{user.user_id}}" >
-              <td><img ng-src="{{user.profile_picture}}" height="50" width="50"/></td>
-			<td>
-			<a ng-click="open('lg',user.user_id)" style="cursor:pointer;text-decoration:underline;"><font size="4">{{user.email}}</font></a>
-			</td>
+          <tr ng-repeat="banner in banners" id="Vip{{banner.BannerId}}" >
+              <td>
+                  <div class="checkbox">
+                      <label class="i-checks">
+                          <input type="checkbox" value="" ng-click="pushbannerid(banner.BannerId)">
+                          <i></i>
+                      </label>
+                  </div>
+              </td>
+              <td>{{banner.user_name}}</td>
+              <td>{{banner.BannerName}}</td>
+              <td><img ng-show="banner.BannerImage!=''" ng-src="{{banner.BannerImage}}" height="50" width="50" ng-click="openimg('md',banner.BannerImage)" style="cursor:pointer"/></td>
 
-              <td><font size="4">{{user.user_name}}</font></td>
-              <td><font size="4">{{user.login_type}}</font></td>
-              <td><font size="4">{{user.gender}}</font></td>
-              <td><span class="label {{user.Statclass}}" title="{{user.Status}}" id="stat{{user.user_id}}" style="cursor:pointer" ng-click="changestat(user.user_id)">{{user.Status}}</span></td>
-			  <td>	 
-				  <a  ng-click="opendel('md',user.user_id,user.user_name)"><i class="fa fa-trash-o fa-lg"></i></a>						
-			  </td>
+
+
+              <td>
+                  <a  ng-click="opendelete('md',banner.BannerId,'singular')"><i class="fa fa-trash-o fa-lg" ></i></a>
+              </td>
+              <td>
+                  <a  ng-click="edit(banner.BannerId)"><i class="fa fa-pencil-square-o fa-lg" ></i></a>
+              </td>
 			  
           </tr>
         
