@@ -9,9 +9,8 @@
 		}
 		
 		factory.addOffer=function(user_id,name,desc,points,image_url) {
-            console.log(user_id,name,desc,points,image_url);
+
 		var dd={userid:user_id,OfferName:name,Description:desc,Points:points,image:image_url};
-            alert(JSON.stringify(dd));
 		return $http.post('offer_admin/addoffer?format=json',dd);
 
 		}

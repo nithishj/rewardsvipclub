@@ -38,6 +38,7 @@
 				   $scope.myimg=data.filepath;
 				   $scope.imuploading=false;
 				   $scope.imfinish=true;
+                   $("#preview_image").attr("src",data.filepath).show();
 				   
 				   }
 				   else if(data.type=="video")
@@ -75,7 +76,7 @@
 				{
                  
 					$scope.showemsg=true;
-					$scope.emsg="Not a Valid File";
+					$scope.errmsg="Not a Valid File";
 
                 }
             }); 

@@ -21,21 +21,27 @@ app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFa
 	$scope.submit=function()
 	{
         loggedUserFactory.userdata().success(function(data){
+            if ($scope.myimg)
+            {
+                OfferFactory.addOffer(data.ssdata.user_id,$scope.offer_name,$scope.offer_d,$scope.offer_points,$scope.myimg)
+                    .success(function(data){
 
-            OfferFactory.addOffer(data.ssdata.user_id,$scope.offer_name,$scope.offer_d,$scope.offer_points,$scope.myimg)
-                .success(function(data){
-                    alert(JSON.stringify(data));
-                    if(data.code==200)
-                    {
-                        alert('Offer Added Successfully');
-                        //$location.path('/listoffers');
-                    }
-                    else
-                    {
-                        $scope.errmsg=data.message;
-                    }
+                        if(data.code==200)
+                        {
+                            alert('Offer Added Successfully');
+                            $location.path('/admin/listoffers');
+                        }
+                        else
+                        {
+                            $scope.errmsg=data.message;
+                        }
 
-                });
+                    });
+            }
+            else{
+                $scope.errmsg="Please Select Image";
+            }
+
 
         });
 
