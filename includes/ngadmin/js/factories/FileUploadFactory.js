@@ -12,7 +12,7 @@
 		}
         
 		factory.uploadFile=function($scope,$files,type) {
-            
+            $scope.showemsg=false;
 			
 		 angular.forEach($files, function ($file, i) {
                 //var $file = $files[i];
@@ -20,9 +20,14 @@
                 if (window.FileReader && (($file.type.indexOf('image') > -1 && type=='image') || ($file.type.indexOf('video') > -1 && type=='video') || ($file.type.indexOf('audio') > -1 && type=='audio') || ($file.type.indexOf('image') > -1 && type=='videothumb'))) 
 				{
 				   //alert($scope.vduploading);
-				    if(type=="image")
-				   $scope.imuploading=true;
-				   
+						if(type=="image")
+						$scope.imuploading=true;
+						if(type=="video")
+						$scope.vduploading=true;
+						if(type=="audio")
+						$scope.aduploading=true;
+						if(type=="videothumb")
+						$scope.vtuploading=true;
 				
 					var fileReader = new FileReader();
 					fileReader.onload = (function (file) {
