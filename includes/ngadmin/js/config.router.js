@@ -45,7 +45,7 @@ angular.module('app')
 				   controller:'newsMsgCtrl'
 			  })	
 			   .state('app.listoffers', {
-                  url: '/listoffers',
+                  url: '/offers',
                   templateUrl: 'includes/ngadmin/tpl/offers/listoffers.html',
                   controller:'listoffersCtrl'
               })
@@ -60,7 +60,7 @@ angular.module('app')
                   controller:'addofferCtrl'
               })
 			  .state('app.listbanners', {
-                  url: '/listbanners',
+                  url: '/banners',
                   templateUrl: 'includes/ngadmin/tpl/banners/listbanners.html',
                   controller:'listbannersCtrl'
               })
@@ -73,6 +73,16 @@ angular.module('app')
                   url: '/editbanner/:id',
                   templateUrl: 'includes/ngadmin/tpl/banners/addbanner.html',
                   controller:'addbannerCtrl'
+              })
+			  .state('app.events', {
+                  url: '/events',
+                  templateUrl: 'includes/ngadmin/tpl/events/events.html',
+                  controller:'eventsCtrl'
+              })
+			  .state('app.addevent', {
+                  url: '/addevent',
+                  templateUrl: 'includes/ngadmin/tpl/events/addevent.html',
+                  controller:'addeventCtrl'
               })
               .state('app.ui', {
                   url: '/ui',

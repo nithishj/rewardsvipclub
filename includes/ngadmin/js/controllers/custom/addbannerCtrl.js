@@ -33,7 +33,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 	$scope.cancel=function()
 	{
 
-        $location.path('/admin/listbanners');
+        $location.path('/admin/banners');
 	};
 
 	$scope.submit=function()
@@ -49,7 +49,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
                         if(data.code==200)
                         {
                             alert('Banner Edited Successfully');
-                            $location.path('/admin/listbanners');
+                            $location.path('/admin/banners');
                         }
                         else
                         {
@@ -68,7 +68,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
                         if(data.code==200)
                         {
                             alert('Banner Added Successfully');
-                            $location.path('/admin/listbanners');
+                            $location.path('/admin/banners');
                         }
                         else
                         {

@@ -30,7 +30,7 @@ app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFa
 	$scope.cancel=function()
 	{
 
-        $location.path('/admin/listoffers');
+        $location.path('/admin/offers');
 	};
 
 	$scope.submit=function()
@@ -46,7 +46,7 @@ app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFa
                             if(data.code==200)
                             {
                                 alert('Offer Edited Successfully');
-                                $location.path('/admin/listoffers');
+                                $location.path('/admin/offers');
                             }
                             else
                             {
@@ -63,7 +63,7 @@ app.controller('addofferCtrl',['$scope','$location','FileUploadFactory','OfferFa
                             if(data.code==200)
                             {
                                 alert('Offer Added Successfully');
-                                $location.path('/admin/listoffers');
+                                $location.path('/admin/offers');
                             }
                             else
                             {
