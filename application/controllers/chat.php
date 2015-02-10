@@ -63,8 +63,9 @@ $video_ext=$v['video_ext'];
 $video_thumb=$v['video_thumb'];
 $latitude=!empty($v['latitude'])?$v['latitude']:'';
 $longitude=!empty($v['longitude'])?$v['longitude']:'';
+$address=!empty($v['address'])?$v['address']:'';
 
-if(!empty($userid) &&  !empty($friendid) &&(!empty($message) || !empty($audio) || !empty($image) || !empty($video)))
+if(!empty($userid) &&  !empty($friendid) &&(!empty($message) || !empty($audio) || !empty($image) || !empty($video) || (!empty($latitude) && !empty($longitude))))
 {
 if(!empty($image) && !empty($image_ext))
 $myimage=$this->getmyfile($image,$image_ext,"user_images/");
@@ -75,7 +76,7 @@ $myvideothumb=$this->getmyfile($video_thumb,".jpeg","user_video/");
 if(!empty($audio) && !empty($audio_ext))
 $myaudio=$this->getmyfile($audio,$audio_ext,"user_audio/");
 $this->load->model('chat_model');
-$msg=$this->chat_model->chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb,$myaudio,$latitude,$longitude);
+$msg=$this->chat_model->chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb,$myaudio,$latitude,$longitude,$address);
 echo json_encode($msg);
 }
 else

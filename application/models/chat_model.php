@@ -30,10 +30,10 @@ Class chat_model extends CI_Model
 	}
 	}
 	
-	function chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb,$myaudio,$latitude,$longitude)
+	function chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb,$myaudio,$latitude,$longitude,$address)
 	{
 
-		$data=array("Message"=>$message,"UserId"=>$userid,"FriendId"=>$friendid,"Image"=>!empty($myimage)?$myimage:"","Audio"=>!empty($myaudio)?$myaudio:"","Video"=>!empty($myvideo)?$myvideo:"","VideoThumb"=>!empty($myvideothumb)?$myvideothumb:"","Latitude"=>$latitude,"Longitude"=>$longitude);
+		$data=array("Message"=>$message,"UserId"=>$userid,"FriendId"=>$friendid,"Image"=>!empty($myimage)?$myimage:"","Audio"=>!empty($myaudio)?$myaudio:"","Video"=>!empty($myvideo)?$myvideo:"","VideoThumb"=>!empty($myvideothumb)?$myvideothumb:"","Latitude"=>$latitude,"Longitude"=>$longitude,"Address"=>$address);
 		$this->db->insert('chat',$data);
 		
 		$q=$this->db->query("select device_token from user_profile where device_token is not null and char_length(device_token)>0 and user_id='$friendid' group by device_token");
@@ -54,9 +54,9 @@ Class chat_model extends CI_Model
 	
 	function getChatHistory($myid,$fid,$start)
 	{
-	 $base=base_url();
-	    $q=$this->db->query("SELECT  cc.ChatId,cc.UserId,cc.FriendId,cc.Message,case when CHAR_LENGTH(cc.Image)>0 then concat('$base',cc.Image) ELSE ''  END as Image,case when CHAR_LENGTH(cc.Audio)>0 then concat('$base',cc.Audio) ELSE ''  END as Audio,case when CHAR_LENGTH(cc.Video)>0 then concat('$base',cc.Video)  ELSE '' END as Video,case when CHAR_LENGTH(cc.VideoThumb)>0 then concat('$base',cc.VideoThumb)  ELSE '' END as VideoThumb,(select uu.user_name from user_profile uu where uu.user_id=cc.UserId) as myname,(select uu.user_name from user_profile uu where uu.user_id=cc.FriendId) as friendname,cc.Latitude,cc.Longitude FROM chat cc where (cc.UserId='$myid' and cc.FriendId='$fid') or (cc.UserId='$fid' and cc.FriendId='$myid') order by cc.ChatId desc limit $start,20");
-	    return $q->result();
+		$base=base_url();
+		$q=$this->db->query("SELECT  cc.ChatId,cc.UserId,cc.FriendId,cc.Message,case when CHAR_LENGTH(cc.Image)>0 then concat('$base',cc.Image) ELSE ''  END as Image,case when CHAR_LENGTH(cc.Audio)>0 then concat('$base',cc.Audio) ELSE ''  END as Audio,case when CHAR_LENGTH(cc.Video)>0 then concat('$base',cc.Video)  ELSE '' END as Video,case when CHAR_LENGTH(cc.VideoThumb)>0 then concat('$base',cc.VideoThumb)  ELSE '' END as VideoThumb,(select uu.user_name from user_profile uu where uu.user_id=cc.UserId) as myname,(select uu.user_name from user_profile uu where uu.user_id=cc.FriendId) as friendname,cc.Latitude,cc.Longitude,cc.Address FROM chat cc where (cc.UserId='$myid' and cc.FriendId='$fid') or (cc.UserId='$fid' and cc.FriendId='$myid') order by cc.ChatId desc limit $start,20");
+		return $q->result();
 	}
 	
 	
