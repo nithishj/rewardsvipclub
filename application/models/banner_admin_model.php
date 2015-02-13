@@ -3,16 +3,16 @@
 Class banner_admin_model extends CI_Model
 {
 
-function addbanner($Name,$Image,$UserId)
+function addbanner($Name,$Image,$bannerurl,$UserId)
 {
-$a=array("BannerName"=>$Name,"BannerImage"=>$Image,"UserId"=>$UserId);
+$a=array("BannerName"=>$Name,"BannerImage"=>$Image,"BannerUrl"=>$bannerurl,"UserId"=>$UserId);
 $q=$this->db->insert('Banner',$a);
 return array("code"=>200,"message"=>"success");
 }
 
-function editbanner($BannerId,$Name,$Image,$UserId)
+function editbanner($BannerId,$Name,$Image,$bannerurl,$UserId)
 {
-$a=array("BannerName"=>$Name,"BannerImage"=>$Image,"UserId"=>$UserId);
+$a=array("BannerName"=>$Name,"BannerImage"=>$Image,"BannerUrl"=>$bannerurl,"UserId"=>$UserId);
 $this->db->where('BannerId',$BannerId);
 $this->db->update('Banner',$a);
 return array("code"=>200,"message"=>"success");

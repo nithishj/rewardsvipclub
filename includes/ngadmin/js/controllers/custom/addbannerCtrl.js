@@ -14,6 +14,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 					//alert(JSON.stringify(data));
 					$scope.banid=data[0].BannerId;
 					$scope.banner_name=data[0].BannerName;
+					$scope.bannerurl=data[0].BannerUrl;
 					$scope.imguploaded=true;
 					$scope.myimg=data[0].BannerImage;
 					});
@@ -43,7 +44,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
             {
 			 if($stateParams.id)
 			 {
-			   BannerFactory.editBanner($scope.banid,data.ssdata.user_id,$scope.banner_name,$scope.myimg)
+			   BannerFactory.editBanner($scope.banid,data.ssdata.user_id,$scope.banner_name,$scope.bannerurl,$scope.myimg)
                     .success(function(data){
 
                         if(data.code==200)
@@ -62,7 +63,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 			 }
 			 else
 			 {
-                BannerFactory.addBanner(data.ssdata.user_id,$scope.banner_name,$scope.myimg)
+                BannerFactory.addBanner(data.ssdata.user_id,$scope.banner_name,$scope.bannerurl,$scope.myimg)
                     .success(function(data){
 
                         if(data.code==200)
