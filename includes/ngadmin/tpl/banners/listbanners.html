@@ -49,6 +49,9 @@ border-radius: .25em;
 			  <th data-hide="phone,tablet">
                 Banner Name
               </th>
+			   <th data-hide="phone,tablet">
+                 Banner Url
+              </th>
               <th data-hide="phone,tablet">
                  Banner
               </th>
@@ -77,6 +80,7 @@ border-radius: .25em;
               </td>
               <td>{{banner.user_name}}</td>
               <td>{{banner.BannerName}}</td>
+              <td><a href="{{banner.BannerUrl}}" target="_blank" >{{banner.BannerUrl}}</a></td>
               <td><img ng-show="banner.BannerImage!=''" ng-src="{{banner.BannerImage}}" height="50" width="50" ng-click="openimg('md',banner.BannerImage)" style="cursor:pointer"/></td>
 
 
