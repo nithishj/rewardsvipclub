@@ -74,15 +74,29 @@ angular.module('app')
                   templateUrl: 'includes/ngadmin/tpl/banners/addbanner.html',
                   controller:'addbannerCtrl'
               })
+			 
 			  .state('app.events', {
                   url: '/events',
-                  templateUrl: 'includes/ngadmin/tpl/events/events.html',
-                  controller:'eventsCtrl'
-              })
-			  .state('app.addevent', {
-                  url: '/addevent',
                   templateUrl: 'includes/ngadmin/tpl/events/addevent.html',
-                  controller:'addeventCtrl'
+                  controller:'addeventCtrl',
+                  // use resolve to load other dependences
+                  resolve: {
+                      deps: ['$ocLazyLoad', 'uiLoad',
+                        function( $ocLazyLoad, uiLoad ){
+                          return uiLoad.load(
+                            ['includes/ngadmin/vendor/jquery/fullcalendar/fullcalendar.css',
+                              'includes/ngadmin/vendor/jquery/fullcalendar/theme.css',
+                              'includes/ngadmin/vendor/jquery/jquery-ui-1.10.3.custom.min.js',
+                              'includes/ngadmin/vendor/libs/moment.min.js',
+                              'includes/ngadmin/vendor/jquery/fullcalendar/fullcalendar.min.js'
+                              ]
+                          ).then(
+                            function(){
+                              return $ocLazyLoad.load('ui.calendar');
+                            }
+                          )
+                      }]
+                  }
               })
               .state('app.ui', {
                   url: '/ui',

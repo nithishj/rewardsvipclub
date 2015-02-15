@@ -26,6 +26,9 @@ class Uploadfile extends CI_Controller
 			$audio=$_FILES['audio']['name'];
 			$video=$_FILES['video']['name'];
 			$color=$_POST['color'];
+			$latitude=$_POST['latitude'];
+			$longitude=$_POST['longitude'];
+			$address=$_POST['address'];
 
 			if(!empty($message) && !empty($userid))
 			{
@@ -33,7 +36,7 @@ class Uploadfile extends CI_Controller
 				$myaudio=(!empty($image))?$this->uploadmyfile($audio,"audio"):"";
 				$myvideo=(!empty($video))?$this->uploadmyfile($video,"video"):"";
 				$this->load->model('upload_model');
-				$msg=$this->upload_model->upload($userid,$message,$color,$myimage,$myaudio,$myvideo);
+				$msg=$this->upload_model->upload($userid,$message,$color,$myimage,$myaudio,$myvideo,$latitude,$longitude,$address);
 				echo json_encode($msg);
 			}
 			else
@@ -148,6 +151,9 @@ function testupload()
                   $broadcast_type=!empty($v['broadcast_type'])?$v['broadcast_type']:"push";
 
 		  $color=$v['color'];
+		  $latitude=!empty($v['latitude'])?$v['latitude']:"";
+			$longitude=!empty($v['longitude'])?$v['longitude']:"";
+			$address=!empty($v['address'])?$v['address']:"";
              if(!empty($userid) && !empty($message))
                 {
                    if(!empty($image) && !empty($image_ext))
@@ -159,7 +165,7 @@ function testupload()
                   if(!empty($video_thumb))
                   $myvideothumb=$this->getmyfile($video_thumb,".jpeg","user_video/");
                   $this->load->model('upload_model');
-	$msg=$this->upload_model->upload($userid,$message,$color,$myimage,$myaudio,$myvideo,$myvideothumb,$broadcast_type);
+	$msg=$this->upload_model->upload($userid,$message,$color,$myimage,$myaudio,$myvideo,$myvideothumb,$broadcast_type,$latitude,$longitude,$address);
 		  echo json_encode($msg);
                }
               else
