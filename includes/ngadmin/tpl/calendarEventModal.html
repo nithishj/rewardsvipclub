@@ -1,0 +1,97 @@
+<form name="calendar_event_form" ng-submit="submitEvent()" id="calendar_event_form" class="form-horizontal  form-validation">
+    
+    <input type="hidden" ng-model="event_id" />
+    <div class="modal-header">
+        <h3 class="modal-title"><i class="" ng-class="event_header_icon"></i>
+            &nbsp;&nbsp; {{header}} Event </h3>
+    </div>
+
+
+    <div class="modal-body" style="min-height:100px;">
+
+        <div class="row">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Name :</label>
+          <div class="col-sm-8">
+            <input type='text' id="event_name" ng-model="event_name" class="form-control maxlength"  placeholder="Event name" required />
+          </div>
+        </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+         <div class="form-group">
+              <label class="col-sm-3 control-label">Description :</label>
+              <div class="col-sm-8">
+                <textarea id="event_desc" ng-model="event_desc" class="form-control maxlength" rows="2" placeholder="Event Description" required ></textarea>
+
+
+              </div>
+        </div>
+        </div>
+
+
+        <br>
+
+        <div class="row">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Event Icon:</label>
+            <div class="col-sm-4 col-md-4">
+
+                 <div class="btn-group" dropdown>
+          <button type="button" class="btn btn-default" style="background-image:url({{chosenicon}})"><span style="visibility:hidden">Please choose Icon</span></button>
+          <button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle>
+            <span class="caret"></span>
+            <span class="sr-only">Split button!</span>
+          </button>
+          <ul class="dropdown-menu" role="menu" style="width:50px;height:200px;overflow-y:auto">
+          <li ng-repeat="icn in eventIcons" style="background-image:url({{icn.Icon}});height:25px;cursor:pointer;" ng-click="setIcon({{icn}})"><a</li>
+          </ul>
+        </div>
+
+            </div>
+            </div>
+        </div>
+    
+
+
+        <br>
+        <div class="row">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Start date:</label>
+
+            <div class="col-sm-6">
+                <p class="input-group">
+                  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened"  datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-disabled="true" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+            </div>
+
+        </div>	
+        </div> 
+
+        <br>
+
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+            <p style="color:red;font-weight:bold" ng-show="showemsg">{{emsg}}</p>
+            </div>
+        </div>
+
+    </div>   
+
+    <div class="modal-footer">                  
+         <button type="button"  class="btn btn-danger" ng-click="cancel()">cancel</button>
+         <button type="submit" class="btn btn-warning" >Submit</button>
+    </div>
+
+
+</form>
+
+<style>
+	select { -webkit -appearance:none }
+</style>
