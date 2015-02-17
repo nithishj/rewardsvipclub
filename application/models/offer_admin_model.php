@@ -8,8 +8,8 @@ function addoffer($OfferName,$Description,$Points,$UserId,$Image)
 $a=array("OfferName"=>$OfferName,"Description"=>$Description,"Points"=>$Points,"UserId"=>$UserId,"Image"=>$Image);
 $q=$this->db->insert('offer',$a);
 $id=$this->db->insert_id();
-$offercode=md5(uniqid($id, true));
-$u=$this->db->query("update offer set OfferCode='$offercode' where OfferId='$id'");
+/* $offercode=md5(uniqid($id, true)); */
+$u=$this->db->query("update offer set OfferCode=left(UUID(), 5) where OfferId='$id'");
 return array("code"=>200,"message"=>"success");
 }
 
