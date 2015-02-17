@@ -98,6 +98,16 @@ angular.module('app')
                       }]
                   }
               })
+              .state('app.addreward', {
+                  url: '/addrewards',
+                  templateUrl: 'includes/ngadmin/tpl/rewards/addreward.html',
+                  controller:'addRewardCtrl'
+              })
+                .state('app.rewards', {
+                  url: '/rewards',
+                  templateUrl: 'includes/ngadmin/tpl/rewards/rewards.html',
+                  controller:'rewardsCtrl'
+              })
               .state('app.ui', {
                   url: '/ui',
                   template: '<div ui-view class="fade-in-up"></div>'

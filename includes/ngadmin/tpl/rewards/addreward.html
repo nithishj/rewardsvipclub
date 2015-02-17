@@ -1,0 +1,97 @@
+<div class="col-sm-12 add-reward" style="margin-top:5px;">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Star Rewards</h4>
+                
+                <textarea placeholder="Send Message Content" rows="1" ng-model="reward_msg" name="reward_msg" class="form-control inline-block ng-valid ng-valid-required" required style="width:500px;display:inline-block;vertical-align:top;"></textarea>
+                
+                
+                
+				  <input type="number"  placeholder="Reward Points" ng-model="rewards_points" name="rewards_points" min="0" max = "500" class="form-control ng-valid-number ng-valid ng-valid-required" required style="width:150px;display:inline-block;">
+                
+                    <div class="inline">
+				            <button class="btn btn-warning inline " >Send Reward <i class="fa fa-share-alt"></i></button>
+			        </div>
+            </div>
+            <div class="panel-body">                    
+                
+                <div class="col-sm-12" id="added_rewards_container">
+                    <div class="row">
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                        <div class="alert alert-warning alert-dismissible col-md-3" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+                </div>
+                    </div>
+                    
+                
+                <div id="list_users_container">
+                    <div class="panel-heading">
+                        Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+                        <div class="inline">
+				            <button class="btn btn-warning inline " >Add Users <i class="fa fa-users"></i></button>
+			            </div>
+                        <h5 class="inline pull-right">Seleted Users : 0 </h5>
+                    </div>
+                </div>
+              
+            </div>
+          
+        </div>
+</div>
+
+<style>
+    #added_rewards_container{
+        max-height:200px;
+        min-height:200px;
+        overflow-x: hidden;
+        border:1px solid #ccc;
+    }
+    #list_users_container{
+        max-height:400px;
+        min-height:400px;
+        overflow-x: hidden;
+        border:1px solid #ccc;
+    }
+    
+    #list_users_container .panel-heading
+    {
+        border-bottom:1px solid #ccc;
+    }
+    
+
+</style>
