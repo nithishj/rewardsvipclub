@@ -1,16 +1,28 @@
-app.controller('addRewardCtrl',['$scope','$location','RewardsFactory', function($scope, $location,RewardsFactory)
+app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory', function($scope, $location,$timeout,RewardsFactory)
 {
 
     $scope.users_list = [];
     // default Diable Add users button
     $scope.isDisableButton = true;
-    
+   
     $scope.selected_users = [];
+    
+    $scope.getIdsFromJSON = function(arr){
+        arrIds = [];
+        for(var i=0;i<arr.length;i++){
+        
+            arrIds.push(arr[i].id);
+        }
+        
+        return arrIds;
+    };
+    
     
     $scope.get_users_list = function(){
          // remove previous array                       
         $scope.users_list.splice(0,$scope.users_list.length);
         $scope.users_list = RewardsFactory.getRewards();
+        console.log($scope.getIdsFromJSON($scope.users_list))
         
     };
     // get users list                         
@@ -40,6 +52,11 @@ app.controller('addRewardCtrl',['$scope','$location','RewardsFactory', function(
         
     };
    
+    $scope.getSearchUsersList = function(){
+        
+        console.log($scope.search_filter);
+    };
+    
     
     $scope.enableAddUser = function(){
         var checked_objs = $(".users_container input:checkbox:checked")
@@ -60,11 +77,27 @@ app.controller('addRewardCtrl',['$scope','$location','RewardsFactory', function(
         }
     }
     
+    $scope.shareRewards = function(){
+        
+         $scope.rewards_errors = "";
+        
+        if($scope.selected_users.length>0)
+        {
+            console.log($scope.getIdsFromJSON($scope.selected_users))
+            
+        }else{
+            //alert("Select atleast one user to share points");
+            $scope.rewards_errors = "* Select atleast one user to share points";
+            
+            
+            $timeout(function(){$scope.rewards_errors = ""},1500)
+        }
+    }
     
     
-    $scope.toggleCheckboxes = function(input){
+    $scope.toggleCheckboxes = function(action){
         var checkbox_objs = $(".users_container input:checkbox")
-        switch(input)
+        switch(action)
         {
             case 0:
                  // Enable Add User button
@@ -83,7 +116,9 @@ app.controller('addRewardCtrl',['$scope','$location','RewardsFactory', function(
                     
 
   $scope.closeAlert = function(index,user) {
-    $scope.selected_users.splice(index, 1);
+   // remove from seleted lists
+      $scope.selected_users.splice(index, 1);
+      // add to users list at first position
     $scope.users_list.splice(0,0,user);
   };
 
