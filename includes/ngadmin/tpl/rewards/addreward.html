@@ -6,7 +6,7 @@
                 <div class="row">
                   <form  id="add_rewards_form" class="form-horizontal form-validation" ng-submit="shareRewards()">
                     <div class="col-sm-6">
-                      <textarea  placeholder="Send Message Content" rows="1" ng-model="reward_msg" name="reward_msg" class="form-control inline-block ng-valid ng-valid-required col-sm-6" required style="display:inline-block;vertical-align:top;"></textarea>
+                      <textarea  placeholder="Send Message Content" rows="1" ng-model="rewards_msg" name="rewards_msg" class="form-control inline-block ng-valid ng-valid-required col-sm-6" required style="display:inline-block;vertical-align:top;"></textarea>
                 
                     </div>
                       
@@ -48,7 +48,7 @@
                         <div class="row">
                              <div class="col-sm-6">
                                 <div class="inline col-sm-8">
-                                     Search: <input ng-keyup="getSearchUsersList()" ng-model="search_filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+                                     Search: <input ng-model="search_filter" type="text" class="form-control input-sm w-sm inline m-r" /><button class="btn btn-primary" ng-click="getSearchUsersList()">Search</button>
                                 </div>
                                 
                                 <div class="inline col-sm-4">

@@ -22,7 +22,7 @@
 		factory.getRewards=function()
 		{
 		    
-            //return $http.get('rewards_admin/getrewards');
+            return $http.get('starrewards_admin/getusers');
             
             // add new event based on obj from local
 //            console.log("Add Event factory :");
@@ -32,7 +32,20 @@
 //             });
             
 			
-			return users_list;
+			//return users_list;
+		}
+        
+        factory.getRewards=function(query_str,users_ids)
+		{
+            
+            // add new event based on obj from local
+            
+            return $http.post('starrewards_admin/getusers?format=json',{
+                query:query_str,
+                users:users_ids
+             });
+            
+			
 		}
         
         // Rewards history
@@ -42,6 +55,19 @@
             //return $http.get('rewards_admin/getrewards');
 			
 			return rewards_history;
+		}
+        
+         // Rewards history
+        factory.addStarRewards=function(msg,points,user_ids)
+		{
+		    
+            return $http.post('rewards_admin/addstarreward?format=json',{
+            Message:msg,
+            Points:points,
+            UserIds:user_ids
+                
+            });
+			
 		}
 		
 		
