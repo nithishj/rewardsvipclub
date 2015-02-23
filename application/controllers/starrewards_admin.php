@@ -33,5 +33,12 @@ class starrewards_admin extends CI_Controller
 		echo json_encode($msg);
 	}
 	
+	function getschedulehistory()
+	{
+	    $this->load->model('starrewards_admin_model');
+		$msg=$this->starrewards_admin_model->getschedulehistory();
+		echo json_encode($msg);
+	}
+	
 	
 }
