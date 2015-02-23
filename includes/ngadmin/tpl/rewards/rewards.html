@@ -1,0 +1,77 @@
+<style>
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size: 100%;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
+</style>
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Rewards</h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Rewards - All Rewards
+    </div>
+    <div class="panel-body b-b b-light">
+      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+	 
+		     
+            <div class="pull-right inline">
+				<button  ui-sref="app.addreward" class="btn btn-warning inline " >Add Reward<i class="fa fa-plus"></i></button>
+			</div>
+     
+	  
+    </div>
+	
+    <div>
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="20">
+        <thead>
+          <tr>
+              
+              
+			  <th data-hide="phone,tablet">
+                Profile image
+              </th>
+              <th>
+                User Name
+              </th>
+			   <th data-hide="phone,tablet">
+                 Points
+              </th>
+              <th data-hide="phone,tablet">
+                 Message
+              </th>
+			  
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="reward in rewards_lists">
+              <td><img src={{reward.profile_image}} style="width:60px;height:60px;"/></td>
+              <td>{{reward.name}}</td>
+              <td>{{reward.points}}</td>
+              <td>{{reward.msg}}</td>
+              
+          </tr>
+        
+         
+
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
