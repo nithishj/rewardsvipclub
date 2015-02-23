@@ -1,0 +1,115 @@
+<style>
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size: 100%;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
+</style>
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Schedule Push</h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Schedule Push - All Schedule
+    </div>
+    <div class="panel-body b-b b-light">
+      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+	 
+		     
+            <div class="pull-right inline">
+				<button  ui-sref="app.addschedulepush" class="btn btn-warning inline " >Add a Schedule <i class="fa fa-plus"></i></button>
+			</div>
+
+        <div class="pull-right inline">
+            <button   ng-click="opendelete('md','','multi')" class="btn  btn-warning inline" ng-disabled="disdel" >Delete Selected  <i class="fa fa-bitbucket"></i></button>
+        </div>
+			
+     
+	  
+    </div>
+	
+    <div>
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="20">
+        <thead>
+          <tr>
+              <th data-toggle="true" class="hide-sort">
+                
+              </th>
+              <th>
+                User Name
+              </th>
+			  <th data-hide="phone,tablet">
+                Message
+              </th>
+			   <th data-hide="phone,tablet">
+                 Message Type
+              </th>
+              <th data-hide="phone,tablet">
+                Date
+              </th>
+			  <th data-hide="phone,tablet">
+                Day
+              </th>
+			  <th data-hide="phone,tablet">
+                Time
+              </th>
+              
+			  <th class="hide-sort" data-hide="phone" style="width:50px;">
+				
+			  </th>
+			   <th class="hide-sort" data-hide="phone" style="width:50px;">
+				
+			  </th>
+			  
+			  
+			  
+			  
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="dat in schp" id="Vip{{dat.PushScheduleId}}" >
+              <td>
+                  <div class="checkbox">
+                      <label class="i-checks">
+                          <input type="checkbox" value="" ng-click="pushschp(dat.PushScheduleId)">
+                          <i></i>
+                      </label>
+                  </div>
+              </td>
+              <td>{{dat.user_name}}</td>
+              <td>{{dat.AlertMessage}}</td>
+              <td>{{dat.AlertType}}</td>
+              <td>{{dat.AlertDate}}</td>
+              <td>{{dat.AlertDay}}</td>
+              <td>{{dat.AlertTime}}</td>
+              <td>
+                  <a  ng-click="opendelete('md',dat.PushScheduleId,'singular')"><i class="fa fa-trash-o fa-lg" ></i></a>
+              </td>
+              <td>
+                  <a  ng-click="edit(dat)"><i class="fa fa-pencil-square-o fa-lg" ></i></a>
+              </td>
+			  
+          </tr>
+        
+         
+
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

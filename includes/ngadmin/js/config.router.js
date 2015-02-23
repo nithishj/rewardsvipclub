@@ -98,6 +98,16 @@ angular.module('app')
                       }]
                   }
               })
+			   .state('app.schedulepush', {
+                  url: '/schedulepush',
+                  templateUrl: 'includes/ngadmin/tpl/schedulepush/schedulepush.html',
+                  controller:'schedulepushCtrl'
+              })
+			  .state('app.addschedulepush', {
+                  url: '/adddschedulepush',
+                  templateUrl: 'includes/ngadmin/tpl/schedulepush/addschedulepush.html',
+                  controller:'addschedulepushCtrl'
+              })
               .state('app.ui', {
                   url: '/ui',
                   template: '<div ui-view class="fade-in-up"></div>'

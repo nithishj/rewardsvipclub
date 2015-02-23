@@ -21,7 +21,7 @@ class banner_admin extends CI_Controller
 		if(!empty($json['BannerName']) && !empty($json['BannerImage']) && !empty($json['UserId']))
 		{
 		$this->load->model('banner_admin_model');
-		$res=$this->banner_admin_model->addbanner($json['BannerName'],$json['BannerImage'],$json['BannerUrl'],$json['UserId']);
+		$res=$this->banner_admin_model->addbanner($json['BannerName'],$json['BannerImage'],!empty($json['BannerUrl'])?$json['BannerUrl']:"",$json['UserId']);
 
 		}
 	     else
@@ -36,7 +36,7 @@ class banner_admin extends CI_Controller
 		if(!empty($json['BannerId']) && !empty($json['BannerName']) && !empty($json['BannerImage']) && !empty($json['UserId']))
 		{
 		$this->load->model('banner_admin_model');
-		$res=$this->banner_admin_model->editbanner($json['BannerId'],$json['BannerName'],$json['BannerImage'],$json['BannerUrl'],$json['UserId']);
+		$res=$this->banner_admin_model->editbanner($json['BannerId'],$json['BannerName'],$json['BannerImage'],!empty($json['BannerUrl'])?$json['BannerUrl']:"",$json['UserId']);
 
 		}
 	     else
