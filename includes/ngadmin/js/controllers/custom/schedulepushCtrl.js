@@ -1,4 +1,4 @@
-app.controller('schedulepushCtrl',['$scope', '$modal', 'SchedulePushFactory', function($scope ,$modal ,SchedulePushFactory)
+app.controller('schedulepushCtrl',['$scope', '$modal', 'SchedulePushFactory', '$location', function($scope ,$modal ,SchedulePushFactory, $location)
 {
  $scope.Addpushid=[];
  $scope.disdel=true;
@@ -11,13 +11,9 @@ SchedulePushFactory.getpush('')
 		
 $scope.edit=function(id)
 {
+alert(id);
 $location.path('/editschedule/id');
 };		
-
-$scope.cancel=function()
-{
-$location.path('/editschedule/id');
-};
 		
 $scope.pushpushid=function(pushid)
 		{

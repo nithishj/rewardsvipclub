@@ -1,8 +1,13 @@
-app.controller('addschedulepushCtrl',['$scope', '$modal', 'SchedulePushFactory', 'loggedUserFactory', '$stateParams', function($scope ,$modal, SchedulePushFactory, loggedUserFactory, $stateParams)
+app.controller('addschedulepushCtrl',['$scope', '$modal', 'SchedulePushFactory', 'loggedUserFactory', '$stateParams', '$location', function($scope ,$modal, SchedulePushFactory, loggedUserFactory, $stateParams, $location)
 {
 
 $scope.heading="Add";
 
+
+$scope.cancel=function()
+{
+$location.path('/schedulepush');
+};
 
 //***********************date picker config functions************************//
  $scope.today = function() {
