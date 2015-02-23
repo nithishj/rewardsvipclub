@@ -32,4 +32,6 @@ class starrewards_admin extends CI_Controller
 		$msg=$this->starrewards_admin_model->getusers($json['query'],$json['users']);
 		echo json_encode($msg);
 	}
+	
+	
 }
