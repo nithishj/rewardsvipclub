@@ -20,5 +20,17 @@ function getusers($search,$users)
    return array();
 }
 
+function addstarreward($message,$points,$userids)
+{
+  $q=$this->db->query("insert into starrewards (Message,Points,Code)  values ('$message','$points',left(UUID(), 5))");
+  $id=$this->db->insert_id();
+  $userids=explode(',',$userids);
+  for($i=0;$i<count($userids);$i++)
+  {
+    $q1=$this->db->query("insert into rewardusers (StarRewardsId, UserId)  values ('$id','$userids[$i]')");
+  }
+  return array("message"=>"success","code"=>200);
+  
+}
 
 }
