@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class schedulepush_admin admin extends CI_Controller
+class schedulepush_admin extends CI_Controller
 {  
 
 	function __construct()
@@ -17,10 +17,10 @@ class schedulepush_admin admin extends CI_Controller
     function addpush()
 	{
 		$json = json_decode(trim(file_get_contents('php://input')),true);
-		if(!empty($json['UserId']) && !empty($json['AlertMessage']) && !empty($json['AlertType']) && ((!empty($json['AlertDate']) && !empty($json['AlertTime'])) || (!empty($json['AlertDay']) && !empty($json['AlertTime'])) || (!empty($json['AlertTime'))))
+		if(!empty($json['UserId']) && !empty($json['AlertMessage']) && !empty($json['AlertType']) && ((!empty($json['AlertDate']) && !empty($json['AlertTime'])) || (!empty($json['AlertDay']) && !empty($json['AlertTime'])) || (!empty($json['AlertTime']))))
 		{
 		$this->load->model('schedulepush_admin_model');
-		$res=$this->schedulepush_admin_model->addpush($json['UserId'],$json['AlertMessage'],$json['AlertType'],$json['AlertDate'],$json['AlertTime'],$json['AlertDay']);
+		$res=$this->schedulepush_admin_model->addpush($json['UserId'],$json['AlertMessage'],$json['AlertType'],!empty($json['AlertDate'])?$json['AlertDate']:"",$json['AlertTime'],!empty($json['AlertDay'])?$json['AlertDay']:'');
 		
 		}
 		else
@@ -33,10 +33,10 @@ class schedulepush_admin admin extends CI_Controller
 	function editpush()
 	{
 		$json = json_decode(trim(file_get_contents('php://input')),true);
-		if(!empty($json['SchedulePushId']) &&!empty($json['UserId']) && !empty($json['AlertMessage']) && !empty($json['AlertType']) && ((!empty($json['AlertDate']) && !empty($json['AlertTime'])) || (!empty($json['AlertDay']) && !empty($json['AlertTime'])) || (!empty($json['AlertTime'))))
+		if(!empty($json['SchedulePushId']) &&!empty($json['UserId']) && !empty($json['AlertMessage']) && !empty($json['AlertType']) && ((!empty($json['AlertDate']) && !empty($json['AlertTime'])) || (!empty($json['AlertDay']) && !empty($json['AlertTime'])) || (!empty($json['AlertTime']))))
 		{
 		$this->load->model('schedulepush_admin_model');
-		$res=$this->schedulepush_admin_model->editpush($json['SchedulePushId'],$json['UserId'],$json['AlertMessage'],$json['AlertType'],$json['AlertDate'],$json['AlertTime'],$json['AlertDay']);
+		$res=$this->schedulepush_admin_model->editpush($json['SchedulePushId'],$json['UserId'],$json['AlertMessage'],$json['AlertType'],!empty($json['AlertDate'])?$json['AlertDate']:"",$json['AlertTime'],!empty($json['AlertDay'])?$json['AlertDay']:'');
 		}
 		else
 		$res=array("Message"=>"Required Fields","code"=>400);

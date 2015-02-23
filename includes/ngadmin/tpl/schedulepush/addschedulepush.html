@@ -1,1 +1,65 @@
-<h1>Add Schedule push</h1>
+<div class="col-sm-12" style="margin-top:30px;">
+        <form name="add_user_form" id="add_user_form" class="form-horizontal form-validation" ng-submit="submit()">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>{{heading}} a Schedule</h4>
+            </div>
+            <div class="panel-body" style="min-height:400px">                    
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Message : </label>
+                <div class="col-sm-6">
+				 <textarea  placeholder="Enter push message here" rows="2" ng-model="message" name="reward_msg" class="form-control inline-block ng-valid ng-valid-required col-sm-6" required style="display:inline-block;vertical-align:top;"></textarea>
+                     
+                </div>
+              </div>
+            
+              <div class="form-group">
+				<label class="col-sm-3 control-label" style="vertical-align:middle">Type: </label>
+				<div class="col-sm-4" style="vertical-align:middle;display:inline-block;">
+					 <select class="form-control" ng-model="alerttype"  ng-options="val.id as val.type for val in atype" ng-change="typechange()" name="alerttype" ng-required="true" >
+						  
+					  </select>
+				</div>
+              </div>
+		   
+		   <div class="row" ng-show="showdate">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Date:</label>
+
+            <div class="col-sm-4" style="padding-left:2%">
+                <p class="input-group">
+                  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened"  datepicker-options="dateOptions"  ng-required="false" close-text="Close" ng-disabled="true" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+            </div>
+
+        </div>	
+        </div> 
+		    <div class="form-group" ng-show="showday">
+				<label class="col-sm-3 control-label" style="vertical-align:middle">Day: </label>
+				<div class="col-sm-4" style="vertical-align:middle;display:inline-block;">
+					 <select class="form-control" ng-model="weekday"  ng-options="val.id as val.name for val in weekdays" name="day">
+						  
+					  </select>
+				</div>
+              </div>
+			  
+			   <div class="form-group" ng-show="showtime">
+				<label class="col-sm-3 control-label" style="vertical-align:middle"></label>
+				<div class="col-sm-4" style="vertical-align:middle;display:inline-block;">
+					 <timepicker ng-model="mytime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+				</div>
+              </div>
+
+            </div>
+			
+              
+            <footer class="panel-footer text-right bg-light lter">
+			  <button type="button" class="btn btn-danger" ng-click="cancel()">cancel</button>
+              <button type="submit" class="btn btn-warning">Submit</button>
+            </footer>
+          </div>
+        </form>
+      </div>

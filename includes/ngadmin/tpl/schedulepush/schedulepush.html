@@ -79,14 +79,14 @@ border-radius: .25em;
               <td>
                   <div class="checkbox">
                       <label class="i-checks">
-                          <input type="checkbox" value="" ng-click="pushschp(dat.PushScheduleId)">
+                          <input type="checkbox" value="" ng-click="pushpushid(dat.PushScheduleId)">
                           <i></i>
                       </label>
                   </div>
               </td>
               <td>{{dat.user_name}}</td>
               <td>{{dat.AlertMessage}}</td>
-              <td>{{dat.AlertType}}</td>
+              <td>{{dat.Alerttypemsg}}</td>
               <td>{{dat.AlertDate}}</td>
               <td>{{dat.AlertDay}}</td>
               <td>{{dat.AlertTime}}</td>
@@ -94,7 +94,7 @@ border-radius: .25em;
                   <a  ng-click="opendelete('md',dat.PushScheduleId,'singular')"><i class="fa fa-trash-o fa-lg" ></i></a>
               </td>
               <td>
-                  <a  ng-click="edit(dat)"><i class="fa fa-pencil-square-o fa-lg" ></i></a>
+                  <a  ng-click="edit(dat.PushScheduleId)"><i class="fa fa-pencil-square-o fa-lg" ></i></a>
               </td>
 			  
           </tr>

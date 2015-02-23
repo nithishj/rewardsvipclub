@@ -21,13 +21,12 @@ function editpush($schedulepushid,$userid,$alertmessage,$alerttype,$alertdate,$a
   $q=$this->db->update('pushschedule',$a);
   if($q)
   return array("Message"=>"success","code"=>200);
-
+  
 }
 
 function deletepush($schedulepushid)
 {
-	$this->db->where('PushScheduleId', $schedulepushid);
-	$q=$this->db->delete('pushschedule'); 
+    $q=$this->db->query("delete from pushschedule where PushScheduleId IN ($schedulepushid)");
 	if($q)
     return array("Message"=>"success","code"=>200);
 }
@@ -36,9 +35,9 @@ function getpush($id)
 {
 	$base=base_url();
 	if(empty($id))
-	$q=$this->db->query("select up.user_name,ps.*  from pushschedule ps inner join user_profile up on ps.UserId=up.user_id order by ps.PushScheduleId desc");
+	$q=$this->db->query("select up.user_name,ps.PushScheduleId,ps.UserId,ps.AlertMessage,ps.AlertType,case when ps.AlertType=1 then 'Once' when ps.AlertType=2 then 'Every Week' else 'Every Day' END as Alerttypemsg,ps.AlertDate,ps.AlertDay,ps.AlertTime from pushschedule ps inner join user_profile up on ps.UserId=up.user_id order by ps.PushScheduleId desc");
 	else
-	$q=$this->db->query("select up.user_name,ps.*   from pushschedule ps inner join user_profile up on ps.UserId=up.user_id where ps.PushScheduleId='$id'");
+	$q=$this->db->query("select up.user_name,ps.PushScheduleId,ps.UserId,ps.AlertMessage,ps.AlertType,case when ps.AlertType=1 then 'Once' when ps.AlertType=2 then 'Every Week' else 'Every Day' END as Alerttypemsg,ps.AlertDate,ps.AlertDay,ps.AlertTime   from pushschedule ps inner join user_profile up on ps.UserId=up.user_id where ps.PushScheduleId='$id'");
 	if($q->num_rows()>0)
 	return $q->result();
 	else
