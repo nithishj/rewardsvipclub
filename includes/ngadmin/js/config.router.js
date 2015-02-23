@@ -105,12 +105,12 @@ angular.module('app')
                   controller:'schedulepushCtrl'
               })
 			  .state('app.addschedulepush', {
-                  url: '/adddschedule',
+                  url: '/addschedule',
                   templateUrl: 'includes/ngadmin/tpl/schedulepush/addschedulepush.html',
                   controller:'addschedulepushCtrl'
 				})
-				.state('app.editschedulepush', {
-                  url: '/editschedulepush/:id',
+				.state('app.editschedule', {
+                  url: '/editschedule/:id',
                   templateUrl: 'includes/ngadmin/tpl/schedulepush/addschedulepush.html',
                   controller:'addschedulepushCtrl'
               })
