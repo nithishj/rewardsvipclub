@@ -6,7 +6,10 @@ app.controller('rewardsCtrl',['$scope','$location','RewardsFactory', function($s
     $scope.get_rewards_list = function(){
          // remove previous array                       
         $scope.rewards_lists.splice(0,$scope.rewards_lists.length);
-        $scope.rewards_lists = RewardsFactory.getRewardsHistory();
+        RewardsFactory.getRewardsHistory().success(function(data){
+            $scope.rewards_lists = data;
+            
+        });
         
     };
     // get rewards history list                         

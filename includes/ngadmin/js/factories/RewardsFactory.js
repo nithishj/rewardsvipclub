@@ -52,16 +52,14 @@
         factory.getRewardsHistory=function()
 		{
 		    
-            //return $http.get('rewards_admin/getrewards');
-			
-			return rewards_history;
+            return $http.get('starrewards_admin/getschedulehistory');
 		}
         
          // Rewards history
         factory.addStarRewards=function(msg,points,user_ids)
 		{
 		    
-            return $http.post('rewards_admin/addstarreward?format=json',{
+            return $http.post('starrewards_admin/addstarreward?format=json',{
             Message:msg,
             Points:points,
             UserIds:user_ids

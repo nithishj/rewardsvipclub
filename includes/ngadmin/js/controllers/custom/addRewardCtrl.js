@@ -153,18 +153,21 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
 
 
 
-app.controller('rewardsModalCtrl', ['$scope', '$modalInstance','RewardsFactory',
-  function($scope, $modalInstance, RewardsFactory) {
+app.controller('rewardsModalCtrl', ['$scope', '$location', '$modalInstance','RewardsFactory',
+  function($scope, $location, $modalInstance, RewardsFactory) {
       
       $scope.share_cancel = function(){
         $modalInstance.close();
       };
       
        $scope.share_ok = function(){
-        console.log($scope.rewards_msg+","+$scope.rewards_points+","+$scope.getIdsFromJSON($scope.selected_users).toString());
+        //console.log($scope.rewards_msg+","+$scope.rewards_points+","+$scope.getIdsFromJSON($scope.selected_users).toString());
             RewardsFactory.addStarRewards($scope.rewards_msg,$scope.rewards_points,$scope.getIdsFromJSON($scope.selected_users).toString()).success(function(data){
 
-                 console.log("added suuccessfully");
+                 
+                $modalInstance.close();
+                alert("Reward added Successfully.");
+                $location.path('admin/rewards');
 
             });
            
