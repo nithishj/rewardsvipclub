@@ -33,4 +33,13 @@ function addstarreward($message,$points,$userids)
   
 }
 
+function getschedulehistory()
+{
+  $q=$this->db->query("select Message,Points,Code from starrewards");
+  if($q->num_rows()>0)
+  return $q->result();
+  else
+  return array();
+}
+
 }
