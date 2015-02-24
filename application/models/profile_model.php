@@ -50,6 +50,18 @@ return array("message"=>"Profile Updated Successfully","code"=>200);
 
 function terminate($userid,$password)
 {
+$a=$this->db->query("select social_type from social_login where user_id='$userid'");
+if($a->num_rows()>0)
+{
+$q=$this->db->query("update users set Deleted=1 where user_id=$userid");
+return array("message"=>"User Deleted Successfully","code"=>200);
+}
+else
+{
+
+if(empty($password))
+return array("message"=>"Required Fields","code"=>400);
+
 $q=$this->db->query("select user_id from users where user_id=$userid and password='$password'");
 if($q->num_rows()>0)
 {
@@ -59,6 +71,7 @@ return array("message"=>"User Deleted Successfully","code"=>200);
 else
 {
 return array("message"=>"Wrong Password","code"=>400);
+}
 }
 
 }

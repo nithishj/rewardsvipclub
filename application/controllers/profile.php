@@ -77,7 +77,7 @@ class profile extends CI_Controller
 	function terminate()
 	{
 	$data = json_decode(trim(file_get_contents('php://input')),true);
-	 if(!empty($data['UserId']) && !empty($data['Password']))
+	 if(!empty($data['UserId']))
 	 {
 			$this->load->model('profile_model');
 			$msg=$this->profile_model->terminate($data['UserId'],$data['Password']);

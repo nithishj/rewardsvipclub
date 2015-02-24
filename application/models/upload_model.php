@@ -32,12 +32,12 @@ Class upload_model extends CI_Model
 	
 	function getupload($broadcast_type)
 	{
-                $msg=array();
-		$q=$this->db->query("select b.*,c.r_value,c.g_value,c.b_value,c.r_fore_value,c.g_fore_value,c.b_fore_value, c.color_images,b.Latitude,b.Longitude,b.Address  from broadcast b left join color_lookup c on b.Color=c.color_lookup_id where b.BroadcastType='$broadcast_type' order by b.BroadcastId desc limit 0,20");
+        $msg=array();
+		$q=$this->db->query("select b.*,c.r_value,c.g_value,c.b_value,c.r_fore_value,c.g_fore_value,c.b_fore_value, c.color_images,b.Latitude,b.Longitude,b.Address,up.profile_picture  from broadcast b left join color_lookup c on b.Color=c.color_lookup_id inner join user_profile up on b.Fr_UserId=up.user_id where b.BroadcastType='$broadcast_type' order by b.BroadcastId desc limit 0,20");
 		$v=$q->result();
 		foreach($v as $val)
 		{
-			$msg[]=array("BroadcastId"=>$val->BroadcastId,"Message"=>$val->Message,"Fr_UserId"=>$val->Fr_UserId,"Image"=>!empty($val->Image)?base_url().$val->Image:"","Color"=>$val->Color,"Rvalue"=>!empty($val->r_value)?$val->r_value:"0","Gvalue"=>!empty($val->g_value)?$val->g_value:"0","Bvalue"=>!empty($val->b_value)?$val->b_value:"0","R_fore_value"=>!empty($val->r_fore_value)?$val->r_fore_value:"0","G_fore_value"=>!empty($val->g_fore_value)?$val->g_fore_value:"0","B_fore_value"=>!empty($val->b_fore_value)?$val->b_fore_value:"0","Audio"=>!empty($val->Audio)?base_url().$val->Audio:"","Video"=>!empty($val->Video)?base_url().$val->Video:"","VideoThumb"=>!empty($val->VideoThumb)?base_url().$val->VideoThumb:"","color_images"=>!empty($val->color_images)?base_url()."color_images/".$val->color_images:"","Latitude"=>!empty($val->Latitude)?$val->Latitude:"","Longitude"=>!empty($val->Longitude)?$val->Longitude:"","Address"=>!empty($val->Address)?$val->Address:"");
+			$msg[]=array("BroadcastId"=>$val->BroadcastId,"Message"=>$val->Message,"Fr_UserId"=>$val->Fr_UserId,"Image"=>!empty($val->Image)?base_url().$val->Image:"","Color"=>$val->Color,"Profile_pic"=>!empty($val->profile_picture)?base_url().$val->profile_picture:'',"Rvalue"=>!empty($val->r_value)?$val->r_value:"0","Gvalue"=>!empty($val->g_value)?$val->g_value:"0","Bvalue"=>!empty($val->b_value)?$val->b_value:"0","R_fore_value"=>!empty($val->r_fore_value)?$val->r_fore_value:"0","G_fore_value"=>!empty($val->g_fore_value)?$val->g_fore_value:"0","B_fore_value"=>!empty($val->b_fore_value)?$val->b_fore_value:"0","Audio"=>!empty($val->Audio)?base_url().$val->Audio:"","Video"=>!empty($val->Video)?base_url().$val->Video:"","VideoThumb"=>!empty($val->VideoThumb)?base_url().$val->VideoThumb:"","color_images"=>!empty($val->color_images)?base_url()."color_images/".$val->color_images:"","Latitude"=>!empty($val->Latitude)?$val->Latitude:"","Longitude"=>!empty($val->Longitude)?$val->Longitude:"","Address"=>!empty($val->Address)?$val->Address:"");
 	    }
 			return $msg;
 	}
