@@ -38,26 +38,24 @@ border-radius: .25em;
               
               
 			  <th data-hide="phone,tablet">
-                Profile image
+                Message
               </th>
               <th>
-                User Name
+                Points
               </th>
 			   <th data-hide="phone,tablet">
-                 Points
+                 Code
               </th>
-              <th data-hide="phone,tablet">
-                 Message
-              </th>
+              
 			  
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="reward in rewards_lists">
-              <td><img src={{reward.profile_image}} style="width:60px;height:60px;"/></td>
-              <td>{{reward.name}}</td>
-              <td>{{reward.points}}</td>
-              <td>{{reward.msg}}</td>
+              
+              <td>{{reward.Message}}</td>
+              <td>{{reward.Points}}</td>
+              <td>{{reward.Code}}</td>
               
           </tr>
         

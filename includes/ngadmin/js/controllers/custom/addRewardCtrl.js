@@ -1,4 +1,4 @@
-app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory', function($scope, $location,$timeout,RewardsFactory)
+app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory','$modal', function($scope, $location,$timeout,RewardsFactory,$modal)
 {
 
     $scope.users_list = [];
@@ -21,8 +21,15 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
     $scope.get_users_list = function(){
          // remove previous array                       
         $scope.users_list.splice(0,$scope.users_list.length);
-        $scope.users_list = RewardsFactory.getRewards();
-        console.log($scope.getIdsFromJSON($scope.users_list))
+        
+        RewardsFactory.getRewards().success(function(data){
+            
+             $scope.users_list = data;
+             console.log("init = "+$scope.getIdsFromJSON($scope.users_list));
+        
+        });
+        
+       
         
     };
     // get users list                         
@@ -54,7 +61,18 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
    
     $scope.getSearchUsersList = function(){
         
-        console.log($scope.search_filter);
+        if($scope.search_filter!= undefined && $scope.search_filter.length>0){
+            
+             // remove previous array                       
+            $scope.users_list.splice(0,$scope.users_list.length);
+
+            RewardsFactory.getRewards($scope.search_filter,$scope.getIdsFromJSON($scope.selected_users).toString()).success(function(data){
+
+                 $scope.users_list = data;
+
+            });
+            
+        }
     };
     
     
@@ -84,6 +102,13 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
         if($scope.selected_users.length>0)
         {
             console.log($scope.getIdsFromJSON($scope.selected_users))
+            
+             var modalInstance = $modal.open({
+                templateUrl: 'includes/ngadmin/tpl/confirmmodal.html',
+                controller: 'rewardsModalCtrl',
+                size: 'md',
+                scope:$scope
+            });    
             
         }else{
             //alert("Select atleast one user to share points");
@@ -125,3 +150,29 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
 
 
 }]);
+
+
+
+app.controller('rewardsModalCtrl', ['$scope', '$location', '$modalInstance','RewardsFactory',
+  function($scope, $location, $modalInstance, RewardsFactory) {
+      
+      $scope.share_cancel = function(){
+        $modalInstance.close();
+      };
+      
+       $scope.share_ok = function(){
+        //console.log($scope.rewards_msg+","+$scope.rewards_points+","+$scope.getIdsFromJSON($scope.selected_users).toString());
+            RewardsFactory.addStarRewards($scope.rewards_msg,$scope.rewards_points,$scope.getIdsFromJSON($scope.selected_users).toString()).success(function(data){
+
+                 
+                $modalInstance.close();
+                alert("Reward added Successfully.");
+                $location.path('admin/rewards');
+
+            });
+           
+      };
+      
+   
+  }]);
+
