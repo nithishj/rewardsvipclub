@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+	 <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="user_cancel()"><span aria-hidden="true">&times;</span></button>
+Star Rewards Users</h3>
+</div>
+<div class="modal-body">
+    <table class="table">
+        <thead>
+          <tr>
+              
+              
+			  <th data-hide="phone,tablet">
+                User Profile
+              </th>
+              <th>
+                User Name
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in rewards_users_lists">
+              
+              <td><img ng-src="{{user.profile_picture}}" style="width:60px;height:60px;"/></td>
+              <td>{{user.user_name}}</td>
+              
+          </tr>
+        
+         
+
+        </tbody>
+	</table>
+</div>

@@ -46,6 +46,9 @@ border-radius: .25em;
 			   <th data-hide="phone,tablet">
                  Code
               </th>
+              <th data-toggle="true" class="hide-sort">
+                
+              </th>
               
 			  
           </tr>
@@ -56,6 +59,7 @@ border-radius: .25em;
               <td>{{reward.Message}}</td>
               <td>{{reward.Points}}</td>
               <td>{{reward.Code}}</td>
+              <td><a ng-click="openUsersList(reward.users,md)"><i class="fa fa-external-link fa-lg" ></i></a></td>
               
           </tr>
         
