@@ -1,4 +1,4 @@
-app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory','$modal', function($scope, $location,$timeout,RewardsFactory,$modal)
+app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory','$modal','toaster', function($scope, $location,$timeout,RewardsFactory,$modal,toaster)
 {
 
     $scope.users_list = [];
@@ -146,15 +146,27 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
       // add to users list at first position
     $scope.users_list.splice(0,0,user);
   };
+    
 
+           /* Toaster type: 
+                success
+                info
+                wait
+                warning
+                error
+           */
+
+    //toaster.pop("success", "Sample", "mSG");
 
 
 }]);
 
 
 
-app.controller('rewardsModalCtrl', ['$scope', '$location', '$modalInstance','RewardsFactory',
-  function($scope, $location, $modalInstance, RewardsFactory) {
+app.controller('rewardsModalCtrl', ['$scope', '$location', '$modalInstance','RewardsFactory','toaster','$rootScope',
+  function($scope, $location, $modalInstance, RewardsFactory,toaster,$rootScope) {
+      
+      
       
       $scope.share_cancel = function(){
         $modalInstance.close();
@@ -166,8 +178,10 @@ app.controller('rewardsModalCtrl', ['$scope', '$location', '$modalInstance','Rew
 
                  
                 $modalInstance.close();
-                alert("Reward added Successfully.");
+                //alert("Reward added Successfully.");
+                $rootScope.toasterFlag = true;
                 $location.path('admin/rewards');
+                
 
             });
            

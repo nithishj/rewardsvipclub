@@ -1,6 +1,18 @@
-app.controller('rewardsCtrl',['$scope','$location','$modal','RewardsFactory', function($scope, $location,$modal,RewardsFactory)
+app.controller('rewardsCtrl',['$scope','$location','$modal','RewardsFactory','$rootScope','toaster','$timeout', function($scope, $location,$modal,RewardsFactory,$rootScope,toaster,$timeout)
 {
-
+    
+    
+    if ($rootScope.toasterFlag){
+        
+        $timeout(function(){
+            toaster.pop("success", "Star Rewards", "Reward added Successfully.");
+        },500);
+        
+        $rootScope.toasterFlag = false;
+       
+    }
+        
+    
      $scope.rewards_lists = [];
     
     $scope.get_rewards_list = function(){
