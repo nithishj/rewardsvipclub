@@ -240,7 +240,7 @@ class Users_Db extends CI_Model
 	public function update_user_by_social_id($social_id, $social_type, $data) {
 		if (empty($social_id) OR empty($social_type) OR empty($data))
 			return false;
-		$user = array('user_role' => $data['user_role']);
+		//$user = array('user_role' => $data['user_role']);
 		if ($social_type == 'General') {
 			$user_id = $social_id;
 		} else {
@@ -251,9 +251,9 @@ class Users_Db extends CI_Model
 		$this->db->where('user_id', $user_id);
 		
 		$user_profile = array(
-				'user_name'	=> $data['user_name'],
+				//'user_name'	=> $data['user_name'],
 				'device_token'=>$data['device_token'],
-				'profile_picture'=>$data['profile_picture'],
+				//'profile_picture'=>$data['profile_picture'],
 				'gender'=>$data['gender']
 		);
 		if ($social_type != 'General')
