@@ -39,14 +39,14 @@
             <label class="col-sm-3 control-label">Event Icon:</label>
             <div class="col-sm-4 col-md-4">
 
-                 <div class="btn-group" dropdown>
-          <button type="button" class="btn btn-default" style="background-image:url({{chosenicon}})"><span style="visibility:hidden">Please choose Icon</span></button>
-          <button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle>
+        <div class="btn-group" dropdown>
+          <button type="button" class="btn btn-default" style="background-image:url({{chosenicon}});height:50px !important;width:55px; !important"> <span style="visibility:hidden">Please choose Icon</span></button>
+          <button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle style="height:50px;">
             <span class="caret"></span>
             <span class="sr-only">Split button!</span>
           </button>
-          <ul class="dropdown-menu" role="menu" style="width:50px;height:200px;overflow-y:auto">
-          <li ng-repeat="icn in eventIcons" style="background-image:url({{icn.Icon}});height:25px;cursor:pointer;" ng-click="setIcon({{icn}})"><a</li>
+          <ul class="dropdown-menu" role="menu" style="width:88px !important;height:200px;overflow-y:auto">
+          <li ng-repeat="icn in eventIcons" style="cursor:pointer;width:50px !important;padding-left:10px !important;padding-top:10px;" ng-click="setIcon({{icn}})"><img ng-src="{{icn.Icon}}" style="min-height:40px;min-width:40px;max-height:50px;max-width:50px;" /></li>
           </ul>
         </div>
 
@@ -94,4 +94,7 @@
 
 <style>
 	select { -webkit -appearance:none }
+	.dropdown-menu {
+		min-width:75px !important;
+	}
 </style>
