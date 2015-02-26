@@ -73,6 +73,14 @@ class profile extends CI_Controller
 	
 	}
 	
+	function get_user_themes()
+	{
+	  $baseurl=base_url();	
+	  $thumb=$baseurl."resize.php?height=100&width=100&path=";
+	  $q=$this->db->query("select theme_lookup_id,concat('$baseurl',Image) as theme,concat('$thumb',Image) as thumb  from theme_lookup");
+	  echo json_encode($q->result());
+	}
+	
 	
 	function terminate()
 	{
