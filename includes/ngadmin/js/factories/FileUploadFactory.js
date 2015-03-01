@@ -17,10 +17,11 @@
 		 angular.forEach($files, function ($file, i) {
                 //var $file = $files[i];
 				//alert($file.type.indexOf('video'));
-                if (window.FileReader && (($file.type.indexOf('image') > -1 && type=='image') || ($file.type.indexOf('video') > -1 && type=='video') || ($file.type.indexOf('audio') > -1 && type=='audio') || ($file.type.indexOf('image') > -1 && type=='videothumb'))) 
+                if (window.FileReader && (($file.type.indexOf('image') > -1 && (type=='image'||type=="theme")) || ($file.type.indexOf('video') > -1 && type=='video') || ($file.type.indexOf('audio') > -1 && type=='audio') || ($file.type.indexOf('image') > -1 && type=='videothumb'))) 
 				{
 				   //alert($scope.vduploading);
-						if(type=="image")
+                     
+						if(type=="image"||type=="theme")
 						$scope.imuploading=true;
 						if(type=="video")
 						$scope.vduploading=true;
@@ -41,7 +42,7 @@
 				   {
                        $scope.errmsg=""; // remove previous error msg
 				   
-				   if(data.type=="image")
+				   if(data.type=="image"||data.type == "theme")
 				   {
 				   $scope.myimg=data.filepath;
 				   $scope.imuploading=false;
@@ -96,7 +97,7 @@
             
          if (window.FileReader && (files[0].type.indexOf('image') > -1 ))
          {
-            
+           
             var reader = new FileReader();
             var img = new Image();
             
@@ -104,7 +105,20 @@
                 img.src = e.target.result;
                 img.onload = function () {
                    
-                     if(this.width == width && this.height == height){
+                if(type == "theme"){
+                   
+                    if(this.width > width && this.height > height){
+                        factory.uploadFile($scope,files,type);
+                         
+                        
+                    }else
+                    {
+                        
+                       alert("Invalid Image Resolution");
+                       
+                    }
+                }else{
+                    if(this.width > width && this.height > height){
                         factory.uploadFile($scope,files,type);
                         
                     }else
@@ -113,6 +127,9 @@
                        alert("Invalid Image Resolution");
                        
                     }
+                
+                }     
+                    
                     
                 };
             };
