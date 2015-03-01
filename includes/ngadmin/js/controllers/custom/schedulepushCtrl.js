@@ -2,17 +2,20 @@ app.controller('schedulepushCtrl',['$scope', '$modal', 'SchedulePushFactory', '$
 {
  $scope.Addpushid=[];
  $scope.disdel=true;
-
+ $scope.schp=[];
 
 SchedulePushFactory.getpush('')
 		.success(function(data){
-		$scope.schp=data;
+		 angular.forEach(data,function(val,key){
+		 	//alert(JSON.stringify(val));
+           this.push({"user_name":val.user_name,"PushScheduleId":val.PushScheduleId,"UserId":val.UserId,"AlertMessage":val.AlertMessage,"AlertType":val.AlertType,"Alerttypemsg":val.Alerttypemsg,"AlertDate":(val.AlertDate)?new Date(val.AlertDate).toLocaleDateString():'',"AlertDay":val.AlertDay,"AlertTime":new Date(val.AlertTime).toLocaleTimeString(),"AlertDayMsg":val.AlertDayMsg,"dtmsg":val.dtmsg});
+		 },$scope.schp);
+		//alert(JSON.stringify($scope.schp));
 		});
 		
 $scope.edit=function(id)
 {
-alert(id);
-$location.path('/editschedule/id');
+$location.path('/admin/editschedule/'+id);
 };		
 		
 $scope.pushpushid=function(pushid)
@@ -33,7 +36,7 @@ $scope.pushpushid=function(pushid)
 			 $scope.disdel=true;
 			 else
 			 $scope.disdel=false;
-			alert($scope.Addpushid);
+			//alert($scope.Addpushid);
 		};		
 			
 $scope.opendelete=function(size , id, type)

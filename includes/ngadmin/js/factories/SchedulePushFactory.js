@@ -15,10 +15,16 @@
 		//alert(JSON.stringify(dd));
 			 return $http.post('schedulepush_admin/addpush?format=json',dd);
 		}
-		
+
+		factory.editpush=function(psid,userid,msg,type,dt,atime,aday)
+		{
+		var dd={SchedulePushId:psid,UserId:userid,AlertMessage:msg,AlertType:type,AlertDate:dt,AlertTime:atime,AlertDay:aday};
+		//alert(JSON.stringify(dd));
+			 return $http.post('schedulepush_admin/editpush?format=json',dd);
+		}
 		factory.deletepush=function(delid) {
 		var dd={SchedulePushId:delid};
-		alert(JSON.stringify(dd));
+		//alert(JSON.stringify(dd));
 			 return $http.post('schedulepush_admin/deletepush?format=json',dd);
 		}
 

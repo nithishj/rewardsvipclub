@@ -102,7 +102,9 @@ function plususer()
 	else if($json['type']=='audio')
 	$filedest="user_audio/"; 
 	else if($json['type']=='video' || $json['type']=='videothumb')
-	$filedest="user_video/"; 
+	$filedest="user_video/";
+	else if($json['type']=='theme')
+	$filedest="user_themes/";
 	//echo $json['value'];
 	$name=str_replace(' ','',$json['name1']);
 	$val=explode(",", $json['value']);
@@ -133,7 +135,7 @@ function plususer()
 	 {
 	   if(!empty($userid))
 	   {
-	   $q=$this->db->query("update users set Deleted=1 where user_id='$userid'");
+	   $q=$this->db->query("Delete users where user_id='$userid'");
 	    
 	   }
 	 
