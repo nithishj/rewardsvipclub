@@ -19,6 +19,19 @@ class schedulepush_admin extends CI_Controller
 		$json = json_decode(trim(file_get_contents('php://input')),true);
 		if(!empty($json['UserId']) && !empty($json['AlertMessage']) && !empty($json['AlertType']) && ((!empty($json['AlertDate']) && !empty($json['AlertTime'])) || (!empty($json['AlertDay']) && !empty($json['AlertTime'])) || (!empty($json['AlertTime']))))
 		{
+			if($json['AlertType']==1)
+			{
+				$json['AlertDay']="";
+			}
+			elseif ($json['AlertType']==2)
+		    {
+				$json['AlertDate']="";
+			}
+			elseif ($json['AlertType']==3)
+		    {
+				$json['AlertDate']="";
+				$json['AlertDay']="";
+			}	
 		$this->load->model('schedulepush_admin_model');
 		$res=$this->schedulepush_admin_model->addpush($json['UserId'],$json['AlertMessage'],$json['AlertType'],!empty($json['AlertDate'])?$json['AlertDate']:"",$json['AlertTime'],!empty($json['AlertDay'])?$json['AlertDay']:'');
 		
@@ -35,6 +48,19 @@ class schedulepush_admin extends CI_Controller
 		$json = json_decode(trim(file_get_contents('php://input')),true);
 		if(!empty($json['SchedulePushId']) &&!empty($json['UserId']) && !empty($json['AlertMessage']) && !empty($json['AlertType']) && ((!empty($json['AlertDate']) && !empty($json['AlertTime'])) || (!empty($json['AlertDay']) && !empty($json['AlertTime'])) || (!empty($json['AlertTime']))))
 		{
+			if($json['AlertType']==1)
+			{
+				$json['AlertDay']="";
+			}
+			elseif ($json['AlertType']==2)
+		    {
+				$json['AlertDate']="";
+			}
+			elseif ($json['AlertType']==3)
+		    {
+				$json['AlertDate']="";
+				$json['AlertDay']="";
+			}	
 		$this->load->model('schedulepush_admin_model');
 		$res=$this->schedulepush_admin_model->editpush($json['SchedulePushId'],$json['UserId'],$json['AlertMessage'],$json['AlertType'],!empty($json['AlertDate'])?$json['AlertDate']:"",$json['AlertTime'],!empty($json['AlertDay'])?$json['AlertDay']:'');
 		}
