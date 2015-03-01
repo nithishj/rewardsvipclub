@@ -137,6 +137,18 @@ angular.module('app')
                   }
 
               })
+                .state('app.themes', {
+                  url: '/themes',
+                  templateUrl: 'includes/ngadmin/tpl/themes/themes.html',
+                  controller:'themesCtrl',
+                    resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load('toaster');
+                      }]
+                  }
+
+              })
               .state('app.ui', {
                   url: '/ui',
                   template: '<div ui-view class="fade-in-up"></div>'
