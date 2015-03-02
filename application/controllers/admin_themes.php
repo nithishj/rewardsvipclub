@@ -32,7 +32,7 @@ class admin_themes extends CI_Controller
 		$json = json_decode(trim(file_get_contents('php://input')),true);
 		if(!empty($json['ThemeId']))
 		{
-          $this->db->delete('theme_lookup',array('theme_lookup_id'=>$json['ThemeId']));
+          $this->db->query("delete from theme_lookup where theme_lookup_id in ('$json[ThemeId]')");
           echo json_encode(array("message"=>"success","code"=>200));
 		}
 		else
