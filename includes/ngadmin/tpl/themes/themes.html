@@ -6,62 +6,55 @@
     
           <div class="panel panel-default">
             <div class="panel-heading col-sm-12">
-              <h4>Star Rewards</h4>
-                <h4 class="" style="color:red">{{rewards_errors}}</h4>
-                <div class="row">
-                  <form  id="add_rewards_form" class="form-horizontal form-validation" ng-submit="shareRewards()">
-                    <div class="col-sm-6">
-                      <textarea  placeholder="Send Message Content" rows="1" ng-model="rewards_msg" name="rewards_msg" class="form-control inline-block ng-valid ng-valid-required col-sm-6" required style="display:inline-block;vertical-align:top;"></textarea>
+              <h4>Themes</h4>
+                <h4 class="" style="color:red">{{errmsg}}</h4>
                 
-                    </div>
-                      
+                    <div style="border:1px solid #ccc;padding:20px 0;">
+                        <div class="row col-sm-12">
+                            <p class="text-center text-danger ">* Please Choose an image with 1242 x 2208 resolution</p>
+                        </div>
                 
-                
-				  <input type="number"  placeholder="Reward Points" ng-model="rewards_points" name="rewards_points" min="0" max = "500" class="form-control ng-valid-number ng-valid ng-valid-required col-sm-2" required style="width:150px;display:inline-block;">
-                
-                    <div class="inline col-sm-2">
-				            <button class="btn btn-warning inline " >Share Reward <i class="fa fa-share-alt"></i></button>
-			        </div>
-                  </form>
-                    
-                    <h5 class="inline pull-right col-sm-2" style="font-style:bold;font-size:15px;">Seleted Users : {{selected_users.length}} </h5>
-                </div>
-                
-            </div>
-            <div class="panel-body">                    
-                
-                <div class="col-sm-12" id="added_rewards_container">
-                    <div class="row">
-                       
-                        
-                    <div ng-repeat="user in selected_users" class="col-sm-3" style="margin-top:10px;">
-                        <alert  type="{{alert.type}}" close="closeAlert($index,user)" >                               <div>
-                            <img src={{user.profile_image}} style="width:50px;height:50px;" class="img-round" />
-                            <h5 class="inline">{{user.name}}</h5> 
-                            </div>
-                            
-                        </alert>
-                    </div>
-        
+                        <div class="row">
+                             <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Choose Theme:</label>
+                                <div class="col-sm-3">
+                                    <input type="file" ng-file-select ng-file-change="onFileSelect($files,'theme')" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <span style="font-weight:bold" ng-show="imuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="imfinish"/>
+                                </div>
+                                     
+                                 <div class="inline col-sm-3">
+                                    <button class="btn btn-warning inline"  ng-click="addTheme()">Add Themes <i class="fa fa-plus"></i></button>
+                                 </div>
 
-                    </div>
-                </div>
+                              </div>
+                              
+                            
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-6">
+                                <img   ng-src="{{myimg}}" ng-show="imguploaded" style="width:414px;height:100px;" />
+
+                            </div>
+                        </div>
+                    </div> 
                     
+                        <br><br>
                 
-                <div id="list_users_container">
-                    <div class="panel-heading col-sm-12">
                         <div class="row">
                              <div class="col-sm-6">
+<!--
                                 <div class="inline col-sm-8">
-                                     Search: <input ng-model="search_filter" type="text" class="form-control input-sm w-sm inline m-r" /><button class="btn btn-primary" ng-click="getSearchUsersList()">Search</button>
+                                     Search: <input ng-model="search_filter" type="text" class="form-control input-sm w-sm inline m-r" /><button class="btn btn-primary" ng-click="getSearchThemesList()">Search</button>
                                 </div>
-                                
-                                <div class="inline col-sm-4">
-                                    <button class="btn btn-warning inline " ng-disabled="isDisableButton" ng-click="addNewUsers()">Add Users <i class="fa fa-users"></i></button>
-                                </div>
-                            </div >
-                            <div class="col-sm-6">
-                               <div class="btn-group" dropdown>
+-->
+                                 <div class="btn-group" dropdown>
                                   <button type="button" class="btn btn-danger">Action</button>
                                   <button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle>
                                     <span class="caret"></span>
@@ -73,29 +66,42 @@
                                     <li><a ng-click="toggleCheckboxes(1)">UnSelect All</a></li>
                                   </ul>
                                 </div>
-
                                 
-
+                                <div class="inline col-sm-4">
+                                    <button class="btn btn-warning inline " ng-disabled="isDisableButton" ng-click="removeTheme()">Remove Themes <i class="fa fa-file-photo-o"></i></button>
+                                </div>
+                            </div >
+                            <div class="col-sm-6">
+                               
+                                <h5 class="inline pull-right" style="font-style:bold;font-size:15px;">Seleted Themes : {{sltd_tms}} </h5>
                             </div>
+                            
                         
                         </div>
                         
-                    </div>
+                    
+                
+            </div>
+            <div class="panel-body">                                
+                
+                <div id="list_themes_container">
+                    
                     
                     <div class="col-sm-12" style="margin-top:10px;">
-                        <div class="row users_container">
+                        <div class="row themes_container">
                             
                             
-                            <div class="col-sm-3" ng-repeat="user in users_list">
+                            <div class="col-sm-3" ng-repeat="theme in themes_list">
                               <div class="well">
+                                <button type="button" ng-click="closeAlert($index,theme,'md')" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <div class="checkbox inline">
                                     <label class="i-checks">
-                                        <input type="checkbox" value='{{user}}' ng-click ="enableAddUser()" />
+                                        <input type="checkbox" value='{{theme}}' ng-click ="enableRemoveTheme()" />
                                         <i></i>
                                     </label>
                                 </div>
-                                <img src={{user.profile_image}} style="width:50px;height:50px;" class="img-round" />
-                                <h5 class="inline">{{user.name}}</h5>
+                                <img src={{theme.profile_image}} style="width:150px;height:80px;" class="img-round" />
+<!--                                <h5 style="display:block;text-align:center">{{theme.name}}</h5>-->
                               </div>
                            </div>
                             
@@ -111,20 +117,15 @@
 </div>
 
 <style>
-    #added_rewards_container{
-        max-height:200px;
-        min-height:200px;
-        overflow-x: hidden;
-        border:1px solid #ccc;
-    }
-    #list_users_container{
+   
+    #list_themes_container{
         max-height:400px;
         min-height:400px;
         overflow-x: hidden;
         border:1px solid #ccc;
     }
     
-    #list_users_container .panel-heading
+    #list_themes_container .panel-heading
     {
         border-bottom:1px solid #ccc;
     }
