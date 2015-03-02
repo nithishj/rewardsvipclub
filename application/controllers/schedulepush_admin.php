@@ -91,4 +91,10 @@ class schedulepush_admin extends CI_Controller
 		$res=$this->schedulepush_admin_model->getpush($id);
 		echo json_encode($res);
 	}
+
+	function scheduleCron()
+	{
+
+		
+	}
 }

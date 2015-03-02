@@ -43,8 +43,8 @@ class admin_themes extends CI_Controller
 	function listthemes()
 	{
         $base=base_url();
-        $thumb=$base."resize.php?height=50&width=50&path=";
-        $q=$this->db->query("select concat('$base',Image) as theme,concat('$thumb',Image) as thumb from theme_lookup order by theme_lookup_id desc");
+        $thumb=$base."resize.php?height=100&width=150&path=";
+        $q=$this->db->query("select theme_lookup_id as id,concat('$base',Image) as theme,concat('$thumb',Image) as thumb from theme_lookup order by theme_lookup_id desc");
         if($q->num_rows()>0)
         echo json_encode($q->result());
         else 
