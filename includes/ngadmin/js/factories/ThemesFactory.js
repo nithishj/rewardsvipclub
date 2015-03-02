@@ -27,7 +27,7 @@
 		{
 		    
             return $http.post('starrewards_admin/addstarreward?format=json',{
-            ThemeIds:user_ids
+            UserId:user_ids
                 
             });
 			

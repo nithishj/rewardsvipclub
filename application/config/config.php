@@ -15,7 +15,7 @@
 |
 */
 
-$config['base_url'] = "http://localhost/vip/";
+$config['base_url'] = "http://localhost:9999/vip/";
 
 /*
 |--------------------------------------------------------------------------

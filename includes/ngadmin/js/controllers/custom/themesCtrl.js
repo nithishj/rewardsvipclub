@@ -1,4 +1,4 @@
-app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','$modal','toaster','FileUploadFactory','loggedUserFactory', function($scope, $location,$timeout,RewardsFactory,$modal,toaster,FileUploadFactory,loggedUserFactory)
+app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','ThemesFactory','$modal','toaster','FileUploadFactory','loggedUserFactory', function($scope, $location,$timeout,RewardsFactory,$modal,toaster,FileUploadFactory,loggedUserFactory)
 {
 
     $scope.themes_list = [];
@@ -42,7 +42,7 @@ app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','$
        
         
     };
-    // get users list                         
+    // get Themes list                         
     $scope.get_themes_list();
    
     $scope.removeSltdThemes = function(){
@@ -172,6 +172,30 @@ app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','$
     toaster.pop(type, title, msg);
  }
  
+ $scope.addTheme = function(){
+   
+    loggedUserFactory.userdata().success(function(data){
+        if ($scope.myimg)
+        {
+             if($stateParams.id)
+             {
+                ThemesFactory.addTheme(data.ssdata.user_id,$scope.myimg).success(function(data){
+                    
+                    $("input[type=file]").val("");
+                    $scope.imfinish=false;
+                    $scope.imguploaded=false;
+                    
+                     // get Themes list                         
+                    $scope.get_themes_list();
+   
+                });
+                    
+             }
+        }
+    });
+     
+   
+ };
 
 }]);
 
