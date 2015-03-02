@@ -1,6 +1,6 @@
 
 (function() {
-    var FileUploadFactory = function($http,$upload) {
+    var FileUploadFactory = function($http,$upload,toaster) {
     
         var factory = {};
         
@@ -107,7 +107,7 @@
                    
                 if(type == "theme"){
                    
-                    if(this.width > width && this.height > height){
+                    if(this.width == width && this.height == height){
                         factory.uploadFile($scope,files,type);
                          
                         
@@ -115,6 +115,7 @@
                     {
                         
                        alert("Invalid Image Resolution");
+                        toaster.pop("error", "Error", "Invalid Image Resolution");
                        
                     }
                 }else{
@@ -125,6 +126,7 @@
                     {
                         
                        alert("Invalid Image Resolution");
+                        toaster.pop("error", "Error", "Invalid Image Resolution");
                        
                     }
                 
@@ -151,7 +153,7 @@
         return factory;
     };
 	   
-    FileUploadFactory.$inject = ['$http','$upload'];
+    FileUploadFactory.$inject = ['$http','$upload','toaster'];
         
     app.factory('FileUploadFactory', FileUploadFactory);
                                            

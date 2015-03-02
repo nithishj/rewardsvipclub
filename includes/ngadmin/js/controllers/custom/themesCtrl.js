@@ -1,4 +1,4 @@
-app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','ThemesFactory','$modal','toaster','FileUploadFactory','loggedUserFactory', function($scope, $location,$timeout,RewardsFactory,$modal,toaster,FileUploadFactory,loggedUserFactory)
+app.controller('themesCtrl',['$scope','$location','$timeout','ThemesFactory','$modal','toaster','FileUploadFactory','loggedUserFactory', function($scope, $location,$timeout,ThemesFactory,$modal,toaster,FileUploadFactory,loggedUserFactory)
 {
 
     $scope.themes_list = [];
@@ -21,8 +21,8 @@ app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','T
     
     $scope.onFileSelect = function($files,type) {
 		
-         var width = 100,
-            height = 50;
+         var width = 1242,
+            height = 2208;
          FileUploadFactory.validateImageFile($scope,$files,type,width,height);
 		
 	};
@@ -32,10 +32,10 @@ app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','T
          // remove previous array                       
         $scope.themes_list.splice(0,$scope.themes_list.length);
         
-        RewardsFactory.getRewards().success(function(data){
+        ThemesFactory.getThemes().success(function(data){
             
-             $scope.themes_list = data;
-        
+                $scope.themes_list = data;
+
         
         });
         
@@ -85,21 +85,21 @@ app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','T
         
     };
    
-    $scope.getSearchThemesList = function(){
-            
-         if($scope.search_filter!= undefined && $scope.search_filter.length>0){
-            
-             // remove previous array                       
-            $scope.themes_list.splice(0,$scope.themes_list.length);
-
-            RewardsFactory.getRewards($scope.search_filter,$scope.getIdsFromJSON($scope.selected_themes).toString()).success(function(data){
-
-                 $scope.themes_list = data;
-
-            });
-            
-        }
-    };
+//    $scope.getSearchThemesList = function(){
+//            
+//         if($scope.search_filter!= undefined && $scope.search_filter.length>0){
+//            
+//             // remove previous array                       
+//            $scope.themes_list.splice(0,$scope.themes_list.length);
+//
+//            RewardsFactory.getRewards($scope.search_filter,$scope.getIdsFromJSON($scope.selected_themes).toString()).success(function(data){
+//
+//                 $scope.themes_list = data;
+//
+//            });
+//            
+//        }
+//    };
     
     
     $scope.enableRemoveTheme = function(){
@@ -177,20 +177,28 @@ app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','T
     loggedUserFactory.userdata().success(function(data){
         if ($scope.myimg)
         {
-             if($stateParams.id)
-             {
+             
                 ThemesFactory.addTheme(data.ssdata.user_id,$scope.myimg).success(function(data){
                     
-                    $("input[type=file]").val("");
-                    $scope.imfinish=false;
-                    $scope.imguploaded=false;
+                   
                     
                      // get Themes list                         
                     $scope.get_themes_list();
+                    
+                    if(data.code == 200){
+                        
+                        $("input[type=file]").val("");
+                        $scope.imfinish=false;
+                        $scope.imguploaded=false;
+                        $scope.myimg = "";
+                        $scope.showToaster("info","Add Theme:","Seleted Theme added successfully.");
+                    }else{
+                        $scope.showToaster("error","Add Theme Error:",data.message);
+                    }
    
                 });
                     
-             }
+            
         }
     });
      
@@ -201,8 +209,8 @@ app.controller('themesCtrl',['$scope','$location','$timeout','RewardsFactory','T
 
 
 
-app.controller('themesModalCtrl', ['$scope', '$location', '$modalInstance','RewardsFactory','toaster','$rootScope',
-  function($scope, $location, $modalInstance, RewardsFactory,toaster,$rootScope) {
+app.controller('themesModalCtrl', ['$scope', '$location', '$modalInstance','ThemesFactory','toaster','$rootScope',
+  function($scope, $location, $modalInstance, ThemesFactory,toaster,$rootScope) {
       
       
       
@@ -212,22 +220,24 @@ app.controller('themesModalCtrl', ['$scope', '$location', '$modalInstance','Rewa
       
        $scope.confirmdel = function(){
            
-                    $modalInstance.close();
+    
            
-           $scope.showToaster("info","Removed Success","Seleted Themes removed successfully.");
            
+           
+           $scope.removed_ids = "";
            if($scope.selected_theme.length>0)
            {
                  // remove from seleted lists
                   $scope.themes_list.splice($scope.rmdTheme_index,1);
-           
+                 $scope.removed_ids = $scope.getIdsFromJSON($scope.selected_theme).toString();
             
            }else{
             
                $scope.removeSltdThemes();
+               $scope.removed_ids = $scope.getIdsFromJSON($scope.selected_themes).toString();
            }
            
-           console.log(">>>>>"+$scope.getIdsFromJSON($scope.selected_themes).toString()+"@@@@@"+$scope.getIdsFromJSON($scope.selected_theme).toString());
+           console.log(">>>>>"+$scope.removed_ids);
   
            
            $scope.enableRemoveTheme();
@@ -235,19 +245,24 @@ app.controller('themesModalCtrl', ['$scope', '$location', '$modalInstance','Rewa
             $scope.selected_theme.splice(0,$scope.selected_theme.length);
             // remove previous array                       
             $scope.selected_themes.splice(0,$scope.selected_themes.length);
-           
-           
-        //console.log($scope.rewards_msg+","+$scope.rewards_points+","+$scope.getIdsFromJSON($scope.selected_themes).toString());
-//            RewardsFactory.addStarRewards($scope.rewards_msg,$scope.rewards_points,$scope.getIdsFromJSON($scope.selected_themes).toString()).success(function(data){
-//
-//                 
-//                $modalInstance.close();
-//                //alert("Reward added Successfully.");
-//                $rootScope.toasterFlag = true;
-//                $location.path('admin/rewards');
-//                
-//
-//            });
+        
+            ThemesFactory.removeTheme($scope.removed_ids).success(function(data){
+
+                
+                if(data.code == 200){
+                    $modalInstance.close();
+                     $scope.showToaster("info","Remove Theme:","Seleted Themes removed successfully.");
+                }else{
+                    $scope.showToaster("error","Remove Theme Error:",data.message);
+                }
+                
+                
+                
+//                 // get Themes list                         
+//                $scope.get_themes_list();
+                
+
+            });
            
       };
       
