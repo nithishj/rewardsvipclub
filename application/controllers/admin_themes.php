@@ -48,7 +48,7 @@ class admin_themes extends CI_Controller
         if($q->num_rows()>0)
         echo json_encode($q->result());
         else 
-        echo json_encode(array("message"=>"Required Fields","code"=>400));
+        echo array();
 
 	}
 }
