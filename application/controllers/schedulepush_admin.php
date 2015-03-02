@@ -94,7 +94,7 @@ class schedulepush_admin extends CI_Controller
 
 	function scheduleCron()
 	{
-        $this->db->query("");
+        $this->db->query("select AlertMessage from pushschedule where Status=0");
 
 	}
 }

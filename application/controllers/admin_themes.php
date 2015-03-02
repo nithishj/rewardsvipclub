@@ -48,7 +48,7 @@ class admin_themes extends CI_Controller
         if($q->num_rows()>0)
         echo json_encode($q->result());
         else 
-        echo array();
+        echo json_encode(array());
 
 	}
 }
