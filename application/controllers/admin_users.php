@@ -105,6 +105,8 @@ function plususer()
 	$filedest="user_video/";
 	else if($json['type']=='theme')
 	$filedest="user_themes/";
+    else if($json['type']=='csv')
+	$filedest="user_csv/";
 	//echo $json['value'];
 	$name=str_replace(' ','',$json['name1']);
 	$val=explode(",", $json['value']);
