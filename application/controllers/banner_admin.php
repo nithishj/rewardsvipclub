@@ -18,10 +18,10 @@ class banner_admin extends CI_Controller
     function addbanner()
     {
 		$json = json_decode(trim(file_get_contents('php://input')),true);
-		if(!empty($json['BannerName']) && !empty($json['BannerImage']) && !empty($json['UserId']))
+		if(!empty($json['BannerName']) && !empty($json['BannerImage']) && !empty($json['UserId']) &&  !empty($json['Timer']))
 		{
 		$this->load->model('banner_admin_model');
-		$res=$this->banner_admin_model->addbanner($json['BannerName'],$json['BannerImage'],!empty($json['BannerUrl'])?$json['BannerUrl']:"",$json['UserId']);
+		$res=$this->banner_admin_model->addbanner($json['BannerName'],$json['BannerImage'],!empty($json['BannerUrl'])?$json['BannerUrl']:"",$json['UserId'], $json['Timer']);
 
 		}
 	     else
@@ -33,10 +33,10 @@ class banner_admin extends CI_Controller
 	   function editbanner()
     {
 		$json = json_decode(trim(file_get_contents('php://input')),true);
-		if(!empty($json['BannerId']) && !empty($json['BannerName']) && !empty($json['BannerImage']) && !empty($json['UserId']))
+		if(!empty($json['BannerId']) && !empty($json['BannerName']) && !empty($json['BannerImage']) && !empty($json['UserId']) &&  !empty($json['Timer']))
 		{
 		$this->load->model('banner_admin_model');
-		$res=$this->banner_admin_model->editbanner($json['BannerId'],$json['BannerName'],$json['BannerImage'],!empty($json['BannerUrl'])?$json['BannerUrl']:"",$json['UserId']);
+		$res=$this->banner_admin_model->editbanner($json['BannerId'],$json['BannerName'],$json['BannerImage'],!empty($json['BannerUrl'])?$json['BannerUrl']:"",$json['UserId'], $json['Timer']);
 
 		}
 	     else
@@ -66,5 +66,28 @@ class banner_admin extends CI_Controller
 	 $this->load->model('banner_admin_model');
 	 $res=$this->banner_admin_model->listbanners($id);
 	 echo json_encode($res);
+	}
+
+	function setstatus()
+	{
+      $json = json_decode(trim(file_get_contents('php://input')),true);
+      if(!empty($json['BannerId']))
+	      {
+             $q=$this->db->query("select Status from banner where BannerId='$json[BannerId]'");
+             $r=$q->row();
+             if($r->Status==0)
+             $stat=1;
+             else
+             $stat=0;
+             
+             $q1=$this->db->query("update banner set Status='$stat' where BannerId='$json[BannerId]'");
+             $msg=array("message"=>"success");
+          }
+          else
+          {
+          	$msg=array("message"=>"Required Fields");
+          }
+
+        echo json_encode($msg);
 	}
 }

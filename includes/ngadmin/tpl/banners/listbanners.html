@@ -53,10 +53,15 @@ border-radius: .25em;
                  Banner Url
               </th>
               <th data-hide="phone,tablet">
+                 Timer
+              </th>
+              <th data-hide="phone,tablet">
                  Banner
               </th>
-              
-			  <th class="hide-sort" data-hide="phone" style="width:50px;">
+          <th class="hide-sort" data-hide="phone" style="width:50px;">
+
+          </th>
+         <th class="hide-sort" data-hide="phone" style="width:50px;">
 				
 			  </th>
 			   <th class="hide-sort" data-hide="phone" style="width:50px;">
@@ -81,8 +86,10 @@ border-radius: .25em;
               <td>{{banner.user_name}}</td>
               <td>{{banner.BannerName}}</td>
               <td><a href="{{banner.BannerUrl}}" target="_blank" >{{banner.BannerUrl}}</a></td>
+              <td>{{banner.Timer}} <span style="font-style:italic">seconds</span></td>
               <td><img ng-show="banner.BannerImage!=''" ng-src="{{banner.BannerImage}}" height="50" width="50" ng-click="openimg('md',banner.BannerImage)" style="cursor:pointer"/></td>
 
+              <td><span class="label {{banner.Statclass}}" title="{{banner.StatMsg}}" id="stat{{banner.BannerId}}" style="cursor:pointer" ng-click="changestat(banner.BannerId)">{{banner.StatMsg}}</span></td>
 
 
               <td>

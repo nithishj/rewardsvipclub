@@ -19,10 +19,27 @@
               </div>
 			   <div class="form-group">
                      <div class="col-sm-3"> </div>
-				    <label class="col-sm-8 text-danger ">* This Url will be used as a Redirect Link for Your Banner</label>
+				    <label class="col-sm-8 text-danger ">** This Url will be used as a Redirect Link for Your Banner **</label>
                 </div>
-            <br>
-                 
+            
+
+                 <div class="form-group">
+              <label class="col-sm-3 control-label">Timer: </label>
+                <div class="col-sm-1">
+                    <select class="form-control" ng-model="timer"  ng-required="true">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                      <option value="60">60</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 pull-left" style="padding-left:0px;">
+                  
+                <span style="font-style:italic;line-height: 2.42857143;">seconds</span>
+                </div>
+              </div>
         
               
 			  <div class="form-group">
@@ -34,9 +51,10 @@
 					<span style="font-weight:bold" ng-show="imuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="imfinish"/>
 				</div>
 			  </div>
+              
               <div class="form-group">
                      <div class="col-sm-3"> </div>
-				    <label class="col-sm-8 text-danger ">* Please Choose an image with 1242 x 192 resolution</label>
+				    <label class="col-sm-8 text-danger ">** Please Choose an image with 1242 x 192 resolution **</label>
               </div>
 			<br>
                 <div class="form-group">

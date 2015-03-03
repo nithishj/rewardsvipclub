@@ -35,6 +35,31 @@ app.controller('listbannersCtrl',['$scope','$location','BannerFactory','$modal',
         //alert($scope.AddBannerid);
     };
 
+     $scope.changestat=function(id)
+            {
+
+                var stat=$('#stat'+id).text();
+
+                if(stat=='Active')
+                {
+                    $('#stat'+id).removeClass();
+                    $('#stat'+id).addClass('label bg-warning');
+                    $('#stat'+id).text('InActive');
+                }
+                else
+                {
+                    $('#stat'+id).removeClass();
+                    $('#stat'+id).addClass('label bg-success');
+                    $('#stat'+id).text('Active');
+                }
+
+                 BannerFactory.setStatus(id)
+                .success(function(data){
+                   //alert(JSON.stringify(data));
+                }); 
+
+            };
+
     $scope.openimg = function (size,imgurl)
     {
         // alert(imgurl);

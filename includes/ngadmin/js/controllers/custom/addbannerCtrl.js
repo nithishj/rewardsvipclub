@@ -17,6 +17,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 					$scope.bannerurl=data[0].BannerUrl;
 					$scope.imguploaded=true;
 					$scope.myimg=data[0].BannerImage;
+                    $scope.timer=data[0].Timer;
 					});
 
 	
@@ -37,14 +38,21 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
         $location.path('/admin/banners');
 	};
 
+       
+
 	$scope.submit=function()
 	{
+
+        if(!$scope.timer)
+        alert("Please Choose Timer");
+        return false;
+
         loggedUserFactory.userdata().success(function(data){
             if ($scope.myimg)
             {
 			 if($stateParams.id)
 			 {
-			   BannerFactory.editBanner($scope.banid,data.ssdata.user_id,$scope.banner_name,$scope.bannerurl,$scope.myimg)
+			   BannerFactory.editBanner($scope.banid,data.ssdata.user_id,$scope.banner_name,$scope.bannerurl,$scope.myimg,$scope.timer)
                     .success(function(data){
 
                         if(data.code==200)
@@ -63,7 +71,7 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
 			 }
 			 else
 			 {
-                BannerFactory.addBanner(data.ssdata.user_id,$scope.banner_name,$scope.bannerurl,$scope.myimg)
+                BannerFactory.addBanner(data.ssdata.user_id,$scope.banner_name,$scope.bannerurl,$scope.myimg,$scope.timer)
                     .success(function(data){
 
                         if(data.code==200)
