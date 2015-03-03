@@ -53,6 +53,18 @@ app.controller('pushMsgCtrl',['$scope','$location', '$modal', 'MessageFactory', 
 		scope:$scope
 		});
 		};
+    
+        $scope.openPushNotifications=function(size)
+		{
+		    alert("1");
+            var modalInstance = $modal.open({
+			templateUrl: 'includes/ngadmin/tpl/pushNtfyModal.html',
+			controller: 'myModalCtrl',
+			size: size,
+			scope:$scope
+			});
+		
+	    };
 		
 		
 		

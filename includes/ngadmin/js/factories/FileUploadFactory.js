@@ -1,6 +1,6 @@
 
 (function() {
-    var FileUploadFactory = function($http,$upload,toaster) {
+    var FileUploadFactory = function($http,$upload) {
     
         var factory = {};
         
@@ -16,7 +16,7 @@
 			
 		 angular.forEach($files, function ($file, i) {
                 //var $file = $files[i];
-				alert($file.type);
+				//alert($file.type);
                 if (window.FileReader && (($file.type.indexOf('image') > -1 && (type=='image'||type=="theme")) || ($file.type.indexOf('text') > -1 && type=='csv') || ($file.type.indexOf('video') > -1 && type=='video') || ($file.type.indexOf('audio') > -1 && type=='audio') || ($file.type.indexOf('image') > -1 && type=='videothumb'))) 
 				{
 				   //alert($scope.vduploading);
@@ -105,7 +105,7 @@
                 img.src = e.target.result;
                 img.onload = function () {
                    
-                if(type == "theme"){
+                if(type == "theme" || type == "image"){
                    
                     if(this.width == width && this.height == height){
                         factory.uploadFile($scope,files,type);
@@ -115,26 +115,18 @@
                     {
                         
                        alert("Invalid Image Resolution");
-                        toaster.pop("error", "Error", "Invalid Image Resolution");
+                        //toaster.pop("error", "Error", "Invalid Image Resolution");
                        
                     }
                 }else{
-                    if(this.width > width && this.height > height){
-                        factory.uploadFile($scope,files,type);
-                        
-                    }else
-                    {
-                        
-                       alert("Invalid Image Resolution");
-                        toaster.pop("error", "Error", "Invalid Image Resolution");
-                       
+                    alert("Invalid File Type");
                     }
                 
                 }     
                     
                     
                 };
-            };
+           
             reader.readAsDataURL(files[0]);
             
              
@@ -153,7 +145,7 @@
         return factory;
     };
 	   
-    FileUploadFactory.$inject = ['$http','$upload','toaster'];
+    FileUploadFactory.$inject = ['$http','$upload'];
         
     app.factory('FileUploadFactory', FileUploadFactory);
                                            
