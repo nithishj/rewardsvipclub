@@ -198,7 +198,7 @@ app.controller('addeventCtrl',['$scope','$location','CalendarFactory','$modal', 
 
     /* remove event */
     $scope.remove = function(index,id, size) {
-     console.log("Remove Event with index ="+index+", id= "+id);
+     //console.log("Remove Event with index ="+index+", id= "+id);
      // $scope.events.splice(index,1);
       $scope.delid = id;
       $scope.delname="Event";
