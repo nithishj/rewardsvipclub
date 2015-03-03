@@ -149,6 +149,18 @@ angular.module('app')
                   }
 
               })
+                .state('app.upload_csv', {
+                  url: '/upload_csv',
+                  templateUrl: 'includes/ngadmin/tpl/csv/upload_csv.html',
+                  controller:'CSVCtrl',
+                    resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load('toaster');
+                      }]
+                  }
+
+              })
               .state('app.ui', {
                   url: '/ui',
                   template: '<div ui-view class="fade-in-up"></div>'

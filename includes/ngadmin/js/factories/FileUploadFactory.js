@@ -16,12 +16,12 @@
 			
 		 angular.forEach($files, function ($file, i) {
                 //var $file = $files[i];
-				//alert($file.type.indexOf('video'));
-                if (window.FileReader && (($file.type.indexOf('image') > -1 && (type=='image'||type=="theme")) || ($file.type.indexOf('video') > -1 && type=='video') || ($file.type.indexOf('audio') > -1 && type=='audio') || ($file.type.indexOf('image') > -1 && type=='videothumb'))) 
+				alert($file.type);
+                if (window.FileReader && (($file.type.indexOf('image') > -1 && (type=='image'||type=="theme")) || ($file.type.indexOf('text') > -1 && type=='csv') || ($file.type.indexOf('video') > -1 && type=='video') || ($file.type.indexOf('audio') > -1 && type=='audio') || ($file.type.indexOf('image') > -1 && type=='videothumb'))) 
 				{
 				   //alert($scope.vduploading);
                      
-						if(type=="image"||type=="theme")
+						if(type=="image"||type=="theme"||type=="csv")
 						$scope.imuploading=true;
 						if(type=="video")
 						$scope.vduploading=true;
@@ -42,7 +42,7 @@
 				   {
                        $scope.errmsg=""; // remove previous error msg
 				   
-				   if(data.type=="image"||data.type == "theme")
+				   if(data.type=="image"||data.type == "theme"||data.type=="csv")
 				   {
 				   $scope.myimg=data.filepath;
 				   $scope.imuploading=false;

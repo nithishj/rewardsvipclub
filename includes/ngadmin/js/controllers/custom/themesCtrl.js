@@ -179,8 +179,7 @@ app.controller('themesCtrl',['$scope','$location','$timeout','ThemesFactory','$m
         {
              
                 ThemesFactory.addTheme(data.ssdata.user_id,$scope.myimg).success(function(data){
-                    
-                   
+                      
                     
                      // get Themes list                         
                     $scope.get_themes_list();
@@ -237,8 +236,6 @@ app.controller('themesModalCtrl', ['$scope', '$location', '$modalInstance','Them
                $scope.removed_ids = $scope.getIdsFromJSON($scope.selected_themes).toString();
            }
            
-           console.log(">>>>>"+$scope.removed_ids);
-  
            
            $scope.enableRemoveTheme();
             // remove previous array                       
