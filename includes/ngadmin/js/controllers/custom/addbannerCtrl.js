@@ -38,14 +38,16 @@ app.controller('addbannerCtrl',['$scope','$location','FileUploadFactory','Banner
         $location.path('/admin/banners');
 	};
 
-       
+
 
 	$scope.submit=function()
 	{
 
         if(!$scope.timer)
+        {
         alert("Please Choose Timer");
         return false;
+        }
 
         loggedUserFactory.userdata().success(function(data){
             if ($scope.myimg)
