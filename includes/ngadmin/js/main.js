@@ -34,7 +34,7 @@ angular.module('app')
       // config
       $scope.app = {
         name: 'VIP',
-        version: '2.0',
+        version: '3.0',
         // for chart colors
         color: {
           primary: '#7266ba',

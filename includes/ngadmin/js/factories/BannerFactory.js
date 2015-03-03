@@ -11,14 +11,14 @@
 		factory.addBanner=function(user_id,name,bannerurl,image_url,timer) {
 
 		var dd={UserId:user_id,BannerName:name,BannerUrl:bannerurl,BannerImage:image_url,Timer:timer};
-		alert(dd);
+		//alert(dd);
 		return $http.post('banner_admin/addbanner?format=json',dd);
 
 		}
 		factory.editBanner=function(bannerid,user_id,name,bannerurl,image_url,timer) {
 
 		var dd={BannerId:bannerid,UserId:user_id,BannerName:name,BannerUrl:bannerurl,BannerImage:image_url,Timer:timer};
-		alert(dd);
+		//alert(dd);
 		return $http.post('banner_admin/editbanner?format=json',dd);
 
 		}

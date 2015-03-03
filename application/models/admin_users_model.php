@@ -63,13 +63,13 @@ if($q->num_rows()>0)
 $r=$q->result();
 foreach($r as $v)
 {
-   $this->iosnotify($v->device_token,(strlen($msg) > 110) ? substr($msg,0,110).'... More' : $msg);
+   $this->iosnotify($v->device_token,(strlen($msg) > 110) ? substr($msg,0,110).'... More' : $msg,$type);
 }
 }
 return array("code"=>200);
 }
 
-function iosnotify($devicetoken,$message)
+function iosnotify($devicetoken,$message,$type)
 {
 $time = time();
 $apnsHost = 'gateway.push.apple.com';
@@ -82,7 +82,7 @@ if($apns)
 {
 $payload = array();
 //$payload['aps'] = array('alert' => $message, 'badge' => 1, 'sound' => 'default','notifytype'=>$notifytype,'keyword'=>$keyword);strval($badge)
-$payload['aps'] = array('alert' => $message,'sound' => 'default','badge'=>1,"broadcasttype"=>"push");
+$payload['aps'] = array('alert' => $message,'sound' => 'default','badge'=>1,"broadcasttype"=>$type);
 $payload = json_encode($payload);
 $apnsMessage = chr(0) . chr(0) . chr(32) . pack('H*', str_replace(' ', '', $devicetoken)) . chr(0) . chr(strlen($payload)) . $payload;
 fwrite($apns, $apnsMessage);
