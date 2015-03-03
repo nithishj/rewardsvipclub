@@ -1,0 +1,71 @@
+<div class="col-sm-12 add-reward" style="margin-top:5px;">
+  
+  <!-- toaster directive -->
+  <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+  <!-- / toaster directive -->
+    
+          <div class="panel panel-default">
+            <div class="panel-heading col-sm-12">
+              <h4>Upload CSV</h4>
+                
+                
+                    <div style="border:1px solid #ccc;padding:20px 0;">
+                        <div class="row col-sm-12 col-md-offset-1">
+                            <h4 class="" style="color:red">{{errmsg}}</h4>
+                        </div>
+                        <div class="row col-sm-12">
+                            <p class="text-center text-danger ">* Please Choose CSV from your local computer</p>
+                        </div>
+                        
+                        
+                
+                        <div class="row">
+                             <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Choose CSV:</label>
+                                <div class="col-sm-3">
+                                    <input type="file" ng-file-select ng-file-change="onFileSelect($files,'csv')" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <span style="font-weight:bold" ng-show="imuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="imfinish"/>
+                                </div>
+                                     
+                                 
+
+                              </div>
+                              
+                            
+                            </div>
+                        </div>
+                        
+                    </div> 
+                    
+                        
+                
+                       
+                        
+                    
+                
+            </div>
+            
+        </div>
+</div>
+
+<style>
+   
+    #list_themes_container{
+        max-height:400px;
+        min-height:400px;
+        overflow-x: hidden;
+        border:1px solid #ccc;
+    }
+    
+    #list_themes_container .panel-heading
+    {
+        border-bottom:1px solid #ccc;
+    }
+    
+   
+    
+
+</style>
