@@ -21,6 +21,7 @@ app.controller('rewardsCtrl',['$scope','$location','$modal','RewardsFactory','$r
         RewardsFactory.getRewardsHistory().success(function(data){
             $scope.rewards_lists = data;
             
+            
         });
         
     };

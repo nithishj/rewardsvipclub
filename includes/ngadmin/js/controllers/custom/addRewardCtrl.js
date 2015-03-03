@@ -25,7 +25,7 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
         RewardsFactory.getRewards().success(function(data){
             
              $scope.users_list = data;
-             console.log("init = "+$scope.getIdsFromJSON($scope.users_list));
+             //console.log("init = "+$scope.getIdsFromJSON($scope.users_list));
         
         });
         
@@ -58,12 +58,10 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
         }
         
     };
-   
-    $scope.getSearchUsersList = function(){
-        
-        if($scope.search_filter!= undefined && $scope.search_filter.length>0){
-            
-             // remove previous array                       
+    
+    $scope.getNewRewards = function(){
+    
+          // remove previous array                       
             $scope.users_list.splice(0,$scope.users_list.length);
 
             RewardsFactory.getRewards($scope.search_filter,$scope.getIdsFromJSON($scope.selected_users).toString()).success(function(data){
@@ -71,8 +69,22 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
                  $scope.users_list = data;
 
             });
+    
+    };
+   
+    $scope.getSearchUsersList = function(){
+        
+        if($scope.search_filter!= undefined && $scope.search_filter.length>0){
+            
+           $scope.getNewRewards();
             
         }
+        
+//        if($scope.search_filter!= undefined && $scope.search_filter.length==0)
+//        {
+//            $scope.search_filter = "";
+//            $scope.getNewRewards();
+//        }
     };
     
     
@@ -101,7 +113,7 @@ app.controller('addRewardCtrl',['$scope','$location','$timeout','RewardsFactory'
         
         if($scope.selected_users.length>0)
         {
-            console.log($scope.getIdsFromJSON($scope.selected_users))
+            //console.log($scope.getIdsFromJSON($scope.selected_users))
             
              var modalInstance = $modal.open({
                 templateUrl: 'includes/ngadmin/tpl/confirmmodal.html',
