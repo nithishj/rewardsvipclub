@@ -3,10 +3,15 @@ app.controller('newsMsgCtrl',['$scope','$location', '$modal', 'MessageFactory', 
  $scope.Addbroadcastid=[];
  $scope.disdel=true;
  
-		MessageFactory.pushmessages('news')
-		.success(function(data){
-		$scope.msgs=data;
-		});
+		
+        $scope.getNewsMessages = function(){
+            MessageFactory.pushmessages('news')
+            .success(function(data){
+            $scope.msgs=data;
+            });
+        };
+    
+        $scope.getNewsMessages();
 		
 		$scope.openimg = function (size,imgurl) 
 		{
@@ -54,9 +59,10 @@ app.controller('newsMsgCtrl',['$scope','$location', '$modal', 'MessageFactory', 
 		});
 		};
 		
-		$scope.openPushNotifications=function(size)
+		$scope.openPushNotifications=function(size,type)
 		{
-		    var modalInstance = $modal.open({
+		    $scope.type = type;
+            var modalInstance = $modal.open({
 			templateUrl: 'includes/ngadmin/tpl/pushNtfyModal.html',
 			controller: 'myModalCtrl',
 			size: size,

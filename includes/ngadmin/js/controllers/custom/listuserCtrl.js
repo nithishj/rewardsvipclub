@@ -40,16 +40,16 @@ app.controller('listuserCtrl',['$scope', 'ListUserFactory' , '$modal', function(
 		
 	    };
 		
-		$scope.openPushNotifications=function(size)
-		{
-		    var modalInstance = $modal.open({
-			templateUrl: 'includes/ngadmin/tpl/pushNtfyModal.html',
-			controller: 'myModalCtrl',
-			size: size,
-			scope:$scope
-			});
-		
-	    };
+//		$scope.openPushNotifications=function(size)
+//		{
+//		    var modalInstance = $modal.open({
+//			templateUrl: 'includes/ngadmin/tpl/pushNtfyModal.html',
+//			controller: 'myModalCtrl',
+//			size: size,
+//			scope:$scope
+//			});
+//		
+//	    };
 		
 		$scope.changestat=function(id)
 		{
@@ -93,6 +93,13 @@ app.controller('listuserCtrl',['$scope', 'ListUserFactory' , '$modal', function(
   $scope.adfinish=false;
   $scope.vdfinish=false;
   $scope.vtfinish=false;
+      
+      if($scope.type == "push")
+      {
+        $scope.btype = "push";
+      }else{
+        $scope.btype = "news";
+      }
   
   
   $scope.setcolor=function(id)
@@ -187,6 +194,14 @@ $scope.errmsg="Message cannot be empty";
 				    if(data.code==200)
 					{
 					  $modalInstance.close();
+                        if($scope.type == "push")
+                        {
+                            $scope.getPushMessages();
+                        }else{
+                            $scope.getNewsMessages();
+                        }
+                        
+                         
 					}
 					else
 					{
