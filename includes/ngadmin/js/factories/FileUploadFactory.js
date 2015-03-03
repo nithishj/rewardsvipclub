@@ -49,6 +49,14 @@
 				   $scope.imfinish=true;
                    $scope.imguploaded=true; //showing image preview after file upload
                   // $("#preview_image").attr("src",data.filepath).show();
+                       
+                       if(data.type=="csv"){
+//                        $("input[type=file]").val("");
+//                        $scope.imfinish=false;
+//                        $scope.imguploaded=false;
+//                        $scope.myimg = "";
+                        alert("Seleted CSV uploaded successfully.");
+                       }
 				   
 				   }
 				   else if(data.type=="video")
