@@ -36,7 +36,7 @@ function addstarreward($message,$points,$userids)
 function getschedulehistory()
 {
   $defaultpic='includes/images/a5.jpg';
-  $q=$this->db->query("select StarRewardsId,Message,Points,Code from starrewards");
+  $q=$this->db->query("select StarRewardsId,Message,Points,Code from starrewards order by StarRewardsId desc");
   if($q->num_rows()>0)
   {
    $r=$q->result();
