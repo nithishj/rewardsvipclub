@@ -60,10 +60,6 @@ $scope.showtime=false;
 $scope.atype=[{"id":1,"type":"Once"},{"id":2,"type":"Every Week"},{"id":3,"type":"Every Day"}];
 $scope.weekdays=[{id:1,name:"Monday"},{id:2,name:"Tuesday"},{id:3,name:"Wednesday"},{id:4,name:"Thursday"},{id:5,name:"Friday"},{id:6,name:"Satday"},{id:7,name:"Sunday"}];
 
-var options = {
-    weekday: "long", year: "numeric", month: "short",
-    day: "numeric", hour: "2-digit", minute: "2-digit"
-}; 
 
 if($stateParams.id)
 {
@@ -145,6 +141,8 @@ $location.path('/admin/schedulepush');
 }
 else
 {
+alert($scope.dt);
+alert($scope.mytime);
 
 SchedulePushFactory.addpush(data.ssdata.user_id,$scope.message,$scope.alerttype,$scope.dt,$scope.mytime,$scope.weekday).success(function(data){
 //alert(JSON.stringify(data));
