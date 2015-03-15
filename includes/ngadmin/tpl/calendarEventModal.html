@@ -40,7 +40,7 @@
             <div class="col-sm-4 col-md-4">
 
         <div class="btn-group" dropdown>
-          <button type="button" class="btn btn-default" style="background-image:url({{chosenicon}});height:50px !important;width:55px; !important"> <span style="visibility:hidden">Please choose Icon</span></button>
+          <button type="button" class="btn btn-default" style="height:50px !important;width:70px; !important"><img ng-src="{{chosenicon}}" style="height:45px !important;width:55px; !important;margin-top:-5px;margin-left:-5px;" /> <span style="visibility:hidden">Please choose Icon</span></button>
           <button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle style="height:50px;">
             <span class="caret"></span>
             <span class="sr-only">Split button!</span>
@@ -57,21 +57,28 @@
 
 
         <br>
-        <div class="row">
+		<br />
+		<div class="row">
         <div class="form-group">
-            <label class="col-sm-3 control-label">Start date:</label>
-
-            <div class="col-sm-6">
-                <p class="input-group">
-                  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened"  datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-disabled="true" />
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
-                </p>
-            </div>
-
-        </div>	
-        </div> 
+			<label class="col-sm-3 control-label">Start date:</label>
+			<div class="col-sm-6">
+       
+				<div id ="dt_container" class="btn-group" dropdown is-open="status.isopen">
+				
+				  <div class="input-group" dropdown-toggle>
+							
+							<label class="form-control dropdown-toggle">{{data.embeddedDT | date: 'dd-MM-yyyy h:mm a'}}</label>
+							<span class="input-group-addon" ><i class="glyphicon glyphicon-calendar"></i></span>
+				   </div>
+				  <ul class="dropdown-menu" role="menu">
+					<datetimepicker data-ng-model="data.embeddedDT"
+										data-on-set-time="onTimeSet()"
+										data-before-render="beforeRender($dates)"></datetimepicker>
+				  </ul>
+				</div>
+			</div>
+		  </div>
+		</div>
 
         <br>
 
@@ -83,21 +90,13 @@
         </div>
 		
 		<br />
-		 <div class="dropdown">
-                <a class="dropdown-toggle" id="dropdown6" role="button" data-toggle="dropdown" data-target="#"
-                   href="#">
-                    <div class="input-group">
-                        <input type="text" class="form-control" data-ng-model="data.dateDropDownInputNoFormatting">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                    </div>
-                </a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <datetimepicker data-ng-model="data.dateDropDownInputNoFormatting"
-                                    data-datetimepicker-config="{ dropdownSelector: '#dropdown6' }"
-                                    data-before-render="beforeRender($dates)"></datetimepicker>
-                </ul>
-            </div>
+		 
 
+            
+        
+
+
+    </div>
     </div>   
 
     <div class="modal-footer">                  

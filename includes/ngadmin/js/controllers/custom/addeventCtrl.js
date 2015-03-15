@@ -10,8 +10,9 @@ app.controller('addeventCtrl',['$scope','$location','CalendarFactory','$modal', 
     
     $scope.getFormatedDate = function(date){
         
-        newDate = new Date(date);
-        var d = newDate.getDate();
+        return newDate = new Date(date);
+        
+		/*var d = newDate.getDate();
         var m = newDate.getMonth()+1;
         var y = newDate.getFullYear();
         
@@ -21,7 +22,7 @@ app.controller('addeventCtrl',['$scope','$location','CalendarFactory','$modal', 
         if(m < 10)
             m = '0'+m
         
-        return d+"-"+m+"-"+y
+        return d+"-"+m+"-"+y  */
         
     };
 
@@ -187,6 +188,7 @@ app.controller('addeventCtrl',['$scope','$location','CalendarFactory','$modal', 
         $scope.event_name = obj.title;
         $scope.event_desc = obj.info;
         $scope.dt = obj.start;
+		$scope.data = {"embeddedDT":obj.start};
         $scope.chosenicon = obj.icon;
         $scope.choseniconID = obj.iconid;
         
@@ -240,7 +242,23 @@ app.controller('addeventCtrl',['$scope','$location','CalendarFactory','$modal', 
 app.controller('calEventCtrl', ['$scope', '$modalInstance','CalendarFactory','loggedUserFactory',
   function($scope, $modalInstance, CalendarFactory,loggedUserFactory) {
       
-      $scope.setIcon=function(icnObj)
+	  
+	  
+	  
+	  $scope.onTimeSet = function () {
+		//console.log("settime  -------> "+JSON.stringify($scope.data));
+		$scope.status.isopen = false;
+	  }
+      $scope.beforeRender = function ($dates) {
+		datetimePicker: {
+          startView: 'day'
+        }
+		//console.log(" Before Rendering -------> "+JSON.stringify($scope.data));
+		
+      };
+
+      
+	  $scope.setIcon=function(icnObj)
       {
     
           $scope.chosenicon = icnObj.Icon;
@@ -252,6 +270,8 @@ app.controller('calEventCtrl', ['$scope', '$modalInstance','CalendarFactory','lo
         
         $scope.event_header_icon = "fa fa-plus fa-lg";  
         $scope.header = "Add ";
+		
+		$scope.data = {"embeddedDT":$scope.seletedEventDate};
         
     }else{
         
@@ -270,7 +290,7 @@ app.controller('calEventCtrl', ['$scope', '$modalInstance','CalendarFactory','lo
     {
        $scope.events.splice($scope.delindex,1);
         CalendarFactory.deleteEvent($scope.delid).success(function(data){
-         console.log(JSON.stringify(data));
+         //console.log(JSON.stringify(data));
          $modalInstance.close();
         });
 
@@ -284,11 +304,11 @@ app.controller('calEventCtrl', ['$scope', '$modalInstance','CalendarFactory','lo
 
             //$scope.addNewEvent(10,$scope.event_name,$scope.dt,$scope.event_desc);
             
-             
+             if(new Date() <= $scope.data.embeddedDT){
             
             loggedUserFactory.userdata().success(function(data){
             
-                CalendarFactory.addEvent(data.ssdata.user_id,$scope.event_name,$scope.event_desc,$scope.choseniconID,$scope.dt).success(function(data){
+                CalendarFactory.addEvent(data.ssdata.user_id,$scope.event_name,$scope.event_desc,$scope.choseniconID,$scope.data.embeddedDT).success(function(data){
    
     $scope.refreshEvents();                
     $modalInstance.close();
@@ -297,13 +317,17 @@ app.controller('calEventCtrl', ['$scope', '$modalInstance','CalendarFactory','lo
 
             });
             
-            
+            }else{
+				//alert("Invalid Date");
+				$scope.showemsg = true;
+				$scope.emsg = "Invalid Date";
+			}
         }else{
 
-      
+			if(new Date() <= $scope.data.embeddedDT){
           loggedUserFactory.userdata().success(function(data){
             
-                CalendarFactory.editEvent( $scope.event_id,data.ssdata.user_id,$scope.event_name,$scope.event_desc,$scope.choseniconID,$scope.dt).success(function(data){
+                CalendarFactory.editEvent( $scope.event_id,data.ssdata.user_id,$scope.event_name,$scope.event_desc,$scope.choseniconID,$scope.data.embeddedDT).success(function(data){
    
     $scope.refreshEvents();                
     $modalInstance.close();
@@ -311,39 +335,16 @@ app.controller('calEventCtrl', ['$scope', '$modalInstance','CalendarFactory','lo
                 
 
             });  
+			
+			}else{
+				//alert("Invalid Date");
+				$scope.showemsg = true;
+				$scope.emsg = "Invalid Date";
+			}
   
            
     }
     };
 
-    $scope.today = function() {
-        $scope.dt = $scope.seletedEventDate;
-    };
-
-
-    $scope.clear = function () {
-        $scope.dt = null;
-    };
-
-    $scope.toggleMin = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-
-    $scope.toggleMin();
-
-    $scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.opened = true;
-    };
-
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-    };
-
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd-MM-yyyy', 'shortDate'];
-    $scope.format = $scope.formats[2];
-    $scope.today();
   
   }]);
