@@ -46,16 +46,16 @@ class events_app extends CI_Controller
 	    $json = json_decode(trim(file_get_contents('php://input')),true);
 		if(!empty($json['EventId']) && !empty($json['UserId']) && !empty($json['EventName']) && !empty($json['EventDate']))
 		{
-			if(!empty($json['image']) && !empty($json['image_ext']))
+			if((!empty($json['image']) && !empty($json['image_ext']))  && (empty($json['image_url'])))
 			$myimage=$this->getmyfile($json['image'],$json['image_ext'],"user_images/");
-			if(!empty($json['video']) && !empty($json['video_ext']))
+			if(!empty($json['video']) && !empty($json['video_ext']) && (empty($json['video_url'])))
 			$myvideo=$this->getmyfile($json['video'],$json['video_ext'],"user_video/");
-			if(!empty($json['video_thumb']))
+			if(!empty($json['video_thumb']) && (empty($json['video_thumb_url'])))
 			$myvideothumb=$this->getmyfile($json['video_thumb'],".jpeg","user_video/");
-			if(!empty($json['audio']) && !empty($json['audio_ext']))
+			if(!empty($json['audio']) && !empty($json['audio_ext']) && (empty($json['audio_url'])))
 				$myaudio=$this->getmyfile($json['audio'],$json['audio_ext'],"user_audio/");
 				$this->load->model('events_app_model');
-				$res=$this->events_app_model->editevent($json['EventId'],$json['UserId'],$json['EventName'],!empty($json['EventDescription'])?$json['EventDescription']:"",!empty($json['IconId'])?$json['IconId']:0,$json['EventDate'],!empty($myimage)?$myimage:'',!empty($myvideo)?$myvideo:'',!empty($myvideothumb)?$myvideothumb:'',!empty($myaudio)?$myaudio:'',!empty($json['latitude'])?$json['latitude']:'',!empty($json['longitude'])?$json['longitude']:'',!empty($json['address'])?$json['address']:'');
+				$res=$this->events_app_model->editevent($json['EventId'],$json['UserId'],$json['EventName'],!empty($json['EventDescription'])?$json['EventDescription']:"",!empty($json['IconId'])?$json['IconId']:0,$json['EventDate'],!empty($myimage)?$myimage:(!empty($json['image_url'])?$json['image_url']:''),!empty($myvideo)?$myvideo:(!empty($json['video_url'])?$json['video_url']:''),!empty($myvideothumb)?$myvideothumb:(!empty($json['video_thumb_url'])?$json['video_thumb_url']:''),!empty($myaudio)?$myaudio:(!empty($json['audio_url'])?$json['audio_url']:''),!empty($json['latitude'])?$json['latitude']:'',!empty($json['longitude'])?$json['longitude']:'',!empty($json['address'])?$json['address']:'');
 		}
 		else
 		$res=array("Message"=>"Required Fields","code"=>400);
