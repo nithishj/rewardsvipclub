@@ -35,9 +35,9 @@
           </div>
 -->
             <div class="line b-b b-light"></div>
-<!--
-            <div><i class="icon-calendar text-muted m-r-xs"></i> {{event.start | date:'medium'}}</div>
-            <div class="ng-hide" ng-show='event.end'><i class="icon-clock text-muted m-r-xs"></i> {{event.end | date:'medium'}}</div>
+
+            <div><i class="icon-clock text-muted m-r-xs"></i> {{toJsDate(event.start)| date:'h:mm a'}} </div>
+ <!--           <div class="ng-hide" ng-show='event.end'><i class="icon-clock text-muted m-r-xs"></i> {{event.end | date:'medium'}}</div>
 -->
             <div class="ng-hide" ng-show='event.icon'><img src="{{event.icon}}" class="icon-pointer text-muted m-r-xs" style="padding:10px;width:50px;height:50px;" /> </div>
             <div class="m-t-sm">{{event.info}}</div>
@@ -56,7 +56,7 @@
           </div>
           <div class="ng-hide" ng-show='e.icon'><img src="{{e.icon}}" class="icon-pointer text-muted m-r-xs" style="padding:10px;width:50px;height:50px;" /> </div>
             
-          <div class="text-xs text-muted">{{e.start | date:"MMM dd"}}</div>
+          <div class="text-xs text-muted">{{e.start | date:"MMM dd yyyy, h:mm a"}}</div>
           <div class="text-xs text-muted">{{e.info}}</div>
         </div>
       </div>

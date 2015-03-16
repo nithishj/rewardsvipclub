@@ -107,6 +107,10 @@ app.controller('addeventCtrl',['$scope','$location','CalendarFactory','$modal', 
     $scope.lastClickTime = time;
     };
     
+	 $scope.toJsDate = function(str){
+		if(!str)return null;
+		return new Date(str);
+	  }
 
     $scope.overlay = $('.fc-overlay');
     $scope.alertOnMouseOver = function( event, jsEvent, view ){
