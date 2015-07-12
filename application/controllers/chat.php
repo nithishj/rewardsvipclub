@@ -66,7 +66,7 @@ $longitude=!empty($v['longitude'])?$v['longitude']:'';
 $address=!empty($v['address'])?$v['address']:'';
 $iconid=!empty($v['iconid'])?$v['iconid']:0;
 
-if(!empty($userid) &&  !empty($friendid) &&(!empty($message) || !empty($audio) || !empty($image) || !empty($video) || (!empty($latitude) && !empty($longitude))))
+if(!empty($userid) &&  !empty($friendid) &&(!empty($message) || !empty($audio) || !empty($image) || !empty($video) || !empty($iconid) || (!empty($latitude) && !empty($longitude))))
 {
 if(!empty($image) && !empty($image_ext))
 $myimage=$this->getmyfile($image,$image_ext,"user_images/");
@@ -78,6 +78,47 @@ if(!empty($audio) && !empty($audio_ext))
 $myaudio=$this->getmyfile($audio,$audio_ext,"user_audio/");
 $this->load->model('chat_model');
 $msg=$this->chat_model->chatMessage($userid,$friendid,$message,$myimage,$myvideo,$myvideothumb,$myaudio,$latitude,$longitude,$address,$iconid);
+echo json_encode($msg);
+}
+else
+{ 
+echo json_encode(array("code"=>400,"message"=>"required fields"));
+}
+}
+}
+
+function groupMessage()
+{			 
+$data = json_decode(trim(file_get_contents('php://input')),true);
+foreach ($data['data'] as $v)
+{
+$userid=$v['userid'];
+$image=$v['image'];
+$image_ext=$v['image_ext'];
+$audio=$v['audio'];
+$audio_ext=$v['audio_ext'];
+$message=!empty($v['message'])?$v['message']:"";
+$video=$v['video'];
+$video_ext=$v['video_ext'];
+$video_thumb=$v['video_thumb'];
+$latitude=!empty($v['latitude'])?$v['latitude']:'';
+$longitude=!empty($v['longitude'])?$v['longitude']:'';
+$address=!empty($v['address'])?$v['address']:'';
+$iconid=!empty($v['iconid'])?$v['iconid']:0;
+$eventid=!empty($v['eventid'])?$v['eventid']:0;
+
+if(!empty($userid) &&(!empty($message) || !empty($audio) || !empty($image) || !empty($video) || !empty($iconid) || (!empty($latitude) && !empty($longitude))))
+{
+if(!empty($image) && !empty($image_ext))
+$myimage=$this->getmyfile($image,$image_ext,"user_images/");
+if(!empty($video) && !empty($video_ext))
+$myvideo=$this->getmyfile($video,$video_ext,"user_video/");
+if(!empty($video_thumb))
+$myvideothumb=$this->getmyfile($video_thumb,".jpeg","user_video/");
+if(!empty($audio) && !empty($audio_ext))
+$myaudio=$this->getmyfile($audio,$audio_ext,"user_audio/");
+$this->load->model('chat_model');
+$msg=$this->chat_model->groupMessage($userid,$message,$myimage,$myvideo,$myvideothumb,$myaudio,$latitude,$longitude,$address,$iconid,$eventid);
 echo json_encode($msg);
 }
 else
@@ -112,6 +153,16 @@ function getChatHistory()
 	{
 		$msg=array("code"=>400,"message"=>"Required Fields");
 	}
+	echo json_encode($msg);
+}
+
+function getGroupHistory()
+{
+        $eventid=$_GET['eventid'];
+	    $start=!empty($_GET['start'])?$_GET['start']:0;
+		$this->load->model('chat_model');
+		$msg=$this->chat_model->getGroupHistory($start,$eventid);
+	
 	echo json_encode($msg);
 }
 	

@@ -126,7 +126,7 @@ class Uploadfile extends CI_Controller
 
 		function getupload()
 		{
-		        $broadcasttype=!empty($_GET['broadcast_type'])?$_GET['broadcast_type']:"push";
+		     $broadcasttype=!empty($_GET['broadcast_type'])?$_GET['broadcast_type']:"push";
 			$this->load->model('upload_model');
 			$msg=$this->upload_model->getupload($broadcasttype);
 			//$this->output->set_content_type('application/json')->set_output(json_encode($msg));
@@ -154,6 +154,7 @@ function testupload()
 		  $latitude=!empty($v['latitude'])?$v['latitude']:"";
 			$longitude=!empty($v['longitude'])?$v['longitude']:"";
 			$address=!empty($v['address'])?$v['address']:"";
+			$iconid=!empty($v['iconid'])?$v['iconid']:0;
              if(!empty($userid) && !empty($message))
                 {
                    if(!empty($image) && !empty($image_ext))
@@ -165,7 +166,7 @@ function testupload()
                   if(!empty($video_thumb))
                   $myvideothumb=$this->getmyfile($video_thumb,".jpeg","user_video/");
                   $this->load->model('upload_model');
-	$msg=$this->upload_model->upload($userid,$message,$color,$myimage,$myaudio,$myvideo,$myvideothumb,$broadcast_type,$latitude,$longitude,$address);
+	$msg=$this->upload_model->upload($userid,$message,$color,$myimage,$myaudio,$myvideo,$myvideothumb,$broadcast_type,$latitude,$longitude,$address,$iconid);
 		  echo json_encode($msg);
                }
               else

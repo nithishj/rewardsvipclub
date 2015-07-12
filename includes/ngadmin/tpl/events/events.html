@@ -22,7 +22,16 @@
       </div>
       <div class="pos-rlt">
         <div class="fc-overlay">
-          
+          <div class="panel bg-white b-a pos-rlt">
+            <span class="arrow"></span>
+            <div class="h4 font-thin m-b-sm">{{event.title}}</div>
+            <div class="line b-b b-light"></div>
+            <div ng-show='event.start'><i class="icon-calendar text-muted m-r-xs"></i> {{event.start | date:'medium'}}</div>
+            <div class="ng-hide" ng-show='event.end'><i class="icon-clock text-muted m-r-xs"></i> {{event.end | date:'medium'}}</div>
+            <div class="ng-hide" ng-show='event.location'><i class="icon-pointer text-muted m-r-xs"></i> {{event.location}}</div>
+            <div class="m-t-sm">{{event.info}}</div>
+            <div class="m-t-sm">{{event.url}}</div>
+          </div>
         </div>
         <div class="calendar" ng-model="eventSources" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
       </div>

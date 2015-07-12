@@ -64,9 +64,11 @@ class events_admin extends CI_Controller
 	}
 	
 	function geticons()
-	{
+	{  
+	    $userid=$_GET['userid'];
+		$type=$_GET['type'];
 		$this->load->model('events_admin_model');
-		$res=$this->events_admin_model->geticons();
+		$res=$this->events_admin_model->geticons($userid,$type);
 		echo json_encode($res);
 	}
 	

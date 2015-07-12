@@ -2,7 +2,7 @@
 //database connection
 require 'dbconnect.php';
 
-        $q1=mysql_query("select EventName,UserId from event where DATE_FORMAT(EventDate,'%d-%m-%Y %H:%i')=DATE_FORMAT(UTC_TIMESTAMP(),'%d-%m-%Y %H:%i')");
+        $q1=mysql_query("select EventName,UserId from event where DATE_FORMAT(EventDate,'%d-%m-%Y %H:%i')=DATE_FORMAT(UTC_TIMESTAMP(),'%d-%m-%Y %H:%i') OR DATE_FORMAT(EndDate,'%d-%m-%Y %H:%i')=DATE_FORMAT(UTC_TIMESTAMP(),'%d-%m-%Y %H:%i')");
 		
         while($row1=mysql_fetch_array($q1))
 		{

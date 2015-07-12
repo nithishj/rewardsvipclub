@@ -15,6 +15,23 @@ class profile extends CI_Controller
 		error_reporting(E_ERROR | E_PARSE);
 
 	}
+	
+	function forgotpassword()
+	{
+	   $data = json_decode(trim(file_get_contents('php://input')),true);
+	  
+	    if(!empty($data['Email']))
+		{
+			$this->load->model('profile_model');
+			$msg=$this->profile_model->forgotpassword($data['Email']);
+		}
+		else
+		{
+		   $msg=array("message"=>"Required Fields","code"=>400);
+		}
+		echo json_encode($msg);
+	
+	}
 
 	
 	function changepassword()

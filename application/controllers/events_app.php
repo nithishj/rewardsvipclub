@@ -33,7 +33,7 @@ class events_app extends CI_Controller
 			$myaudio=$this->getmyfile($json['audio'],$json['audio_ext'],"user_audio/");
 		
 		$this->load->model('events_app_model');
-		$res=$this->events_app_model->addevent($json['UserId'],$json['EventName'],!empty($json['EventDescription'])?$json['EventDescription']:"",!empty($json['IconId'])?$json['IconId']:0,$json['EventDate'],!empty($myimage)?$myimage:'',!empty($myvideo)?$myvideo:'',!empty($myvideothumb)?$myvideothumb:'',!empty($myaudio)?$myaudio:'',!empty($json['latitude'])?$json['latitude']:'',!empty($json['longitude'])?$json['longitude']:'',!empty($json['address'])?$json['address']:'');
+		$res=$this->events_app_model->addevent($json['UserId'],$json['EventName'],!empty($json['EventDescription'])?$json['EventDescription']:"",!empty($json['IconId'])?$json['IconId']:0,$json['EventDate'],!empty($json['EndDate'])?$json['EndDate']:'',!empty($myimage)?$myimage:'',!empty($myvideo)?$myvideo:'',!empty($myvideothumb)?$myvideothumb:'',!empty($myaudio)?$myaudio:'',!empty($json['latitude'])?$json['latitude']:'',!empty($json['longitude'])?$json['longitude']:'',!empty($json['address'])?$json['address']:'',$json['actioncenter'],$json['userlist']);
 		}
 		else
 		$res=array("Message"=>"Required Fields","code"=>400);
@@ -41,6 +41,7 @@ class events_app extends CI_Controller
 		
 	}
 	
+
 	 function editevent()
     {
 	    $json = json_decode(trim(file_get_contents('php://input')),true);
@@ -55,7 +56,7 @@ class events_app extends CI_Controller
 			if(!empty($json['audio']) && !empty($json['audio_ext']) && (empty($json['audio_url'])))
 				$myaudio=$this->getmyfile($json['audio'],$json['audio_ext'],"user_audio/");
 				$this->load->model('events_app_model');
-				$res=$this->events_app_model->editevent($json['EventId'],$json['UserId'],$json['EventName'],!empty($json['EventDescription'])?$json['EventDescription']:"",!empty($json['IconId'])?$json['IconId']:0,$json['EventDate'],!empty($myimage)?$myimage:(!empty($json['image_url'])?$json['image_url']:''),!empty($myvideo)?$myvideo:(!empty($json['video_url'])?$json['video_url']:''),!empty($myvideothumb)?$myvideothumb:(!empty($json['video_thumb_url'])?$json['video_thumb_url']:''),!empty($myaudio)?$myaudio:(!empty($json['audio_url'])?$json['audio_url']:''),!empty($json['latitude'])?$json['latitude']:'',!empty($json['longitude'])?$json['longitude']:'',!empty($json['address'])?$json['address']:'');
+				$res=$this->events_app_model->editevent($json['EventId'],$json['UserId'],$json['ActionUserId'],$json['EventName'],!empty($json['EventDescription'])?$json['EventDescription']:"",!empty($json['IconId'])?$json['IconId']:0,$json['EventDate'],!empty($json['EndDate'])?$json['EndDate']:'',!empty($myimage)?$myimage:(!empty($json['image_url'])?$json['image_url']:''),!empty($myvideo)?$myvideo:(!empty($json['video_url'])?$json['video_url']:''),!empty($myvideothumb)?$myvideothumb:(!empty($json['video_thumb_url'])?$json['video_thumb_url']:''),!empty($myaudio)?$myaudio:(!empty($json['audio_url'])?$json['audio_url']:''),!empty($json['latitude'])?$json['latitude']:'',!empty($json['longitude'])?$json['longitude']:'',!empty($json['address'])?$json['address']:'',$json['actioncenter'],$json['userlist']);
 		}
 		else
 		$res=array("Message"=>"Required Fields","code"=>400);

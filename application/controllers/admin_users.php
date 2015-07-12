@@ -137,7 +137,7 @@ function plususer()
 	 {
 	   if(!empty($userid))
 	   {
-	   $q=$this->db->query("Delete users where user_id='$userid'");
+	   $q=$this->db->query("Delete from users where user_id='$userid'");
 	    
 	   }
 	 

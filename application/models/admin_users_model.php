@@ -56,7 +56,7 @@ function pushmessage($msg,$userid,$type,$color,$image,$audio,$video,$thumb)
  
 $a=array("Message"=>$msg,"Fr_UserId"=>$userid,"BroadcastType"=>$type,"Color"=>$color,"Image"=>$image,"Audio"=>$audio,"Video"=>$video,"VideoThumb"=>$thumb);
 $this->db->insert('broadcast',$a);
-$q=$this->db->query("select device_token from user_profile where device_token is not null and char_length(device_token)>0 group by device_token");
+$q=$this->db->query("select device_token from user_profile where device_token is not null and char_length(device_token)>0 and user_id!='$userid' group by device_token");
 
 if($q->num_rows()>0)
 {
