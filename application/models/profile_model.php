@@ -9,16 +9,15 @@ function forgotpassword($email)
   {
   $href = base_url()."mailer/page/".base64_encode($email);
 		$link = '<a href="'.$href.'">Click Here</a>';
-		$notes="<html><body>Hello!"."<br/><br/>"."We received a request to provide you with your VIP App Login Credentials, Please click on the link below to Set your Password."."<br/><br/>".
-				"Username : ".$email."<br/> Link :".$link."<br/><br/>"."Thank you for using VIP!"."<br/><br/>".
-				"VIP Team</body></html>";
+		$notes="<html><body>Hello!"."<br/><br/>"."We received a request to provide you with your App Login Credentials.<br/><br/> Please click on the link below to Set your Password.<br/><br/>".
+				"Username : ".$email."<br/> Link :".$link."<br/><br/>"."<b>Thank you.</b><br/><br/><b>App Support Team</b></body></html>";
  
   $config=array('protocol'=>'smtp','smtp_host'=>'dedrelay.secureserver.net','smtp_port'=>25,'smtp_user'=>'','smtp_pass'=>'');
                 $this->load->library('email',$config);
                 $this->email->set_newline("\r\n");
                 $this->email->from('VIP@rewardsvipclub.com', 'VIP');
                 $this->email->to($email);
-                $this->email->subject("Set VIP Password");
+                $this->email->subject("Reset Password");
                 $this->email->message($notes);
 				$this->email->set_mailtype("html");
 	

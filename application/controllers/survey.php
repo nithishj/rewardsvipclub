@@ -121,10 +121,10 @@ class survey extends CI_Controller
 	function  deletesurvey()
 	{
 	  $json = json_decode(trim(file_get_contents('php://input')),true);
-	   if(!empty($json['SurveyId']) && !empty($json['UserId']))
+	   if(!empty($json['SurveyId']))
 	   {
-	       $this->load->model('survey_model');
-			$msg=$this->survey_model->deletesurvey($json['SurveyId'],$json['UserId']);
+	        $this->load->model('survey_model');
+			$msg=$this->survey_model->deletesurvey($json['SurveyId']);
 	   }
 	   else
 	     $msg=array("code"=>400,"message"=>"Required Fields");

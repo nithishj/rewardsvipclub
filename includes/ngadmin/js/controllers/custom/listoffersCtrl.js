@@ -15,26 +15,26 @@ OfferFactory.getoffers('')
      $location.path('/admin/editoffer/'+offerid);
     };
 		
-$scope.pushofferid=function(offerid)
-		{
+	$scope.pushofferid=function(offerid)
+	{
 
-		 // alert(broadcastid);
-			if ($scope.AddOfferid.indexOf(offerid) == -1) {
-			$scope.AddOfferid.push(offerid);
-			}
-			else
-			{
-			var index = $.inArray(offerid, $scope.AddOfferid);
-			$scope.AddOfferid.splice(index, 1);
-			//$scope.storeidAdd.push(StoreId);
-			}
-			
-			if ($scope.AddOfferid.length == 0) 
-			 $scope.disdel=true;
-			 else
-			 $scope.disdel=false;
-			//alert($scope.AddOfferid);
-		};
+	 // alert(broadcastid);
+		if ($scope.AddOfferid.indexOf(offerid) == -1) {
+		$scope.AddOfferid.push(offerid);
+		}
+		else
+		{
+		var index = $.inArray(offerid, $scope.AddOfferid);
+		$scope.AddOfferid.splice(index, 1);
+		//$scope.storeidAdd.push(StoreId);
+		}
+		
+		if ($scope.AddOfferid.length == 0) 
+		 $scope.disdel=true;
+		 else
+		 $scope.disdel=false;
+		//alert($scope.AddOfferid);
+	};
 
 
     $scope.openimg = function (size,imgurl)

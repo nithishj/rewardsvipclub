@@ -1,0 +1,96 @@
+<style>
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size: 100%;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
+</style>
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Survey</h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Survey - Participate
+    </div>
+    <div class="panel-body b-b b-light">
+	 
+		     
+		<div class="pull-right inline">
+		<button  ui-sref="app.survey" class="btn btn-warning inline " ><i class="fa fa-arrow"></i>Back </button>
+		</div>
+    </div>
+	<div class="container-fluid">
+	   <div class="row-fluid" ng-repeat="(key,que) in surveydata  track by $index">
+	   <div class="col-md-12">
+	 <h3>  {{key+1}}){{que.Question}} </h3>
+	   </div>
+	   <div class="col-md-12">
+	   <div class="col-md-3" ng-show="que.Image">
+	   <div class="col-md-12">
+	    Image:
+	   </div>
+       <div class="col-md-12">
+	   <img class="img-responsive" src="{{que.Image}}" ng-click="openimg('md',que.Image)" style="cursor:pointer" />
+	   </div>
+	   </div>
+	   
+	    <div class="col-md-3"  ng-show="que.Audio">
+		 <div class="col-md-12">
+	    Audio:
+	   </div>
+       <div class="col-md-12">
+			<audio controls style="width:200px">
+
+				<source ng-src="{{que.Audio}}" type="audio/mp4">
+				Your browser does not support the audio tag.
+			</audio>
+	   </div>
+	   </div>
+	   
+	    <div class="col-md-3" ng-show="que.Video">
+	    <div class="col-md-12">
+	    video:
+	   </div>
+       <div class="col-md-12">
+	   <img ng-src="{{que.VideoThumb}}" class="img-responsive" ng-click="openvid('lg',que.Video)" style="cursor:pointer"/></td>
+	   </div>
+	   </div>
+	   
+	    <div class="col-md-3" ng-show="que.ColorId">
+	    <div class="col-md-12">
+	    color:
+	   </div>
+       <div class="col-md-12" style="background-color:rgb({{que.Rvalue}},{{que.Gvalue}},{{que.Bvalue}});background-image: url({{que.colorsimage}});height:30px">
+	  
+	   </div>
+	   </div>
+	   
+	   </div>
+	    <div class="col-md-12">
+		<br/>
+		 <div class="col-md-4" ng-repeat="choi in que.AllChoice  track by $index">
+		 <span style="font-weight:bold;font-size:16px"><input type="radio" ng-model="choice[key].choiceid" ng-value="choi.ChoiceId" ng-change="updatechoi(que.QuestionId,choi.ChoiceId)" ></span><span style="font-size:16px"> {{choi.Choice}}</span>
+		 </div>
+		  </div>
+		  <div class="col-md-12">
+		  <hr style="border-top: 1px solid #C2CB6C;"/>
+		  </div>
+		</div>
+		<div class="col-md-5 col-md-offset-5">
+		<button class="btn btn-success" ng-click="submitsurvey()">Submit</button>
+		</div>
+		<div class="col-md-12">
+		<br/>
+		</div>
+	   </div>
+	</div>
+  </div>
+</div>

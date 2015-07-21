@@ -3,7 +3,7 @@
   <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
     <span>Admin</span>
   </li>
-  <li>
+  <li ng-show="allnavshow">
     <a href class="auto">      
       <span class="pull-right text-muted">
         <i class="fa fa-fw fa-angle-right text"></i>
@@ -32,7 +32,7 @@
     </ul>
   </li>
   
-    <li>
+    <li ng-show="allnavshow">
     <a href class="auto">
       <span class="pull-right text-muted">
         <i class="fa fa-fw fa-angle-right text"></i>
@@ -60,7 +60,7 @@
     </ul>
   </li>
   
-    <li>
+    <li ng-show="allnavshow">
     <a href class="auto">
       <span class="pull-right text-muted">
         <i class="fa fa-fw fa-angle-right text"></i>
@@ -88,7 +88,7 @@
     </ul>
   </li>
   
-   <li>
+   <li ng-show="allnavshow">
     <a href class="auto">
       <span class="pull-right text-muted">
         <i class="fa fa-fw fa-angle-right text"></i>
@@ -116,14 +116,14 @@
     </ul>
   </li>
   
-    <li ui-sref-active="active">
+    <li ui-sref-active="active" ng-show="allnavshow">
     <a ui-sref="app.events">
       <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
       <span class="font-bold" translate="aside.nav.CALENDAR">Events</span>
     </a>
   </li>
     
-    <li>
+    <li ng-show="allnavshow">
     <a href class="auto">
       <span class="pull-right text-muted">
         <i class="fa fa-fw fa-angle-right text"></i>
@@ -153,7 +153,7 @@
     
     
   
-  <li>
+  <li ng-show="allnavshow">
     <a href class="auto">
       <span class="pull-right text-muted">
         <i class="fa fa-fw fa-angle-right text"></i>
@@ -180,15 +180,43 @@
       </li>
     </ul>
   </li>
+  
+   <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="fa fa-list-alt text-warning"></i>
+      <span class="font-bold">Survey</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>Survey</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.survey">
+          <span>All Survey</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.addsurvey">
+          <span>Add Survey</span>
+        </a>
+      </li>
+    </ul>
+  </li>
     
-    <li ui-sref-active="active">
+    <li ui-sref-active="active" ng-show="allnavshow">
         <a ui-sref="app.themes">
           <i class="fa fa-file-photo-o"></i>
           <span class="font-bold" >Themes</span>
         </a>
     </li>
     
-    <li ui-sref-active="active">
+    <li ui-sref-active="active" ng-show="allnavshow">
         <a ui-sref="app.upload_csv">
           <i class="fa fa-cloud-upload"></i>
           <span class="font-bold" >Upload CSV</span>

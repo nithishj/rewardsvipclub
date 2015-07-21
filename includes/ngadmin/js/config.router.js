@@ -114,6 +114,43 @@ angular.module('app')
                   templateUrl: 'includes/ngadmin/tpl/schedulepush/addschedulepush.html',
                   controller:'addschedulepushCtrl'
               })
+			   .state('app.survey', {
+                  url: '/survey',
+                  templateUrl: 'includes/ngadmin/tpl/survey/survey.html',
+                  controller:'surveyCtrl'
+              })
+			   .state('app.addsurvey', {
+                  url: '/addsurvey',
+                  templateUrl: 'includes/ngadmin/tpl/survey/addsurvey.html',
+                  controller:'addsurveyCtrl'
+              })
+			  
+			   .state('app.surveystatistics', {
+                  url: '/surveystatistics/:surveyid',
+                  templateUrl: 'includes/ngadmin/tpl/survey/surveystatistics.html',
+                  controller:'surveystatisticsCtrl'
+              })
+			  .state('app.surveyparticipants', {
+                  url: '/surveyparticipants/:surveyid',
+                  templateUrl: 'includes/ngadmin/tpl/survey/surveyparticipants.html',
+                  controller:'surveyparticipantsCtrl'
+              })
+			  .state('app.myanswers', {
+                  url: '/myanswers/:surveyid',
+                  templateUrl: 'includes/ngadmin/tpl/survey/myanswers.html',
+                  controller:'myanswersCtrl'
+              })
+			  .state('app.participantanswers', {
+                  url: '/participantanswers/:userid/:surveyid',
+                  templateUrl: 'includes/ngadmin/tpl/survey/participantanswers.html',
+                  controller:'participantanswersCtrl'
+              })
+			  .state('app.participate', {
+                  url: '/participate/:surveyid',
+                  templateUrl: 'includes/ngadmin/tpl/survey/participate.html',
+                  controller:'participateCtrl'
+              })
+			  
               .state('app.addreward', {
                   url: '/addrewards',
                   templateUrl: 'includes/ngadmin/tpl/rewards/addreward.html',

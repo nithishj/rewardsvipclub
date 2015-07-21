@@ -1,0 +1,114 @@
+<style>
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size: 100%;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
+</style>
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Survey</h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Survey - All Survey
+    </div>
+    <div class="panel-body b-b b-light">
+      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+	 
+		     
+		<div class="pull-right inline">
+		<button  ui-sref="app.addsurvey" class="btn btn-warning inline " >Add Survey  <i class="fa fa-plus"></i></button>
+		</div>
+		
+		<div class="pull-right inline">
+		<button   ng-click="opendelete('md','','multi')" class="btn  btn-warning inline" ng-disabled="disdel" >Delete Selected  <i class="fa fa-bitbucket"></i></button>
+		</div>
+    </div>
+	
+    <div>
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="20">
+        <thead>
+          <tr>
+              <th data-toggle="true" class="hide-sort">
+                
+              </th>
+              <th>
+                User Name
+              </th>
+			  <th data-hide="phone,tablet">
+                Profile Pic
+              </th>
+              <th data-hide="phone,tablet">
+                 Title
+              </th>
+              <th data-hide="phone,tablet">
+                 Description
+              </th>
+			  
+			   <th class="hide-sort" data-hide="phone" style="width:50px;">
+				
+			  </th>
+           
+			   <th class="hide-sort" data-hide="phone" style="width:50px;">
+				
+			  </th>
+			  <th class="hide-sort" data-hide="phone" style="width:50px;">
+				
+			  </th>
+			  
+			  
+			  
+			  
+          </tr>
+        </thead>
+        <tbody>
+       <tr ng-repeat="survey in allsurvey" id="Vip{{survey.SurveyId}}" >
+			<td>
+				<div class="checkbox"  ng-show="userid==survey.UserId">
+					<label class="i-checks">
+						<input type="checkbox" value="" ng-click="pushsurveyid(survey.SurveyId)">
+						<i></i>
+					</label>
+				</div>
+			</td>		
+              <td>{{survey.user_name}}</td>
+			  <td><img ng-src="{{survey.profile_picture}}" height="50" width="50"/></td>
+			  <td>{{survey.Title}}</td>
+              <td>{{survey.Description}}</td>
+			  <td ng-show="userid==survey.UserId">	 
+				  <a  class="btn btn-info"    ng-click="statistics(survey.SurveyId)">Statistics</a>
+			  </td>
+			  <td ng-show="userid!=survey.UserId && survey.surveystatus=='false'">	 
+				  <a  class="btn btn-primary" ng-click="participate(survey.SurveyId)" >Participate</a>
+			  </td>
+			  <td ng-show="userid==survey.UserId && survey.surveystatus=='false'">	 
+				  <a  class="btn btn-primary" ng-click="participants(survey.SurveyId)" >Participants</a>
+			  </td>
+			  <td ng-show="survey.surveystatus=='true'">	 
+				  <a  class="btn btn-primary" ng-click="myanswers(survey.SurveyId)">View My Answers</a>
+			  </td>
+			  <td ng-show="userid==survey.UserId">	 
+				  <a  class="btn btn-danger" ng-click="opendelete('md',survey.SurveyId,'singular')">Delete</a>
+			  </td>
+			
+          </tr>
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,7 @@ function portal_signin($email,$password)
 $defaultimg=base_url('includes/images').'/a5.jpg';
 $q=$this->db->query("select uu.user_id,uu.email,uu.user_role,up.gender,
 case when up.profile_picture IS NULL or CHAR_LENGTH(up.profile_picture)=0 then '$defaultimg' ELSE up.profile_picture END as profile_picture,
-up.user_name from users uu left join user_profile up on uu.user_id=up.user_id where uu.email='$email' and uu.password='$password' and (uu.user_role='Admin') and uu.Deleted=0 and uu.Status=1");
+up.user_name from users uu left join user_profile up on uu.user_id=up.user_id where uu.email='$email' and uu.password='$password' and uu.Deleted=0 and uu.Status=1");
 
 if($q->num_rows()==1)
 {

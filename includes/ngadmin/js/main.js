@@ -13,7 +13,12 @@ angular.module('app')
 	   loggedUserFactory.userdata()
                 .success(function(data) {
 				    $scope.loggedusername=data['ssdata']['user_name'];
-				    $scope.mypropic=data['ssdata']['profile_picture']
+				    $scope.mypropic=data['ssdata']['profile_picture'];
+					if(data['ssdata']['user_role']=="Admin")
+					$scope.allnavshow=true;
+					else
+					$scope.allnavshow=false;
+					
                     //alert(JSON.stringify(data));
                     
              });

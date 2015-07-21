@@ -1,0 +1,154 @@
+<style>
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size: 100%;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
+</style>
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Survey</h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Survey - Add Survey
+    </div>
+
+	
+    <div>
+	
+ <form class="form-horizontal" style="padding-top:23px" ng-submit="publishsurvey()">
+<fieldset>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="surveytitle">Survey Title</label>  
+  <div class="col-md-6">
+  <input id="surveytitle" name="surveytitle" type="text" placeholder="Enter Title" ng-model='surveytitle' class="form-control input-xs" required>
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="surveydescription">Survey Description</label>  
+  <div class="col-md-6">
+  <textarea id="surveydescription" name="surveydescription" type="text" placeholder="Enter Description" ng-model='surveydescription' class="form-control input-xs" required/>
+    
+  </div>
+</div>
+<hr/>
+<div ng-repeat="(key,que) in choi  track by $index" >
+<div class="form-group">
+  <label class="col-md-2 control-label" for="question">{{que.question}}</label>  
+  <div class="col-md-6">
+  <textarea id="q1" name="question1" type="text" placeholder="Enter Question" ng-model='choi[$index].questionvalue' class="form-control input-xs" required/>
+    
+  </div>
+</div>
+<!-- uploads  -->
+
+	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Color:</label>
+		<div class="col-sm-8">
+			
+			 <div class="btn-group" dropdown>
+      <button type="button" class="btn btn-default" style="background-color:{{choi[key].chosencolor}};background-image:url({{choi[key].chosenimg}})"><span style="visibility:hidden">Please choose color</span></button>
+      <button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle>
+        <span class="caret"></span>
+        <span class="sr-only">Split button!</span>
+      </button>
+      <ul class="dropdown-menu" role="menu" style="height:200px;overflow-y:auto">
+	  <li ng-repeat="col in colorcodes" style="background-color:{{col.rgb}};background-image:url({{col.color_image}})" ng-click="setcolor({{col.colorid}}, key)"><a>{{col.colorid}}</a></li>
+      </ul>
+    </div>
+	
+		</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Image:</label>
+		<div class="col-sm-5">
+			<input type="file" ng-file-select ng-file-change="onFileSelect($files,'image', key)" />
+		</div>
+		<div class="col-sm-5">
+			<span style="font-weight:bold" ng-show="choi[key].imuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="choi[key].imfinish"/>
+		</div>
+	</div>	
+
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Audio:</label>
+		<div class="col-sm-5">
+			<input type="file" ng-file-select ng-file-change="onFileSelect($files,'audio' , key)" />
+		</div>
+		<div class="col-sm-5">
+			<span style="font-weight:bold"  ng-show="choi[key].aduploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="choi[key].adfinish"/>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Video:</label>
+		<div class="col-sm-5">
+			<input type="file" ng-file-select ng-file-change="onFileSelect($files,'video',  key)" />	
+		</div>
+		<div class="col-sm-5">
+			<span style="font-weight:bold" ng-show="choi[key].vduploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="choi[key].vdfinish"/>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">VideoThumb:</label>
+		<div class="col-sm-5">
+			<input type="file" ng-file-select ng-file-change="onFileSelect($files,'videothumb', key)"/>
+		</div>
+		<div class="col-sm-5">
+			<span style="font-weight:bold" ng-show="choi[key].vtuploading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading...</span><img src="includes/images/green-tick.jpg" height="19" width="23" ng-show="choi[key].vtfinish"/>
+		</div>
+	</div>
+	</div>
+	
+	<!-- uploads end -->
+
+<div class="form-group" ng-repeat="cho in que.choice track by $index">
+  <div class="row" style="padding-top:7px">
+  <label class="col-md-3 control-label" for="question">{{cho.name}}</label>  
+  <div class="col-md-2">
+  <input id="q1" name="question1" type="text" placeholder="Enter choice" ng-model='choi[key].choice[$index].choicevalue'  class="form-control input-xs" required/>
+  </div>
+  </div>
+</div>
+<div class="row">
+	<div class="col-md-5 control-label">
+	   <a class="btn btn-primary btn-sm" ng-click="addchoice(key)">Add Choice<a/>
+	   <a class="btn btn-danger btn-sm" ng-click="removechoice(key)">Remove Choice<a/>
+	</div>
+</div>
+<hr/>
+</div>
+
+<div class="row">
+	<div class="col-md-6 control-label">
+	   <a class="btn btn-primary btn-sm" ng-click="addquestion()">Add Question<a/>
+	   <a class="btn btn-danger btn-sm" ng-click="removequestion()">Remove Question<a/>
+	   <button class="btn btn-success btn-sm" type="submit">Publish</button>
+	</div>
+</div>
+<br/>
+
+</fieldset>
+</form>
+    </div>
+  </div>
+</div>
